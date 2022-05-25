@@ -16,9 +16,7 @@ public:
 
     generos convertir_a_genero(string genero);
 
-    
-    
-    
+        
     Lista<Lectura *> *procesar_lecturas(Lista<Escritor *> *lista_escritores);
     bool validar_archivo(ifstream &archivo_lecturas);
 

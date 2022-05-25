@@ -10,18 +10,18 @@ generos Novela::obtener_genero(){
     return genero_;
 }
 
-generos Novela::convertir_a_genero(string genero){
-    generos gen;
+string Novela::convertir_a_string_genero(){
+    string gen;
     
-    if(genero == "DRAMA") gen = DRAMA;
-    if(genero == "FICCION") gen = FICCION;
-    if(genero == "TERROR") gen = TERROR;
-    if(genero == "COMEDIA") gen = COMEDIA;
-    if(genero == "SUSPENSO") gen = SUSPENSO;
-    if(genero == "ROMANTICA") gen = ROMANTICA;
+    if(genero_ == DRAMA) gen = "DRAMA";
+    if(genero_ == FICCION)gen = "FICCION";
+    if(genero_ == TERROR) gen = "TERROR";
+    if(genero_ == COMEDIA) gen = "COMEDIA";
+    if(genero_ == SUSPENSO) gen = "SUSPENSO";
+    if(genero_ == ROMANTICA) gen = "ROMANTICA";
 
     return gen;
-}//ver que onda
+}
 
 
 void Novela::mostrar_lectura(){
@@ -30,11 +30,13 @@ void Novela::mostrar_lectura(){
     cout << titulo_ << endl;
     cout << "Minutos estimados: " << minutos_ << endl;
     cout << "Publicacion: " << anio_ << endl;
-    cout << "Genero: " << genero_ << endl;
+    cout << "Genero: " << convertir_a_string_genero() << endl;
 
+    cout << "Autor: ";
     if(autor_ != nullptr){
         autor_->mostrar_escritor();
     }
     else cout << "ANONIMO" << endl;
+    cout << endl;
     
 }

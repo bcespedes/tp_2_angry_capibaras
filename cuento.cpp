@@ -16,9 +16,12 @@ void Cuento::mostrar_lectura(){
     cout << "Minutos estimados: " << minutos_ << endl;
     cout << "Publicacion: " << anio_ << endl;
     cout << "Libro: " << libro_ << endl;
+    
+    cout << "Autor : ";
 
     if(autor_ != nullptr){
         autor_->mostrar_escritor();
     }
     else cout << "ANONIMO" << endl;
+    cout << endl;
 }
