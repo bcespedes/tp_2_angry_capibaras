@@ -36,4 +36,6 @@ int Lectura::comparar(Lectura *a_comparar){
     return devolver;
 }
 
+Lectura::~Lectura(){
+}
 

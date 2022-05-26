@@ -10,6 +10,7 @@ class Lista{
 
 private:
 
+    int cantidad;
     Nodo<Tipo> *primero;
     Nodo<Tipo> *actual;
     
@@ -23,6 +24,7 @@ public:
     //POST: Mueve el actual al inicio de la lista
     void inicializar();
 
+    void desinicializar();
     //PRE:
     //POST: Devuelve true si hay un nodo siguiente, false si se esta en el final
     bool hay_siguiente();
@@ -54,6 +56,8 @@ public:
 
     void imprimir_lista2();
 
+    int devolver_cantidad();
+
     //PRE: -
     //POST: Destruye la lista.
     ~Lista();
@@ -67,6 +71,7 @@ private:
 template <typename Tipo>
 
 Lista<Tipo>::Lista(){
+    cantidad = 0;
     primero = NULL;
     actual = NULL;
 }
@@ -79,6 +84,12 @@ void Lista<Tipo>::inicializar(){
 
 template <typename Tipo>
 
+void Lista<Tipo>::desinicializar(){
+    actual = NULL;
+}
+
+template <typename Tipo>
+
 bool Lista<Tipo>::hay_siguiente(){
     return actual->obtener_siguiente() != NULL;
 }
@@ -86,7 +97,6 @@ bool Lista<Tipo>::hay_siguiente(){
 template <typename Tipo>
 
 Tipo Lista<Tipo>::siguiente(){
-    inicializar();
     Tipo devolver = actual->obtener_dato();
     actual = actual->obtener_siguiente();
     return devolver;
@@ -98,6 +108,10 @@ bool Lista<Tipo>::vacia(){
     return (primero == NULL);
 }
 
+template <typename Tipo>
+int Lista<Tipo>::devolver_cantidad(){
+    return cantidad;
+}
 
 template <typename Tipo>
 
@@ -139,7 +153,7 @@ void Lista<Tipo>::alta(Tipo e, int pos){
         anterior->cambiar_siguiente(nuevo);
 
     }
-
+    cantidad++;
 }
 
 template <typename Tipo>
@@ -152,7 +166,8 @@ void Lista<Tipo>::agregar_al_final(Tipo e){
         posicion++;
     }
     alta(e, posicion +1);
-    actual = NULL;    
+    actual = NULL;   
+    cantidad++; 
 }
 
 template <typename Tipo>
@@ -168,8 +183,10 @@ void Lista<Tipo>::baja(int pos){
         borrar = anterior->obtener_siguiente();
         anterior->cambiar_siguiente(borrar->obtener_siguiente());
     }
+    cantidad--;
 
-    delete borrar;
+    //delete borrar->obtener_dato();
+    delete borrar; //:)
 }
 
 template <typename Tipo>
@@ -177,7 +194,6 @@ template <typename Tipo>
 void Lista<Tipo>::imprimir_lista(){
     inicializar();
     while(actual != NULL){
-        actual->obtener_dato->mostrar_dato();
         actual->obtener_dato()->mostrar_escritor(); //cambiar la lista tiene templates
         actual = actual->obtener_siguiente();
     }
@@ -188,7 +204,7 @@ template <typename Tipo>
 void Lista<Tipo>::imprimir_lista2(){
     inicializar();
     while(actual != NULL){
-        //actual->obtener_dato()->mostrar_lectura();
+        actual->obtener_dato()->mostrar_lectura();
         actual = actual->obtener_siguiente();
     }
 }

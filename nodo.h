@@ -32,6 +32,7 @@ public:
     //POST: devuelve el nodo siguiente, si no lo hubiera devuelve null
     Nodo *obtener_siguiente();
 
+    ~Nodo();
 
 };
 
@@ -61,6 +62,12 @@ template <typename Tipo>
 
 Nodo<Tipo> *Nodo<Tipo>::obtener_siguiente(){
     return siguiente;
+}
+
+template <typename Tipo>
+
+Nodo<Tipo>::~Nodo(){
+    delete dato;
 }
 
 #endif
