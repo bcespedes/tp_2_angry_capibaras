@@ -53,7 +53,9 @@ void Lector_lecturas::insertar_poema(string titulo, int minutos, int anio, int v
     lista_lectura->alta(poema, 0);
 }
 
-
+void Lector_lecturas::mostrar_lecturas(){
+    cout << "1 2 3" << endl;
+}
 
 Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_escritores){
     ifstream archivo_lecturas(LECTURAS);
@@ -104,6 +106,7 @@ Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_es
             }
 
 
+
             /*cout << "Tipo lectura: " << tipo_lectura << endl;
             cout << "Titulo: "<< titulo << endl;
             cout << "Duracion: " <<duracion << endl;
@@ -119,11 +122,14 @@ Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_es
             else
                 cout << "versos" << cant_versos << endl;
 
-            cout << "referencia" <<  referencia << '\n' << endl;*/
+            cout << "referencia" <<  referencia << '\n' << endl;]*/
 
             
         }
     }
+    void(*mostrar_lec)(void) = mostrar_lectura();
+    lista_lecturas->imprimir_lista(mostrar_lec);
+
     return lista_lecturas;
     
 }

@@ -21,7 +21,7 @@ public:
     Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, generos genero);
     generos obtener_genero();
     void mostrar_lectura();
-    generos convertir_a_genero(string genero);
+    string convertir_a_string_genero();
 };
 
 #endif

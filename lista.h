@@ -52,6 +52,8 @@ public:
 
     void imprimir_lista();
 
+    void imprimir_lista2();
+
     //PRE: -
     //POST: Destruye la lista.
     ~Lista();
@@ -175,10 +177,22 @@ template <typename Tipo>
 void Lista<Tipo>::imprimir_lista(){
     inicializar();
     while(actual != NULL){
+        actual->obtener_dato->mostrar_dato();
         actual->obtener_dato()->mostrar_escritor(); //cambiar la lista tiene templates
         actual = actual->obtener_siguiente();
     }
 }
+
+template <typename Tipo>
+
+void Lista<Tipo>::imprimir_lista2(){
+    inicializar();
+    while(actual != NULL){
+        //actual->obtener_dato()->mostrar_lectura();
+        actual = actual->obtener_siguiente();
+    }
+}
+
 
 template <typename Tipo>
 
