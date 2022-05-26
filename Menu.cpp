@@ -30,8 +30,13 @@ Menu::Menu(){
 void Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
      Lista<Escritor *> *lista_escritores = e.procesar_escritores();
      Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
-     //lista_escritores->~Lista();
-     //lista_lecturas->~Lista(); 
+     lista_escritores->~Lista();
+     lista_lecturas->~Lista();
+     Funcionalidad f(lista_escritores, lista_lecturas);
+     f.quitar_lectura();
+     lista_lecturas->imprimir_lista2();
+     delete lista_lecturas;
+     delete lista_escritores;
      //Devolver un objeto funcionalidad con listas en los metodos
 }
 

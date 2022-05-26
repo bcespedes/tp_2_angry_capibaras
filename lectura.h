@@ -28,6 +28,7 @@ public:
     Escritor *obtener_escritor();
     int comparar(Lectura *a_comparar);
     virtual void mostrar_lectura() = 0;
+    virtual ~Lectura() = 0;
 };
 
 #endif

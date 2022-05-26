@@ -4,6 +4,7 @@
 #include "lector.h"
 #include "lector_escritores.h"
 #include "lector_lecturas.h"
+#include "funcionalidad.h"
 
 const int OPCION_MINIMA = 1;
 const int OPCION_MAXIMA = 11;

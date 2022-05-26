@@ -29,33 +29,54 @@ generos Lector_lecturas::convertir_a_genero(string genero){
     return gen;
 }
 
+void Lector_lecturas::insertar_lectura_ordenada(Lectura *lectura, Lista<Lectura *> *lista_lectura){
+    int pos = 0;
+    bool avanzar = true;
 
+    lista_lectura->inicializar();
+    if(!lista_lectura->vacia()){
+    
+        while(avanzar){
+            if(lectura->comparar(lista_lectura->consulta(pos)) == -1){
+                avanzar = false;
+                pos--;
+            }
+            if(!lista_lectura->hay_siguiente()){
+                pos++;
+                avanzar = false;
+            }
+            else{
+                pos++;
+                lista_lectura->siguiente();
+            }
+        }
+    }
+
+    lista_lectura->alta(lectura, pos);
+}
 
 void Lector_lecturas::insertar_historica(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *> *lista_lectura, Escritor *escritor){
     char *tema_historico = new char[tema.length() + 1];
     strcpy(tema_historico, tema.c_str());
     Lectura *historica = new Historica(titulo, minutos, anio, escritor, genero, tema_historico);
-    lista_lectura->alta(historica, 0);
+    insertar_lectura_ordenada(historica, lista_lectura);
 }
 
 void Lector_lecturas::insertar_novela(string titulo, int minutos, int anio, generos genero, Lista<Lectura *> *lista_lectura, Escritor *escritor){
     Lectura *novela = new Novela(titulo, minutos, anio, escritor, genero);
-    lista_lectura->alta(novela, 0);
+    insertar_lectura_ordenada(novela, lista_lectura);
 }
 
 void Lector_lecturas::insertar_cuento(string titulo, int minutos, int anio, string libro, Lista<Lectura *> *lista_lectura, Escritor *escritor){
     Lectura *cuento = new Cuento(titulo, minutos, anio, escritor, libro);
-    lista_lectura->alta(cuento, 0);
+    insertar_lectura_ordenada(cuento, lista_lectura);
 }
 
 void Lector_lecturas::insertar_poema(string titulo, int minutos, int anio, int versos , Lista<Lectura *> *lista_lectura, Escritor *escritor){
     Lectura *poema = new Poema(titulo, minutos, anio, escritor, versos);
-    lista_lectura->alta(poema, 0);
+    insertar_lectura_ordenada(poema, lista_lectura);
 }
 
-void Lector_lecturas::mostrar_lecturas(){
-    cout << "1 2 3" << endl;
-}
 
 Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_escritores){
     ifstream archivo_lecturas(LECTURAS);
@@ -127,8 +148,8 @@ Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_es
             
         }
     }
-    void(*mostrar_lec)(void) = mostrar_lectura();
-    lista_lecturas->imprimir_lista(mostrar_lec);
+
+    lista_lecturas->imprimir_lista2();
 
     return lista_lecturas;
     

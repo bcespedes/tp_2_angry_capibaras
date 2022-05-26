@@ -14,6 +14,7 @@ public:
     void insertar_cuento(string titulo, int minutos, int anio, string libro,Lista<Lectura *> *lista_lectura, Escritor *escritor);
     void insertar_poema(string titulo, int minutos, int anio, int versos, Lista<Lectura *> *lista_lectura, Escritor *escritor);
 
+    void insertar_lectura_ordenada(Lectura *lectura, Lista<Lectura *> *lista_lectura);
     generos convertir_a_genero(string genero);
 
         
