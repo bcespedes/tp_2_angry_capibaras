@@ -1,6 +1,6 @@
 #include "funcionalidad.h"
 
-Funcionalidad::Funcionalidad(Lista<Escritor *> *lista_escritores, Lista<Lectura *> *lista_lecturas){
+Funcionalidad::Funcionalidad(Lista<Escritor *> *&lista_escritores, Lista<Lectura *> *&lista_lecturas){
     lista_escritores_ = lista_escritores;
     lista_lecturas_ = lista_lecturas;
 }
@@ -8,7 +8,7 @@ Funcionalidad::Funcionalidad(Lista<Escritor *> *lista_escritores, Lista<Lectura 
 void Funcionalidad::agregar_lectura(Lectura *lectura){
     lista_lecturas_->alta(lectura, 0);
 }
-
+/*
 bool Funcionalidad::igualdad_cadena(string titulo1, string titulo2){
     bool igualdad = false;
     if(titulo1.length() == titulo2.length()){
@@ -21,28 +21,22 @@ bool Funcionalidad::igualdad_cadena(string titulo1, string titulo2){
     }
     return igualdad;
 }
+*/
+bool Funcionalidad::validar_opcion(int opcion, int opcion_max){
+    return (1 <= opcion && opcion <= opcion_max);
+
+}
+
 
 void Funcionalidad::quitar_lectura(){
-
     lista_lecturas_->imprimir_lista2();
-    string titulo;
-    cout << "Ingrese la lectura a eliminar: " << endl;
-    cin >> titulo;
-    int pos = 0;
-    string lectura;
-    //string lectura = lista_lecturas_.consulta(0)->obtener_titulo();
-    while(!igualdad_cadena(titulo, lista_lecturas_->consulta(pos)->obtener_titulo())){
-        cout << "buenas" << endl;
-        pos++;
-    }
-    /*do{
-        string lectura = lista_lecturas_->consulta(pos)->obtener_titulo();
-        pos++;
-    }
-    while(!igualdad_cadena(titulo, lectura) && pos < lista_lecturas_->devolver_cantidad()+1);*/
-
-
-    lista_lecturas_->baja(pos);
+    int opcion;
+    do{
+    cout << "Ingrese la lectura a eliminar: ";
+    cin >> opcion;
+    } while(!validar_opcion(opcion, lista_lecturas_->devolver_cantidad()));
+    cout << "Se ha eliminado: " << lista_lecturas_->consulta(opcion - 1)->obtener_titulo() << endl;
+    lista_lecturas_->baja(opcion -1);
 
 }
 

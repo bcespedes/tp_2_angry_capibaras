@@ -9,32 +9,39 @@ Menu::Menu(){
      opcion_elegida = 0;
      Lector_escritores e;
      Lector_lecturas l;
-     cargar_archivos(l,e);
+     Funcionalidad f = cargar_archivos(l,e);
      
+     bool cerrar_menu = false;
      //mostrar_menu();
-     cout << ESCRIBA_OPCION;
-     cin >> opcion_elegida;
 
-     while (!es_opcion_valida()){
+     while (!cerrar_menu){
+          mostrar_menu();
+          cout << ESCRIBA_OPCION;
+          cin >> opcion_elegida;
+          limpiar_pantalla();
+          cerrar_menu = procesar_opcion(f);
+     }
+     /*     while (!es_opcion_valida()){
           limpiar_pantalla();
           mostrar_menu();
           cout << OPCION_INVALIDA;
           cin >> opcion_elegida;
      }
+     */
      
-     limpiar_pantalla();
-     procesar_opcion();
+     //limpiar_pantalla();
+     //procesar_opcion(f);
 
 }
 
-void Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
+Funcionalidad Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
      Lista<Escritor *> *lista_escritores = e.procesar_escritores();
      Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
+     Funcionalidad f(lista_escritores, lista_lecturas);
+     return f;
      lista_escritores->~Lista();
      lista_lecturas->~Lista();
-     Funcionalidad f(lista_escritores, lista_lecturas);
-     f.quitar_lectura();
-     lista_lecturas->imprimir_lista2();
+
      delete lista_lecturas;
      delete lista_escritores;
      //Devolver un objeto funcionalidad con listas en los metodos
@@ -58,12 +65,15 @@ void Menu::mostrar_menu(){
 
 }
 
-void Menu::procesar_opcion(){
+bool Menu::procesar_opcion(Funcionalidad f){
 
      switch (opcion_elegida){
-          case AGREGAR_LECTURA:
+          case AGREGAR_LECTURA: 
                break;
           case QUITAR_LECTURA:
+               limpiar_pantalla();
+               f.quitar_lectura();
+               limpiar_pantalla();
                break;
           case 3:
                break;
@@ -82,14 +92,15 @@ void Menu::procesar_opcion(){
           case 10:
                break;
           case 11:
+               cerrar_menu = true;
                break;
 
           default:
                cout << OPCION_INVALIDA << endl;
+               cout << endl;
      
-     
-
      }
+     return cerrar_menu;
 }
 
 /*

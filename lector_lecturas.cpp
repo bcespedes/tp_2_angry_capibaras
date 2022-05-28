@@ -148,8 +148,7 @@ Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_es
             
         }
     }
-
-    lista_lecturas->imprimir_lista2();
+    //lista_lecturas->imprimir_lista2();
 
     return lista_lecturas;
     

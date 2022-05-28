@@ -58,6 +58,7 @@ public:
 
     int devolver_cantidad();
 
+
     //PRE: -
     //POST: Destruye la lista.
     ~Lista();
@@ -192,22 +193,29 @@ void Lista<Tipo>::baja(int pos){
 template <typename Tipo>
 
 void Lista<Tipo>::imprimir_lista(){
+    int contador = 0;
     inicializar();
     while(actual != NULL){
+        cout << contador << endl;
         actual->obtener_dato()->mostrar_escritor(); //cambiar la lista tiene templates
         actual = actual->obtener_siguiente();
+        contador++;
     }
 }
 
 template <typename Tipo>
 
 void Lista<Tipo>::imprimir_lista2(){
+    int indice = 1;
     inicializar();
     while(actual != NULL){
+        cout << "["<< indice <<"] - ";
         actual->obtener_dato()->mostrar_lectura();
         actual = actual->obtener_siguiente();
+        indice++;
     }
 }
+
 
 
 template <typename Tipo>

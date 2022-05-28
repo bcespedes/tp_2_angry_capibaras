@@ -34,6 +34,7 @@ class Menu {
 
      private:
           int opcion_elegida;
+          bool cerrar_menu;
           bool es_opcion_valida();
           void mensaje_bienvenida();
      public:
@@ -43,8 +44,8 @@ class Menu {
      private:
           void mostrar_menu(); //privada o publica ver
           
-          void procesar_opcion();//privada o publica ver
-          void cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
+          bool procesar_opcion(Funcionalidad f);//privada o publica ver
+          Funcionalidad cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
           
           void limpiar_pantalla();
           

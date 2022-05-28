@@ -14,10 +14,9 @@ private:
     Lista<Escritor *> *lista_escritores_;
     Lista<Lectura *> *lista_lecturas_;
 
-    bool igualdad_cadena(string titulo, string titulo2);
-
+    bool validar_opcion(int opcion, int opcion_max);
 public:
-    Funcionalidad(Lista<Escritor *> *lista_escritores, Lista<Lectura *> *lista_lecturas);
+    Funcionalidad(Lista<Escritor *> *&lista_escritores, Lista<Lectura *> *&lista_lecturas);
     void agregar_lectura(Lectura *lectura);
     void quitar_lectura();
     void agregar_escritor(Escritor *escritor);
