@@ -20,9 +20,13 @@ string Escritor::devolver_nacionalidad(){
     return nacionalidad_;
 }
 
-void Escritor::fallecimiento(int anio){
-    if(anio_fallecimiento_ == -1)
-        anio_fallecimiento_ = anio;
+bool Escritor::validar_fallecimiento(){
+    return (anio_fallecimiento_ == -1);
+        
+}
+
+void Escritor::asignar_fallecimiento(int anio){
+    anio_fallecimiento_ = anio;
 }
 
 void Escritor::mostrar_escritor(){
@@ -31,8 +35,13 @@ void Escritor::mostrar_escritor(){
     cout << "Nacionalidad: " << nacionalidad_ << endl;
     if(anio_fallecimiento_ != -1 && anio_nacimiento_ != -1)
         cout << anio_nacimiento_ << " - " << anio_fallecimiento_ << endl;
-    else cout << anio_nacimiento_ << " - " << "actualidad o desconocido" << endl;
-
+    else if (anio_nacimiento_ == -1 && anio_fallecimiento_ != -1)
+        cout << "Desconocido" << " - " << anio_fallecimiento_ << endl;
+    else if (anio_nacimiento_ != -1 && anio_fallecimiento_ == -1)
+        cout << anio_nacimiento_ << " - " << "actualidad o desconocido" << endl;
+    else 
+        cout << "Desconocido" << " - " << "actualidad o desconocido" << endl;
+    cout << endl;
 }
 
 Escritor::Escritor(){

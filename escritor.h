@@ -19,7 +19,8 @@ public:
     Escritor(string nombre, string apellido, string nacionalidad, int anio_nacimiento, int anio_fallecimiento);
     string devolver_nombre_completo();
     string devolver_nacionalidad();
-    void fallecimiento(int anio);
+    bool validar_fallecimiento();
+    void asignar_fallecimiento(int anio);
     void mostrar_escritor();
 
 };

@@ -193,13 +193,13 @@ void Lista<Tipo>::baja(int pos){
 template <typename Tipo>
 
 void Lista<Tipo>::imprimir_lista(){
-    int contador = 0;
+    int indice = 1;
     inicializar();
     while(actual != NULL){
-        cout << contador << endl;
+        cout << "["<< indice <<"] - ";
         actual->obtener_dato()->mostrar_escritor(); //cambiar la lista tiene templates
         actual = actual->obtener_siguiente();
-        contador++;
+        indice++;
     }
 }
 
