@@ -21,7 +21,7 @@ const std::string OPCION_9 = "9. Listar las lecturas de un determinado escritor"
 const std::string OPCION_10 = "10. Armar una cola ordenada por tiempo de lectura,";
 const std::string OPCION_11 = "11. Salir";
 
-const std::string OPCION_INVALIDA = "\nPorfavor seleccione una opcion valida: " ;
+const std::string OPCION_INVALIDA = "Por favor seleccione una opcion valida" ;
 const std::string ESCRIBA_OPCION = "\nEscriba una opcion: ";
 const std::string MENSAJE_BIENVENIDA =  "Bienvenidos al club de lectura de Sid! Elija lo que desea realizar. \n";
 
@@ -34,8 +34,10 @@ class Menu {
 
      private:
           int opcion_elegida;
+          bool cerrar_menu = false;
           bool es_opcion_valida();
           void mensaje_bienvenida();
+          void tecla_continuar();
      public:
           Menu();
           ~Menu();
@@ -43,11 +45,15 @@ class Menu {
      private:
           void mostrar_menu(); //privada o publica ver
           
-          void procesar_opcion();//privada o publica ver
-          void cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
+          bool procesar_opcion(Funcionalidad &f);//privada o publica ver
+          //Funcionalidad cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
           
           void limpiar_pantalla();
           
+
+          
+          Lista<Escritor *> *cargar_archivo_e(Lector_escritores e);
+          Lista<Lectura *> *cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores);
 
           //int elegir_opcion(int opcion_elegida);
 

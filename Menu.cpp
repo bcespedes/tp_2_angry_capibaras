@@ -9,38 +9,56 @@ Menu::Menu(){
      opcion_elegida = 0;
      Lector_escritores e;
      Lector_lecturas l;
-     cargar_archivos(l,e);
+     //Funcionalidad f = cargar_archivos(l,e);
      
-     //mostrar_menu();
-     cout << ESCRIBA_OPCION;
-     cin >> opcion_elegida;
+     Lista<Escritor *> * le = cargar_archivo_e(e);
+     Lista<Lectura *> * ll = cargar_archivo_l(l,le);
+     Funcionalidad f(le,ll);
 
-     while (!es_opcion_valida()){
-          limpiar_pantalla();
+     //bool cerrar_menu = false;
+     //mostrar_menu();
+
+     while (!cerrar_menu){
           mostrar_menu();
-          cout << OPCION_INVALIDA;
+          cout << ESCRIBA_OPCION;
           cin >> opcion_elegida;
+          limpiar_pantalla();
+          cerrar_menu = procesar_opcion(f);
      }
      
-     limpiar_pantalla();
-     procesar_opcion();
+     //limpiar_pantalla();
+     //procesar_opcion(f);
+     //f.~Funcionalidad();
+     le->~Lista();
+     ll->~Lista();
+
+     delete le;
+     delete ll;
 
 }
-
-void Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
+/*
+Funcionalidad Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
      Lista<Escritor *> *lista_escritores = e.procesar_escritores();
      Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
+     Funcionalidad f(lista_escritores, lista_lecturas);
+     //return f;
      lista_escritores->~Lista();
      lista_lecturas->~Lista();
-     Funcionalidad f(lista_escritores, lista_lecturas);
-     f.quitar_lectura();
-     lista_lecturas->imprimir_lista2();
+
      delete lista_lecturas;
      delete lista_escritores;
      //Devolver un objeto funcionalidad con listas en los metodos
 }
+*/
+Lista<Escritor *> *Menu::cargar_archivo_e(Lector_escritores e){
+     Lista<Escritor *> *lista_escritores = e.procesar_escritores();
+     return lista_escritores;
+}
 
-
+Lista<Lectura *> *Menu::cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores){
+     Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
+     return lista_lecturas;
+}
 
 void Menu::mostrar_menu(){
 
@@ -58,22 +76,32 @@ void Menu::mostrar_menu(){
 
 }
 
-void Menu::procesar_opcion(){
-
+bool Menu::procesar_opcion(Funcionalidad &f){
+     //cerrar_menu = false;
      switch (opcion_elegida){
-          case AGREGAR_LECTURA:
+          case AGREGAR_LECTURA: 
                break;
           case QUITAR_LECTURA:
+               f.quitar_lectura();
+               tecla_continuar();
                break;
           case 3:
                break;
           case 4:
+               f.asignar_fallecimiento_escritor();
+               tecla_continuar();
                break;
           case 5:
+               f.listar_escritores();
+               tecla_continuar();
                break;
           case 6:
+               f.sortear_lectura();
+               tecla_continuar();
                break;
           case 7:
+               f.listar_lecturas();
+               tecla_continuar();
                break;
           case 8:
                break;
@@ -82,22 +110,16 @@ void Menu::procesar_opcion(){
           case 10:
                break;
           case 11:
+               cerrar_menu = true;
                break;
 
           default:
                cout << OPCION_INVALIDA << endl;
-     
-     
+               cout << endl;     
+     }         
 
-     }
+     return cerrar_menu;
 }
-
-/*
-void Menu::elegir_opcion(int opcion_elegida){
-      this -> opcion_elegida = opcion_elegida;
-}
-*/
-
 
 
 bool Menu::es_opcion_valida(){
@@ -116,6 +138,19 @@ void Menu::mensaje_bienvenida(){
      cout << MENSAJE_BIENVENIDA << endl;
 }
 
+void Menu::tecla_continuar(){
+cout << endl;
+#ifdef _WIN32
+        system("pause");
+#else
+        cout << "Presione Enter para continuar: ";
+        cin.get();
+        //system ("read");
+        
+     
+#endif
+limpiar_pantalla();
+}
 
 Menu::~Menu(){
 
