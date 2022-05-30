@@ -11,7 +11,7 @@ public:
     void faltan_anios(string &anio_nacimiento, string &anio_fallecimiento);
     void falta_fallecimiento(string &anio_fallecimiento);
     void validar_anios_fin_archivo(int leidos, string &anio_nacimiento, string &anio_fallecimiento);
-    void insertar_escritor(string nombre, string apellido, string nacionalidad, string anio_nacimiento, string anio_fallecimiento, Lista<Escritor *> *lista, int indice);
+    static void insertar_escritor(string nombre, string apellido, string nacionalidad, string anio_nacimiento, string anio_fallecimiento, Lista<Escritor *> *lista, int indice);
     bool validar_archivo(ifstream &archivo_escritores);
 
 };

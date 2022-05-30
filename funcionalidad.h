@@ -4,7 +4,8 @@
 #include "lista.h"
 #include "escritor.h"
 #include "lectura.h"
-#include "lector.h"
+//#include "lector.h"
+#include "lector_escritores.h"
 #include "stdlib.h"
 #include "time.h"
 #include <string.h>
@@ -16,10 +17,10 @@ private:
 
     bool validar_opcion(int opcion, int opcion_max);
 public:
-    Funcionalidad(Lista<Escritor *> *&lista_escritores, Lista<Lectura *> *&lista_lecturas);
-    void agregar_lectura(Lectura *lectura);
+    Funcionalidad(Lista<Escritor *> *lista_escritores, Lista<Lectura *> *lista_lecturas);//ver si pasar referencia o con puntero esta OK
+    void agregar_lectura();
     void quitar_lectura();
-    void agregar_escritor(Escritor *escritor);
+    void agregar_escritor();
     void asignar_fallecimiento_escritor();
     void listar_escritores();
     void sortear_lectura();
@@ -27,6 +28,7 @@ public:
     void listar_periodo_lecturas();
     void listar_lecturas_de();
     void listar_novelas_genero(generos genero);
+    static void limpiar_pantalla();
 
     void salir();
 

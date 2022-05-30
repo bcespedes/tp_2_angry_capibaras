@@ -10,7 +10,7 @@ Escritor *Lector_lecturas::obtener_escritor(Lista<Escritor *> *lista, int refere
 bool Lector_lecturas::validar_archivo(ifstream &archivo_lecturas){
     bool abierto = true;
     if(!archivo_lecturas.is_open()){
-        cout << "No se pudo abrir el archivo lecturas" << endl;
+        cout << "No se pudo abrir el archivo lecturas, puede añadirlas manualmente!\n" << endl;
         abierto = false;
     }
     return abierto;
@@ -80,17 +80,20 @@ void Lector_lecturas::insertar_poema(string titulo, int minutos, int anio, int v
 
 Lista<Lectura *> *Lector_lecturas::procesar_lecturas(Lista<Escritor *> *lista_escritores){
     ifstream archivo_lecturas(LECTURAS);
-    Lista<Lectura *> *lista_lecturas;
+    //Lista<Lectura *> *lista_lecturas;
+    Lista<Lectura *> *lista_lecturas = new Lista<Lectura *>();
 
-    if(!validar_archivo(archivo_lecturas)){
-        lista_lecturas = NULL;
-    }
+    /*if(!validar_archivo(archivo_lecturas)){
+        //lista_lecturas = NULL;
+        lista_lecturas = new Lista<Lectura *>();
+        
+    }*/
 
-    else{
+    if(validar_archivo(archivo_lecturas)){
         string tipo_lectura, titulo, duracion, anio, genero, libro_publicado, cant_versos, referencia;
         string tema_historico;
 
-        lista_lecturas = new Lista<Lectura *>();
+        //lista_lecturas = new Lista<Lectura *>();
 
         while(!archivo_lecturas.eof()){
 
