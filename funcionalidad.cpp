@@ -89,7 +89,53 @@ void Funcionalidad::listar_lecturas(){
     else
         cout << "La lista esta vacia!" << endl;
 }
+
+
+void Funcionalidad::listar_periodo_lecturas(){
+    int anio_inferior = 0, anio_superior = 0, contador = 0;
+    if (!lista_lecturas_ -> vacia()){
+        cout << "Ingrese el anio desde donde desea mostrar las lecturas: ";
+        cin >> anio_inferior;
+        do {
+        cout << "Ingrese el anio hasta donde desea mostrar las lecturas: ";
+        cin >> anio_superior;
+        if (anio_superior <= anio_inferior)
+            cout << "Error." << endl << "Ingresaste un anio menor o igual al primero. ";
+        } while (anio_superior <= anio_inferior);
+        for (int i = 0; i < lista_lecturas_->devolver_cantidad(); i++)
+            if (lista_lecturas_->consulta(i)->obtener_anio() >= anio_inferior && lista_lecturas_->consulta(i)->obtener_anio() <= anio_superior){
+                contador++;
+                if (contador == 1)
+                    cout << "\nLas lecturas en ese periodo de tiempo son:" << endl;
+                cout << endl << contador << " - " << lista_lecturas_->consulta(i)->obtener_titulo() << " - " << lista_lecturas_->consulta(i)->obtener_anio() << endl;
+            }
+        if (contador == 0)
+            cout << "\nNo se han encontrado lecturas en ese periodo de tiempo." << endl;
+    }
+    else
+        cout << "La lista esta vacia!" << endl;
+}
+
+
+void Funcionalidad::listar_lecturas_de(){
+    int indice, contador = 0;
+    lista_escritores_->imprimir_lista();
+    do{
+        cout << "Ingrese el escritor del cual desea conocer sus obras: ";
+        cin >> indice;
     
+    } while(!validar_opcion(indice,lista_escritores_->devolver_cantidad()));
+    Escritor* escritor = lista_escritores_->consulta(indice - 1);
+    for (int i = 0; i < lista_lecturas_->devolver_cantidad(); i++)
+        if (lista_lecturas_->consulta(i)->obtener_escritor() == escritor){
+            contador++;
+            if (contador == 1)
+                cout << "\nLas obras de " << escritor->devolver_nombre_completo() << " son:" << endl;
+            cout << endl << contador << " - " << lista_lecturas_->consulta(i)->obtener_titulo() << endl;
+        }
+    if (contador == 0)
+        cout << "\nEste escritor no tiene cargada ninguna lectura." << endl;
+}
 
 /*
 Funcionalidad::~Funcionalidad(){

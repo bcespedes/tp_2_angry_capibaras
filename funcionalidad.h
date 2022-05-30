@@ -24,8 +24,8 @@ public:
     void listar_escritores();
     void sortear_lectura();
     void listar_lecturas();
-    void listar_periodo_lecturas(int anio1, int anio2);
-    void listar_lecturas_de(Escritor *escritor);
+    void listar_periodo_lecturas();
+    void listar_lecturas_de();
     void listar_novelas_genero(generos genero);
 
     void salir();

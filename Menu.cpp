@@ -104,8 +104,12 @@ bool Menu::procesar_opcion(Funcionalidad &f){
                tecla_continuar();
                break;
           case 8:
+               f.listar_periodo_lecturas();
+               tecla_continuar();
                break;
           case 9:
+               f.listar_lecturas_de();
+               tecla_continuar();
                break;
           case 10:
                break;
@@ -144,8 +148,8 @@ cout << endl;
         system("pause");
 #else
         cout << "Presione Enter para continuar: ";
-        cin.get();
-        //system ("read");
+        cin.ignore();
+        cin.ignore();
         
      
 #endif
