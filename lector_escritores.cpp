@@ -20,7 +20,9 @@ void Lector_escritores::validar_anios_fin_archivo(int leido, string &anio_nacimi
     }
 }
 
-void Lector_escritores::insertar_escritor(string nombre, string apellido, string nacionalidad, string anio_nacimiento, string anio_fallecimiento, Lista<Escritor *> *lista, int indice){
+void Lector_escritores::insertar_escritor(string nombre, string apellido, string nacionalidad, string anio_nacimiento, 
+        string anio_fallecimiento, Lista<Escritor *> *lista, int indice){
+
     Escritor *e = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
     //e->mostrar_escritor();
     lista->alta(e, indice);
@@ -29,7 +31,7 @@ void Lector_escritores::insertar_escritor(string nombre, string apellido, string
 bool Lector_escritores::validar_archivo(ifstream &archivo_escritores){
     bool abierto = true;
     if(!archivo_escritores.is_open()){
-        cout << "No se pudo abrir el archivo escritores" << endl;
+        cout << "No se pudo abrir el archivo escritores, puede agregarlos manualmente!\n" << endl;
         abierto = false;
     }
     return abierto;
@@ -38,20 +40,17 @@ bool Lector_escritores::validar_archivo(ifstream &archivo_escritores){
 Lista<Escritor *> *Lector_escritores::procesar_escritores(){
     ifstream archivo_escritores(ESCRITORES);
 
-    Lista<Escritor *> *lista_escritores;
-    
-    if(!validar_archivo(archivo_escritores)){
-        lista_escritores = NULL;
-    }
-    
-    else{
+    //Lista<Escritor *> *lista_escritores;
+    Lista<Escritor*> *lista_escritores = new Lista<Escritor *>();
+    if(validar_archivo(archivo_escritores)){ 
+
         
         string nombre, apellido, nacionalidad, referencia, anio_nacimiento, anio_fallecimiento;
 
         int leido = 0;
         int indice = 0;
 
-        lista_escritores = new Lista<Escritor *>();
+        //lista_escritores = new Lista<Escritor *>();
 
         
         while(!archivo_escritores.eof()){

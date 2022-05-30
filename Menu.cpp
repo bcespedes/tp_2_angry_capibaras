@@ -4,7 +4,7 @@ using namespace std;
 
 Menu::Menu(){
 
-     limpiar_pantalla();
+     Funcionalidad::limpiar_pantalla();
      mensaje_bienvenida();
      opcion_elegida = 0;
      Lector_escritores e;
@@ -13,6 +13,7 @@ Menu::Menu(){
      
      Lista<Escritor *> * le = cargar_archivo_e(e);
      Lista<Lectura *> * ll = cargar_archivo_l(l,le);
+
      Funcionalidad f(le,ll);
 
      //bool cerrar_menu = false;
@@ -22,19 +23,21 @@ Menu::Menu(){
           mostrar_menu();
           cout << ESCRIBA_OPCION;
           cin >> opcion_elegida;
-          limpiar_pantalla();
+          Funcionalidad::limpiar_pantalla();
           cerrar_menu = procesar_opcion(f);
      }
-     
+
      //limpiar_pantalla();
      //procesar_opcion(f);
      //f.~Funcionalidad();
+     
+
      le->~Lista();
      ll->~Lista();
 
      delete le;
      delete ll;
-
+     
 }
 /*
 Funcionalidad Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
@@ -73,50 +76,57 @@ void Menu::mostrar_menu(){
      cout << OPCION_9 << endl;
      cout << OPCION_10 << endl;
      cout << OPCION_11 << endl;
-
+     cout << OPCION_12 << endl;
 }
 
 bool Menu::procesar_opcion(Funcionalidad &f){
      //cerrar_menu = false;
      switch (opcion_elegida){
           case AGREGAR_LECTURA: 
+               f.agregar_lectura();
+               tecla_continuar();
                break;
           case QUITAR_LECTURA:
                f.quitar_lectura();
                tecla_continuar();
                break;
-          case 3:
+          case AGREGAR_ESCRITOR:
+               f.agregar_escritor();
+               tecla_continuar();
                break;
-          case 4:
+          case CAMBIAR_FALLECIMIENTO:
                f.asignar_fallecimiento_escritor();
                tecla_continuar();
                break;
-          case 5:
+          case LISTAR_ESCRITORES:
                f.listar_escritores();
                tecla_continuar();
                break;
-          case 6:
+          case SORTEAR_LECTURA:
                f.sortear_lectura();
                tecla_continuar();
                break;
-          case 7:
+          case LISTAR_LECTURAS:
                f.listar_lecturas();
                tecla_continuar();
                break;
-          case 8:
+          case LISTAR_LECTURAS_POR_PERIODOS:
                f.listar_periodo_lecturas();
                tecla_continuar();
                break;
-          case 9:
+          case LISTAR_LECTURA_POR_ESCRITOR:
                f.listar_lecturas_de();
                tecla_continuar();
                break;
-          case 10:
+          case LISTAR_NOVELAS_POR_GENERO:
+          //listar por genero
                break;
-          case 11:
+          case ARMAR_COLA:
+               //armar cola
+               break;
+          case SALIR:
                cerrar_menu = true;
                break;
-
           default:
                cout << OPCION_INVALIDA << endl;
                cout << endl;     
@@ -130,13 +140,7 @@ bool Menu::es_opcion_valida(){
      return (opcion_elegida >= OPCION_MINIMA && opcion_elegida <= OPCION_MAXIMA);
 }
 
-void Menu::limpiar_pantalla(){
-#ifdef _WIN32
-        system("cls");
-#else
-        system ("clear");
-#endif
-}
+
 
 void Menu::mensaje_bienvenida(){
      cout << MENSAJE_BIENVENIDA << endl;
@@ -153,7 +157,7 @@ cout << endl;
         
      
 #endif
-limpiar_pantalla();
+Funcionalidad::limpiar_pantalla();
 }
 
 Menu::~Menu(){
