@@ -55,6 +55,7 @@ void Menu::mostrar_menu() {
 
 bool Menu::procesar_opcion(Funcionalidad* f) {
 
+     cin.ignore();
      switch (opcion_elegida) {
           case AGREGAR_LECTURA: 
                f -> agregar_lectura();
@@ -130,7 +131,6 @@ void Menu::tecla_continuar() {
           system("pause");
      #else
           cout << "Presione Enter para continuar: ";
-          cin.ignore();
           cin.ignore();
      #endif
      Funcionalidad::limpiar_pantalla();
