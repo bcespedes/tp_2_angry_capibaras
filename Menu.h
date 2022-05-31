@@ -48,8 +48,8 @@ class Menu {
      private:
           void mostrar_menu(); //privada o publica ver
           
-          bool procesar_opcion(Funcionalidad &f);//privada o publica ver
-          //Funcionalidad cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
+          bool procesar_opcion(Funcionalidad *f);//privada o publica ver
+          Funcionalidad *cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
           
           
 

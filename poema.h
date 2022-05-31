@@ -12,6 +12,7 @@ public:
     Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, int versos);
     int obtener_versos();
     void mostrar_lectura();
+    void mostrar_solo_novelas(int genero);
     
 };
 

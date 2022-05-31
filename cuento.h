@@ -10,6 +10,7 @@ public:
     Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, string libro);
     string obtener_libro();
     void mostrar_lectura();
+    void mostrar_solo_novelas(int genero);
 
 
 };

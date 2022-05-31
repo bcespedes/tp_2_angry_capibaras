@@ -5,7 +5,7 @@
 //#include "historica.h"
 
 enum generos{
-    DRAMA,
+    DRAMA = 1,
     COMEDIA,
     FICCION,
     SUSPENSO,
@@ -22,6 +22,7 @@ public:
     generos obtener_genero();
     void mostrar_lectura();
     string convertir_a_string_genero();
+    void mostrar_solo_novelas(int genero);
 };
 
 #endif

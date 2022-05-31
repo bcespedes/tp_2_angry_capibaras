@@ -33,6 +33,7 @@ public:
     //POST: Devuelve el dato de actual y mueve el actual+ hacia la siguiente posicion.
     Tipo siguiente();
 
+    bool final();
 
     //PRE: -
     //POST: Devuelve true si esta vacia, false en caso contrario.
@@ -93,6 +94,11 @@ template <typename Tipo>
 
 bool Lista<Tipo>::hay_siguiente(){
     return actual->obtener_siguiente() != NULL;
+}
+
+template <typename Tipo>
+bool Lista<Tipo>::final(){
+    return actual == NULL;
 }
 
 template <typename Tipo>

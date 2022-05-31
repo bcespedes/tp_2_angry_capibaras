@@ -24,3 +24,6 @@ void Poema::mostrar_lectura(){
     else cout << "ANONIMO" << endl;
     cout << endl;
 }
+
+void Poema::mostrar_solo_novelas(int genero){
+}

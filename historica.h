@@ -20,7 +20,7 @@ public:
     char *obtener_tema();
     void mostrar_lectura();
     void insertar_lectura(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *> *lista_lectura, Escritor *autor, int referencia);
-
+    void mostrar_solo_novelas(int genero);
     ~Historica();
 };
 
