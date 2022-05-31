@@ -1,16 +1,22 @@
 #include "novela.h"
 #include "historica.h"
 
-Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, generos genero)
- : Lectura(titulo, minutos, anio, autor){
+
+Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero)
+ : Lectura(titulo, minutos, anio, autor) {
+
     genero_ = genero;
 }
 
-generos Novela::obtener_genero(){
+
+generos Novela::obtener_genero() {
+
     return genero_;
 }
 
-string Novela::convertir_a_string_genero(){
+
+string Novela::convertir_a_string_genero() {
+
     string gen;
     
     if(genero_ == DRAMA) gen = "DRAMA";
@@ -24,7 +30,7 @@ string Novela::convertir_a_string_genero(){
 }
 
 
-void Novela::mostrar_lectura(){
+void Novela::mostrar_lectura() {
     
     cout << "Novela" << endl;
     cout << titulo_ << endl;
@@ -33,15 +39,19 @@ void Novela::mostrar_lectura(){
     cout << "Genero: " << convertir_a_string_genero() << endl;
 
     cout << "Autor: ";
-    if(autor_ != nullptr){
-        autor_->mostrar_escritor();
-    }
-    else cout << "ANONIMO" << endl;
-    cout << endl;
-    
+    if(autor_ != nullptr)
+        autor_ -> mostrar_escritor();
+    else
+        cout << "ANONIMO" << endl << endl;
 }
 
-void Novela::mostrar_solo_novelas(int genero){
+
+bool Novela::coinciden_generos(int genero) {
+
+    bool coinciden = false;
+
     if(genero_ == genero)
-        mostrar_lectura();
+        coinciden = true;
+
+    return coinciden;
 }

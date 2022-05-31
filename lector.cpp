@@ -2,19 +2,19 @@
 #include <string>
 
 
-Lector::Lector(){
+Lector::Lector() {
+
 }
 
-int Lector::obtener_referencia(string referencia){
+int Lector::obtener_referencia(string referencia) {
+
     string num = "";
-    if(referencia != "ANONIMO"){
-        for(int i = 1; referencia[i] != ')'; i++){
+    if(referencia != "ANONIMO") {
+        for(int i = 1; referencia[i] != ')'; i++)
             num += referencia[i];
-        }
     }
     else 
         num = "-1";
 
     return stoi(num);
 }
-

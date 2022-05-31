@@ -1,10 +1,13 @@
 #ifndef MENU_H
 #define MENU_H
+
+
 #include <string>
 #include "lector.h"
 #include "lector_escritores.h"
 #include "lector_lecturas.h"
 #include "funcionalidad.h"
+
 
 const int OPCION_MINIMA = 1;
 const int OPCION_MAXIMA = 11;
@@ -26,7 +29,7 @@ const std::string OPCION_INVALIDA = "Por favor seleccione una opcion valida" ;
 const std::string ESCRIBA_OPCION = "\nEscriba una opcion: ";
 const std::string MENSAJE_BIENVENIDA =  "Bienvenidos al club de lectura de Sid! Elija lo que desea realizar. \n";
 
-enum cant_opciones{
+enum cant_opciones {
      AGREGAR_LECTURA = 1, QUITAR_LECTURA, AGREGAR_ESCRITOR, CAMBIAR_FALLECIMIENTO, LISTAR_ESCRITORES, SORTEAR_LECTURA, LISTAR_LECTURAS,
      LISTAR_LECTURAS_POR_PERIODOS, LISTAR_LECTURA_POR_ESCRITOR, LISTAR_NOVELAS_POR_GENERO, ARMAR_COLA, SALIR
 };
@@ -34,31 +37,33 @@ enum cant_opciones{
 
 class Menu {
 
-     private:
-          int opcion_elegida;
-          bool cerrar_menu = false;
-          bool es_opcion_valida();
-          void mensaje_bienvenida();
-          void tecla_continuar();
-     public:
-          Menu();
-          ~Menu();
-          
+private:
 
-     private:
-          void mostrar_menu(); //privada o publica ver
-          
-          bool procesar_opcion(Funcionalidad *f);//privada o publica ver
-          Funcionalidad *cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
-          
-          
+     int opcion_elegida;
+     bool cerrar_menu = false;
+     bool es_opcion_valida();
+     void mensaje_bienvenida();
+     void tecla_continuar();
 
-          
-          Lista<Escritor *> *cargar_archivo_e(Lector_escritores e);
-          Lista<Lectura *> *cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores);
+public:
 
-          //int elegir_opcion(int opcion_elegida);
+     // PRE:
+     // POST:
+     Menu();
+
+     // PRE:
+     // POST:
+     ~Menu();
+
+private:
+
+     void mostrar_menu(); //privada o publica ver
+     bool procesar_opcion(Funcionalidad* f);//privada o publica ver
+     Funcionalidad* cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
+     Lista<Escritor *>* cargar_archivo_e(Lector_escritores e);
+     Lista<Lectura *>* cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores);
 
 };
+
 
 #endif

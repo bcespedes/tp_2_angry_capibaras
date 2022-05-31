@@ -1,15 +1,20 @@
 #include "cuento.h"
 
-Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, string libro) 
-    : Lectura(titulo, minutos, anio, autor){
+
+Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, string libro) 
+    : Lectura(titulo, minutos, anio, autor) {
+
         libro_ = libro;
 }
 
-string Cuento::obtener_libro(){
+
+string Cuento::obtener_libro() {
+
     return libro_;
 }
 
-void Cuento::mostrar_lectura(){
+
+void Cuento::mostrar_lectura() {
     
     cout << "Cuento" << endl;
     cout << titulo_ << endl;
@@ -17,14 +22,16 @@ void Cuento::mostrar_lectura(){
     cout << "Publicacion: " << anio_ << endl;
     cout << "Libro: " << libro_ << endl;
     
-    cout << "Autor : ";
+    cout << "Autor: ";
 
-    if(autor_ != nullptr){
-        autor_->mostrar_escritor();
-    }
-    else cout << "ANONIMO" << endl;
-    cout << endl;
+    if(autor_ != nullptr)
+        autor_ -> mostrar_escritor();
+    else
+        cout << "ANONIMO" << endl << endl;
 }
 
-void Cuento::mostrar_solo_novelas(int genero){
+
+bool Cuento::coinciden_generos(int genero) {
+
+    return false;
 }

@@ -14,19 +14,20 @@ const string ESCRITORES = "escritores.txt";
 const string LECTURAS = "lecturas.txt";
 
 
-class Lector{
-    
+class Lector {
     
 protected:
+
     int obtener_referencia(string referencia);
 
-
 public:
+
     Lector();
     /*Lista<Lectura *> *procesar_lecturas();
     Lista<Escritor *> *procesar_escritores();*/
     //virtual void procesar_archivos() = 0;
     virtual bool validar_archivo(ifstream &archivo) = 0;
+
 };
 
 
