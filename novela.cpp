@@ -40,3 +40,8 @@ void Novela::mostrar_lectura(){
     cout << endl;
     
 }
+
+void Novela::mostrar_solo_novelas(int genero){
+    if(genero_ == genero)
+        mostrar_lectura();
+}

@@ -9,13 +9,14 @@ class Lector_lecturas : public Lector{
 public:
     
     Escritor *obtener_escritor(Lista<Escritor *> *lista, int referencia);
-    void insertar_historica(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *> *lista_lectura, Escritor *escritor);
-    void insertar_novela(string titulo, int minutos, int anio, generos genero, Lista<Lectura *> *lista_lectura, Escritor *escritor);
-    void insertar_cuento(string titulo, int minutos, int anio, string libro,Lista<Lectura *> *lista_lectura, Escritor *escritor);
-    void insertar_poema(string titulo, int minutos, int anio, int versos, Lista<Lectura *> *lista_lectura, Escritor *escritor);
+    Lectura *crear_historica(string titulo, int minutos, int anio, string tema, Escritor *escritor);
+    Lectura *crear_novela(string titulo, int duracion, int anio, Lista<Escritor *> *lista_escritores, ifstream &archivo_lecturas);
+    Lectura *crear_cuento(string titulo, int duracion, int anio,  Lista<Escritor *> *lista_escritores, ifstream &archivo_lecturas);
+    Lectura *crear_poema(string titulo, int duracion, int anio, Lista<Escritor *> *lista_escritores, ifstream &archivo_lecturas);
+    Lectura *crear_lectura(ifstream &archivo_lecturas, Lista<Escritor *> *lista_escritores);
 
-    void insertar_lectura_ordenada(Lectura *lectura, Lista<Lectura *> *lista_lectura);
-    generos convertir_a_genero(string genero);
+    static void insertar_lectura_ordenada(Lectura *lectura, Lista<Lectura *> *lista_lectura);
+    static generos convertir_a_genero(string genero);
 
         
     Lista<Lectura *> *procesar_lecturas(Lista<Escritor *> *lista_escritores);

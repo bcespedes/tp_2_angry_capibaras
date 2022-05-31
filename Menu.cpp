@@ -9,15 +9,7 @@ Menu::Menu(){
      opcion_elegida = 0;
      Lector_escritores e;
      Lector_lecturas l;
-     //Funcionalidad f = cargar_archivos(l,e);
-     
-     Lista<Escritor *> * le = cargar_archivo_e(e);
-     Lista<Lectura *> * ll = cargar_archivo_l(l,le);
-
-     Funcionalidad f(le,ll);
-
-     //bool cerrar_menu = false;
-     //mostrar_menu();
+     Funcionalidad *f = cargar_archivos(l,e);
 
      while (!cerrar_menu){
           mostrar_menu();
@@ -27,40 +19,18 @@ Menu::Menu(){
           cerrar_menu = procesar_opcion(f);
      }
 
-     //limpiar_pantalla();
-     //procesar_opcion(f);
-     //f.~Funcionalidad();
+
      
 
-     le->~Lista();
-     ll->~Lista();
-
-     delete le;
-     delete ll;
+     delete f;
      
 }
-/*
-Funcionalidad Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
+
+Funcionalidad *Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e){
      Lista<Escritor *> *lista_escritores = e.procesar_escritores();
      Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
-     Funcionalidad f(lista_escritores, lista_lecturas);
-     //return f;
-     lista_escritores->~Lista();
-     lista_lecturas->~Lista();
-
-     delete lista_lecturas;
-     delete lista_escritores;
-     //Devolver un objeto funcionalidad con listas en los metodos
-}
-*/
-Lista<Escritor *> *Menu::cargar_archivo_e(Lector_escritores e){
-     Lista<Escritor *> *lista_escritores = e.procesar_escritores();
-     return lista_escritores;
-}
-
-Lista<Lectura *> *Menu::cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores){
-     Lista<Lectura *> *lista_lecturas = l.procesar_lecturas(lista_escritores);
-     return lista_lecturas;
+     Funcionalidad *f = new Funcionalidad(lista_escritores, lista_lecturas);
+     return f;
 }
 
 void Menu::mostrar_menu(){
@@ -79,47 +49,47 @@ void Menu::mostrar_menu(){
      cout << OPCION_12 << endl;
 }
 
-bool Menu::procesar_opcion(Funcionalidad &f){
-     //cerrar_menu = false;
+bool Menu::procesar_opcion(Funcionalidad *f){
      switch (opcion_elegida){
           case AGREGAR_LECTURA: 
-               f.agregar_lectura();
+               f->agregar_lectura();
                tecla_continuar();
                break;
           case QUITAR_LECTURA:
-               f.quitar_lectura();
+               f->quitar_lectura();
                tecla_continuar();
                break;
           case AGREGAR_ESCRITOR:
-               f.agregar_escritor();
+               f->agregar_escritor();
                tecla_continuar();
                break;
           case CAMBIAR_FALLECIMIENTO:
-               f.asignar_fallecimiento_escritor();
+               f->asignar_fallecimiento_escritor();
                tecla_continuar();
                break;
           case LISTAR_ESCRITORES:
-               f.listar_escritores();
+               f->listar_escritores();
                tecla_continuar();
                break;
           case SORTEAR_LECTURA:
-               f.sortear_lectura();
+               f->sortear_lectura();
                tecla_continuar();
                break;
           case LISTAR_LECTURAS:
-               f.listar_lecturas();
+               f->listar_lecturas();
                tecla_continuar();
                break;
           case LISTAR_LECTURAS_POR_PERIODOS:
-               f.listar_periodo_lecturas();
+               f->listar_periodo_lecturas();
                tecla_continuar();
                break;
           case LISTAR_LECTURA_POR_ESCRITOR:
-               f.listar_lecturas_de();
+               f->listar_lecturas_de();
                tecla_continuar();
                break;
           case LISTAR_NOVELAS_POR_GENERO:
-          //listar por genero
+               f->listar_novelas_genero();
+               tecla_continuar();
                break;
           case ARMAR_COLA:
                //armar cola

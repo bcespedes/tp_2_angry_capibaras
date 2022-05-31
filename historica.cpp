@@ -30,6 +30,11 @@ void Historica::mostrar_lectura(){
     
 }
 
+void Historica::mostrar_solo_novelas(int genero){
+    mostrar_lectura();
+}
+
+
 Historica::~Historica(){
     delete [] tema_;
 }

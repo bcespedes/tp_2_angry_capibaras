@@ -3,7 +3,6 @@
 
 
 Lector::Lector(){
-
 }
 
 int Lector::obtener_referencia(string referencia){

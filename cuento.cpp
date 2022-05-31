@@ -25,3 +25,6 @@ void Cuento::mostrar_lectura(){
     else cout << "ANONIMO" << endl;
     cout << endl;
 }
+
+void Cuento::mostrar_solo_novelas(int genero){
+}

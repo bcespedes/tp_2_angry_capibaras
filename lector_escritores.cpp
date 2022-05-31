@@ -20,12 +20,36 @@ void Lector_escritores::validar_anios_fin_archivo(int leido, string &anio_nacimi
     }
 }
 
-void Lector_escritores::insertar_escritor(string nombre, string apellido, string nacionalidad, string anio_nacimiento, 
-        string anio_fallecimiento, Lista<Escritor *> *lista, int indice){
+Escritor *Lector_escritores::crear_escritor(ifstream &archivo_escritores){
+
+    string nombre, apellido, nacionalidad, referencia, anio_nacimiento, anio_fallecimiento;
+
+    int leido = 0;
+            
+    archivo_escritores >> referencia;
+    archivo_escritores.ignore();
+    getline(archivo_escritores, nombre, ' ');
+    getline(archivo_escritores, apellido);
+    getline(archivo_escritores, nacionalidad);
+    leido = 4;
+    if(getline(archivo_escritores, anio_nacimiento)){
+                
+        leido++;
+    }
+    if(anio_nacimiento.empty()){
+        faltan_anios(anio_nacimiento, anio_fallecimiento);
+        leido++;  
+    }      
+    else if(getline(archivo_escritores, anio_fallecimiento))
+        leido++;
+    
+    if(anio_fallecimiento.empty()){
+        falta_fallecimiento(anio_fallecimiento);
+    }
+    validar_anios_fin_archivo(leido, anio_nacimiento, anio_fallecimiento);
 
     Escritor *e = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
-    //e->mostrar_escritor();
-    lista->alta(e, indice);
+    return e;
 }
 
 bool Lector_escritores::validar_archivo(ifstream &archivo_escritores){
@@ -40,58 +64,24 @@ bool Lector_escritores::validar_archivo(ifstream &archivo_escritores){
 Lista<Escritor *> *Lector_escritores::procesar_escritores(){
     ifstream archivo_escritores(ESCRITORES);
 
-    //Lista<Escritor *> *lista_escritores;
     Lista<Escritor*> *lista_escritores = new Lista<Escritor *>();
     if(validar_archivo(archivo_escritores)){ 
 
-        
-        string nombre, apellido, nacionalidad, referencia, anio_nacimiento, anio_fallecimiento;
-
         int leido = 0;
         int indice = 0;
-
-        //lista_escritores = new Lista<Escritor *>();
-
         
         while(!archivo_escritores.eof()){
 
-            leido = 0;
-            
-            archivo_escritores >> referencia;
-            archivo_escritores.ignore();
-            getline(archivo_escritores, nombre, ' ');
-            getline(archivo_escritores, apellido);
-            getline(archivo_escritores, nacionalidad);
-            leido = 4;
-            if(getline(archivo_escritores, anio_nacimiento)){
-                
-                leido++;
-            }
-            if(anio_nacimiento.empty()){
-                faltan_anios(anio_nacimiento, anio_fallecimiento);
-                leido++;  
-            }      
-            else if(getline(archivo_escritores, anio_fallecimiento))
-                leido++;
-            
-            if(anio_fallecimiento.empty()){
-                falta_fallecimiento(anio_fallecimiento);
-            }
-            validar_anios_fin_archivo(leido, anio_nacimiento, anio_fallecimiento);
-            insertar_escritor(nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento, lista_escritores, indice);
+            Escritor *e = crear_escritor(archivo_escritores);
+            lista_escritores->alta(e, indice);
             indice++;
 
-            /*cout << "Referencia: " << referencia << endl;
-            cout << "Nombre: " << nombre << endl;
-            cout << "Apellido: " << apellido << endl;
-            cout << "Nacionalidad: " << nacionalidad << endl;
-            cout << "Anio nacimiento: " << anio_nacimiento << endl;
-            cout << "Anio fallecimiento: " << anio_fallecimiento << endl;
-            cout << endl;*/
         }
 
     }
 
+    archivo_escritores.close();
     return lista_escritores;
 
 }
+
