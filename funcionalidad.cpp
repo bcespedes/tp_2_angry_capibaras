@@ -24,51 +24,143 @@ bool Funcionalidad::validar_opcion(int opcion, int opcion_max) {
 }
 
 
+char Funcionalidad::ingresar_tipo_lectura() {
+
+    char tipo_lectura = 'X';
+    cout << "Tipos de lectura disponibles:" << endl;
+    cout << "\n[C] - Cuento\n\n[P] - Poema\n\n[N] - Novela" << endl << endl;
+    while(toupper(tipo_lectura) != 'C' && toupper(tipo_lectura) != 'P' && toupper(tipo_lectura) != 'N') {
+        cout << "Ingrese la letra segun el tipo de lectura a agregar: ";
+        cin >> tipo_lectura;
+        if(toupper(tipo_lectura) != 'C' && toupper(tipo_lectura) != 'P' && toupper(tipo_lectura) != 'N')
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+    
+    return tipo_lectura;
+}
+
+char Funcionalidad::ingresar_si_es_anonimo() {
+
+    char anonimo = 'X';
+    while(toupper(anonimo) != 'S' && toupper(anonimo) != 'N') {
+        cout << "\nSu autor es anonimo? (S / N): ";
+        cin >> anonimo;
+        if(toupper(anonimo) != 'S' && toupper(anonimo) != 'N')
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    return anonimo;
+}
+
+
+Escritor* Funcionalidad::no_es_autor_anonimo(int indice, int cantidad_escritores) {
+
+    Escritor* autor;
+    cout << endl;
+    lista_escritores_ -> imprimir_lista();
+    while (!validar_opcion(indice, cantidad_escritores) && indice != -1) {
+        cout << "Ingrese el indice del escritor de la lectura correspondiente." <<
+        "Si su escritor no aparece en la lista ingrese -1." << endl;
+        cin >> indice;
+        if(!validar_opcion(indice, cantidad_escritores) && indice != -1)
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    if(indice == -1) {
+        cout << "\nProceda a agregar un nuevo escritor:\n" << endl;
+        cin.ignore();
+        agregar_escritor();
+        indice = cantidad_escritores + 1;
+        cout << "\nAhora prosiga creando su lectura." << endl;
+    }
+    autor = lista_escritores_ -> consulta(indice - 1);
+
+    return autor;
+}
+
+
+int Funcionalidad::ingresar_genero() {
+
+    int genero = 0;
+    cout << "Generos disponibles:" << endl;
+    cout << "\n[1] - Drama\n\n[2] - Comedia\n\n[3] - Ficcion\n\n[4] - Suspenso\n\n[5] - Terror\n\n[6] - Romantica \n\n[7] - Historica" << endl << endl;
+    while(!validar_opcion(genero, 7)) {
+        cout << "Ingrese el indice correspondiente al genero de la novela: ";
+        cin >> genero;
+        if(!validar_opcion(genero, 7))
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    return genero;
+}
+
+
+Lectura* Funcionalidad::crear_novela_historica(string titulo, int duracion, int anio, Escritor* autor) {
+
+    Lectura* novela_historica;
+    string tema;
+    cout << "\nIngrese el tema historico de la novela: ";
+    getline(cin, tema);
+    char* tema_historico = new char[tema.length() + 1];
+    strcpy(tema_historico, tema.c_str());
+    novela_historica = new Historica(titulo, duracion, anio, autor, HISTORICA, tema_historico);
+
+    return novela_historica;
+}
+
+
+Lectura* Funcionalidad::crear_novela(string titulo, int duracion, int anio, Escritor* autor) {
+
+    Lectura* novela;
+    cout << endl;
+    int genero = ingresar_genero();
+
+    cin.ignore();
+    if(genero == 7)
+        novela = crear_novela_historica(titulo, duracion, anio, autor);
+    else
+        novela = new Novela(titulo, duracion, anio, autor, (generos) genero);
+
+    return novela;
+}
+
+
+Lectura* Funcionalidad::crear_cuento(string titulo, int duracion, int anio, Escritor* autor) {
+
+    Lectura* cuento;
+    cout << "\nIngrese el libro donde se publico el cuento: ";
+    string libro_publicado;
+    cin.ignore();
+    getline(cin, libro_publicado);
+    cuento = new Cuento(titulo, duracion, anio, autor, libro_publicado);
+
+    return cuento;
+}
+
+
+Lectura* Funcionalidad::crear_poema(string titulo, int duracion, int anio, Escritor* autor) {
+    
+    Lectura* poema;
+    cout << "\nIngrese la cantidad de versos del poema: ";
+    int cant_versos;
+    cin >> cant_versos;
+    poema = new Poema(titulo, duracion, anio, autor, cant_versos);
+    cin.ignore();
+
+    return poema;
+}
+
+
 Lectura* Funcionalidad::crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor) {
     
     Lectura* lectura;
 
-    if(toupper(tipo_lectura) == 'N') {
-        int genero = 0;
-        cout << "\nGeneros disponibles: " << endl;
-        cout << "\n[1] - Drama\n\n[2] - Comedia\n\n[3] - Ficcion\n\n[4] - Suspenso\n\n[5] - Terror\n\n[6] - Romantica \n\n[7] - Historica" << endl << endl;
-
-        while(!validar_opcion(genero, 7)) {
-            cout << "Ingrese el indice correspondiente al genero de la novela: ";
-            cin >> genero;
-            if(!validar_opcion(genero, 7))
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
-
-        cin.ignore();
-        if(genero == 7) { //HISTORICA
-            string tema;
-            cout << "\nIngrese el tema historico de la novela: ";
-            getline(cin, tema);
-            char* tema_historico = new char[tema.length() + 1];
-            strcpy(tema_historico, tema.c_str());
-            lectura = new Historica(titulo, duracion, anio, autor, HISTORICA, tema_historico);
-        }
-        else
-            lectura = new Novela(titulo, duracion, anio, autor, (generos) genero);
-    }
-
-    else if(toupper(tipo_lectura) == 'C') {
-        cout << "\nIngrese el libro donde se publico el cuento: ";
-        string libro_publicado;
-        cin.ignore();
-        getline(cin, libro_publicado);
-        lectura = new Cuento(titulo, duracion, anio, autor, libro_publicado);
-    }
-
-    else {
-        cout << "\nIngrese la cantidad de versos del poema: ";
-        int cant_versos;
-        cin >> cant_versos;
-        lectura = new Poema(titulo, duracion, anio, autor, cant_versos);
-        cin.ignore();
-    }
-
+    if(toupper(tipo_lectura) == 'N')
+        lectura = crear_novela(titulo, duracion, anio, autor);
+    else if(toupper(tipo_lectura) == 'C')
+        lectura = crear_cuento(titulo, duracion, anio, autor);
+    else
+        lectura = crear_poema(titulo, duracion, anio, autor);
     cout << "\n\nSe agrego la lectura " << titulo << " a la lista correctamente.\n" << endl;
 
     return lectura;
@@ -78,20 +170,15 @@ Lectura* Funcionalidad::crear_lectura(char tipo_lectura, string titulo, int dura
 void Funcionalidad::agregar_lectura() {
 
     if(!lista_escritores_ -> vacia()) {
-        char tipo_lectura = 'X';
         string titulo; 
         unsigned int duracion, anio;
         int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
-        Escritor* autor;
+        Escritor* autor = NULL;
+        Lectura* lectura;
 
-        while(toupper(tipo_lectura) != 'C' && toupper(tipo_lectura) != 'P' && toupper(tipo_lectura) != 'N') {
-            cout << "Ingrese el tipo de lectura (C -> Cuento, P -> Poesia, N -> Novela): ";
-            cin >> tipo_lectura;
-            if(toupper(tipo_lectura) != 'C' && toupper(tipo_lectura) != 'P' && toupper(tipo_lectura) != 'N')
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
-
+        char tipo_lectura = ingresar_tipo_lectura();
         cin.ignore();
+
         cout << "\nIngrese el titulo de la lectura: ";
         getline(cin, titulo);
 
@@ -101,30 +188,12 @@ void Funcionalidad::agregar_lectura() {
         cout << "\nIngrese el anio de publicacion: ";
         cin >> anio;
 
-        cout << endl;
-        lista_escritores_ -> imprimir_lista();
-        while (!validar_opcion(indice, cantidad_escritores) && indice != -1 && indice != -2) {
-            cout << "Ingrese el indice del escritor de la lectura correspondiente." << endl;
-            cout << "Si su escritor no aparece en la lista ingrese -1." << endl;
-            cout << "Si su escritor es anonimo ingrese -2: ";
-            cin >> indice;
-            if(!validar_opcion(indice, cantidad_escritores) && indice != -1 && indice != -2)
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
+        char anonimo = ingresar_si_es_anonimo();
 
-        if(indice == -1) {
-            cout << "\nProceda a agregar un nuevo escritor:\n" << endl;
-            cin.ignore();
-            agregar_escritor();
-            indice = cantidad_escritores + 1;
-            cout << "\nAhora prosiga creando su lectura." << endl;
-        }
-        if(indice != -2)
-            autor = lista_escritores_ -> consulta(indice - 1);
-        else
-            autor = NULL;
+        if(toupper(anonimo) == 'N')
+            autor = no_es_autor_anonimo(indice, cantidad_escritores);
 
-        Lectura* lectura = crear_lectura(tipo_lectura, titulo, duracion, anio, autor);
+        lectura = crear_lectura(tipo_lectura, titulo, duracion, anio, autor);
         Lector_lecturas::insertar_lectura_ordenada(lectura, lista_lecturas_);
 
     }
@@ -133,20 +202,28 @@ void Funcionalidad::agregar_lectura() {
 }
 
 
+int Funcionalidad::ingresar_indice_lectura() {
+
+    int indice = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
+    while(!validar_opcion(indice, cantidad_lecturas)) {
+        cout << "Ingrese el indice de la lectura a eliminar: ";
+        cin >> indice;
+        if(!validar_opcion(indice, cantidad_lecturas))
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    return indice;
+}
+
+
 void Funcionalidad::quitar_lectura() {
 
     lista_lecturas_ -> imprimir_lista2();
-    int opcion = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
 
     if(!lista_lecturas_ -> vacia()) {
-        while(!validar_opcion(opcion, cantidad_lecturas)) {
-            cout << "Ingrese el indice de la lectura a eliminar: ";
-            cin >> opcion;
-            if(!validar_opcion(opcion, cantidad_lecturas))
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
-        cout << "\nSe ha eliminado " << lista_lecturas_ -> consulta(opcion - 1) -> obtener_titulo() << " correctamente." << endl;
-        lista_lecturas_ -> baja(opcion - 1);
+        int indice = ingresar_indice_lectura();
+        cout << "\nSe ha eliminado " << lista_lecturas_ -> consulta(indice - 1) -> obtener_titulo() << " correctamente." << endl;
+        lista_lecturas_ -> baja(indice - 1);
         cin.ignore();
     }
     else
@@ -156,8 +233,7 @@ void Funcionalidad::quitar_lectura() {
 
 void Funcionalidad::agregar_escritor() {
 
-    string nombre, apellido, nacionalidad;
-    string anio_nacimiento, anio_fallecimiento;
+    string nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento;
 
     cout << "Ingrese el nombre del escritor a agregar: ";
     getline(cin, nombre);
@@ -181,18 +257,28 @@ void Funcionalidad::agregar_escritor() {
 }
 
 
+int Funcionalidad::ingresar_indice_escritor() {
+
+    int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
+    while(!validar_opcion(indice, cantidad_escritores)) {
+        cout << "Ingrese el indice del escritor a asignarle el anio: ";
+        cin >> indice;
+        if(!validar_opcion(indice, cantidad_escritores))
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    return indice;
+}
+
+
 void Funcionalidad::asignar_fallecimiento_escritor() {
 
     if(!lista_escritores_ -> vacia()) {
-        int anio_fallecimiento, indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
+        int anio_fallecimiento;
 
         lista_escritores_ -> imprimir_lista();
-        while(!validar_opcion(indice, cantidad_escritores)) {
-            cout << "Ingrese el indice del escritor a asignarle el anio: ";
-            cin >> indice;
-            if(!validar_opcion(indice, cantidad_escritores))
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
+
+        int indice = ingresar_indice_escritor();
 
         if(lista_escritores_ -> consulta(indice - 1) -> validar_fallecimiento()) {
             cout << "\nIngrese el anio de fallecimiento del escritor: ";
@@ -240,21 +326,32 @@ void Funcionalidad::listar_lecturas() {
 }
 
 
+unsigned int Funcionalidad::ingresar_anio_correcto(unsigned int anio_inferior) {
+
+    unsigned int anio_superior = 0;
+
+    while(anio_superior <= anio_inferior) {
+        cout << "Ingrese el anio hasta donde desea mostrar las lecturas: ";
+        cin >> anio_superior;
+        if(anio_superior <= anio_inferior)
+            cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
+    }
+
+    return anio_superior;
+}
+
+
 void Funcionalidad::listar_periodo_lecturas() {
 
-    unsigned int anio_inferior = 0, anio_superior = 0;
     int contador = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
 
     if(!lista_lecturas_ -> vacia()) {
+
+        unsigned int anio_inferior = 0;
         cout << "Ingrese el anio desde donde desea mostrar las lecturas: ";
         cin >> anio_inferior;
 
-        while(anio_superior <= anio_inferior) {
-            cout << "Ingrese el anio hasta donde desea mostrar las lecturas: ";
-            cin >> anio_superior;
-            if(anio_superior <= anio_inferior)
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
+        unsigned int anio_superior = ingresar_anio_correcto(anio_inferior);
 
         for(int i = 0; i < cantidad_lecturas; i++) {
             if(lista_lecturas_ -> consulta(i) -> obtener_anio() >= anio_inferior && lista_lecturas_ -> consulta(i) -> obtener_anio() <= anio_superior) {
@@ -278,22 +375,16 @@ void Funcionalidad::listar_lecturas_de() {
 
     if(!lista_escritores_ -> vacia()) {
 
-        int indice = 0, contador = 0,
-        cantidad_escritores = lista_escritores_ -> devolver_cantidad(), cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
+        int contador = 0,
+        cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
 
         lista_escritores_ -> imprimir_lista();
 
-        while(!validar_opcion(indice, cantidad_escritores)) {
-            cout << "Ingrese el indice del escritor del cual desea conocer sus obras: ";
-            cin >> indice;
-            if(!validar_opcion(indice, cantidad_escritores))
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
+        int indice = ingresar_indice_escritor();
         
         Escritor* escritor = lista_escritores_ -> consulta(indice - 1);
 
         for(int i = 0; i < cantidad_lecturas; i++) {
-
             if(lista_lecturas_ -> consulta(i) -> obtener_escritor() == escritor) {
                 contador++;
 
@@ -302,6 +393,7 @@ void Funcionalidad::listar_lecturas_de() {
                 cout << endl << contador << " - " << lista_lecturas_ -> consulta(i) -> obtener_titulo() << endl;
             }
         }
+
         if(contador == 0)
             cout << "\nEste escritor no tiene cargada ninguna lectura." << endl;
         cin.ignore();
@@ -313,21 +405,12 @@ void Funcionalidad::listar_lecturas_de() {
 
 void Funcionalidad::listar_novelas_genero() {
     if(!lista_lecturas_ -> vacia()) {
-        unsigned int genero = 0, contador = 0;
+        unsigned int contador = 0;
         int cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
 
-        cout << "Generos disponibles: " << endl;
-        cout << "\n[1] - Drama\n\n[2] - Comedia\n\n[3] - Ficcion\n\n[4] - Suspenso\n\n[5] - Terror\n\n[6] - Romantica \n\n[7] - Historica" << endl << endl;
-
-        while(!validar_opcion(genero, 7)) {
-            cout << "Ingrese el indice correspondiente al genero de la novela: ";
-            cin >> genero;
-            if(!validar_opcion(genero, 7))
-                cout << "\nHas ingresado algo erroneo.\nImtentalo nuevamente. ";
-        }
+        int genero = ingresar_genero();
 
         cout << endl;
-        lista_lecturas_ -> inicializar();
         for(int i = 0; i < cantidad_lecturas; i++) {
             if(lista_lecturas_ -> consulta(i) -> coinciden_generos(genero)) {
                 lista_lecturas_ -> consulta(i) -> mostrar_lectura();

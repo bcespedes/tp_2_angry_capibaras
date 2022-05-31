@@ -5,8 +5,6 @@
 #include "escritor.h"
 #include "lectura.h"
 #include "cola.h"
-//#include "lector.h"
-#include "lector_escritores.h"
 #include "lector_lecturas.h"
 #include "stdlib.h"
 #include "time.h"
@@ -19,8 +17,19 @@ private:
 
     Lista<Escritor *>* lista_escritores_;
     Lista<Lectura *>* lista_lecturas_;
-    Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
     bool validar_opcion(int opcion, int opcion_max);
+    char ingresar_tipo_lectura();
+    char ingresar_si_es_anonimo();
+    Escritor* no_es_autor_anonimo(int indice, int cantidad_escritores);
+    int ingresar_genero();
+    Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* autor);
+    Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* autor);
+    Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* autor);
+    Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* autor);
+    Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
+    int ingresar_indice_lectura();
+    int ingresar_indice_escritor();
+    unsigned int ingresar_anio_correcto(unsigned int anio_inferior);
 
 public:
 

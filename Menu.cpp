@@ -126,13 +126,11 @@ void Menu::mensaje_bienvenida() {
 
 void Menu::tecla_continuar() {
 
+     string entrada_usuario = "a";
      cout << endl;
-     #ifdef _WIN32
-          system("pause");
-     #else
-          cout << "Presione Enter para continuar: ";
-          cin.ignore();
-     #endif
+     cout << "Presione Enter para continuar: ";
+     getline(cin, entrada_usuario);
+     cin.clear();
      Funcionalidad::limpiar_pantalla();
 }
 
