@@ -1,19 +1,35 @@
 #ifndef POEMA_H
 #define POEMA_H
 
+
 #include "lectura.h"
 
 
+class Poema: public Lectura {
 
-class Poema: public Lectura{
 private:
+
     int versos_;
+
 public:
-    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, int versos);
+
+    // PRE:
+    // POST:
+    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos);
+
+    // PRE:
+    // POST:
     int obtener_versos();
+
+    // PRE:
+    // POST:
     void mostrar_lectura();
-    void mostrar_solo_novelas(int genero);
+
+    // PRE:
+    // POST:
+    bool coinciden_generos(int genero);
     
 };
+
 
 #endif

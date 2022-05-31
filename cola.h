@@ -1,16 +1,18 @@
 #ifndef COLA_H
 #define COLA_H
 
+
 #include "nodo.h"
 
 
 template <typename Tipo>
 
-class Cola{
+class Cola {
 
 private:
-    Nodo<Tipo> *primero;
-    Nodo<Tipo> *ultimo;
+
+    Nodo<Tipo>* primero;
+    Nodo<Tipo>* ultimo;
 
 public:
 
@@ -42,62 +44,69 @@ public:
 
 template <typename Tipo>
 
-Cola<Tipo>::Cola(){
+Cola<Tipo>::Cola() {
+
     primero = nullptr;
     ultimo = nullptr;
 }
 
+
 template <typename Tipo>
 
-bool Cola<Tipo>::vacia(){
+bool Cola<Tipo>::vacia() {
+
     return ultimo == nullptr;
 }
 
+
 template <typename Tipo>
 
-Tipo Cola<Tipo>::consulta(){
-    return primero->obtener_dato();
+Tipo Cola<Tipo>::consulta() {
+
+    return primero -> obtener_dato();
 }
 
+
 template <typename Tipo>
 
-void Cola<Tipo>::alta(Tipo d){
+void Cola<Tipo>::alta(Tipo d) {
 
-    Nodo<Tipo> *nuevo = new Nodo<Tipo>(d);
+    Nodo<Tipo>* nuevo = new Nodo<Tipo>(d);
 
-    if(primero){ 
-        ultimo->cambiar_siguiente(nuevo);
-    }
-    else{
+    if(primero)
+        ultimo -> cambiar_siguiente(nuevo);
+    else
         primero = nuevo;
-    }
     
     ultimo = nuevo;
 }
 
+
 template <typename Tipo>
 
-Tipo Cola<Tipo>::baja(){
+Tipo Cola<Tipo>::baja() {
 
-    Nodo<Tipo> *borrar = primero;
+    Nodo<Tipo>* borrar = primero;
 
-    Tipo dato = borrar->obtener_dato();
+    Tipo dato = borrar -> obtener_dato();
 
-    primero = primero->obtener_siguiente();
+    primero = primero -> obtener_siguiente();
 
-    if(!primero){
+    if(!primero)
         ultimo = nullptr;
-    }
-    borrar = NULL;    
+
+    borrar = NULL;
+ 
     return dato;
 }
 
+
 template <typename Tipo>
 
-Cola<Tipo>::~Cola(){
-    while(!vacia()){
+Cola<Tipo>::~Cola() {
+
+    while(!vacia())
         baja();
-    }
 }
 
 

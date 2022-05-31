@@ -1,15 +1,20 @@
 #include "poema.h"
 
-Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor *autor, int versos) 
-    : Lectura(titulo, minutos, anio, autor){
+
+Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos) 
+    : Lectura(titulo, minutos, anio, autor) {
+
         versos_ = versos;
 }
 
-int Poema::obtener_versos(){
+
+int Poema::obtener_versos() {
+
     return versos_;
 }
 
-void Poema::mostrar_lectura(){
+
+void Poema::mostrar_lectura() {
 
     cout << "Poema" << endl;
     cout << titulo_ << endl;
@@ -17,13 +22,15 @@ void Poema::mostrar_lectura(){
     cout << "Publicacion: " << anio_ << endl;
     cout << "Cant de versos: " << versos_ << endl;
     
-    cout << "Autor : ";
-    if(autor_ != nullptr){
-        autor_->mostrar_escritor();
-    }
-    else cout << "ANONIMO" << endl;
-    cout << endl;
+    cout << "Autor: ";
+    if(autor_ != nullptr)
+        autor_ -> mostrar_escritor();
+    else
+        cout << "ANONIMO" << endl << endl;
 }
 
-void Poema::mostrar_solo_novelas(int genero){
+
+bool Poema::coinciden_generos(int genero) {
+
+    return false;
 }
