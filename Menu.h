@@ -23,10 +23,10 @@ const std::string OPCION_8 = "8. Listar las lecturas entre determinados anios";
 const std::string OPCION_9 = "9. Listar las lecturas de un determinado escritor";
 const std::string OPCION_10 = "10. Listar las novelas de determinado genero";
 const std::string OPCION_11 = "11. Armar una cola ordenada por tiempo de lectura";
-const std::string OPCION_12 = "12. Salir";
+const std::string OPCION_12 = "12. Salir\n";
 
 const std::string OPCION_INVALIDA = "Por favor seleccione una opcion valida" ;
-const std::string ESCRIBA_OPCION = "\nEscriba una opcion: ";
+const std::string ESCRIBA_OPCION = "Escriba una opcion: ";
 const std::string MENSAJE_BIENVENIDA =  "Bienvenidos al club de lectura de Sid! Elija lo que desea realizar. \n";
 
 enum cant_opciones {

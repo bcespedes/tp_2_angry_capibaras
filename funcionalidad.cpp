@@ -75,8 +75,10 @@ Escritor* Funcionalidad::no_es_autor_anonimo(int indice, int cantidad_escritores
     cout << endl;
     lista_escritores_ -> imprimir_lista();
     while (!validar_opcion(indice, cantidad_escritores) && indice != -1) {
+
         indice = validar_entero(indice, "Ingrese el indice del escritor de la lectura correspondiente."
         " Si su escritor no aparece en la lista ingrese -1: ", -1);
+
         if(!validar_opcion(indice, cantidad_escritores) && indice != -1)
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
@@ -102,7 +104,9 @@ int Funcionalidad::ingresar_genero() {
     cout << "Generos disponibles:" << endl;
     cout << "\n[1] - Drama\n\n[2] - Comedia\n\n[3] - Ficcion\n\n[4] - Suspenso\n\n[5] - Terror\n\n[6] - Romantica \n\n[7] - Historica" << endl << endl;
     while(!validar_opcion(genero, 7)) {
+
         genero = validar_entero(genero, "Ingrese el indice correspondiente al genero de la novela: ", 1);
+
         if(!validar_opcion(genero, 7))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
@@ -157,8 +161,10 @@ Lectura* Funcionalidad::crear_poema(string titulo, int duracion, int anio, Escri
     
     Lectura* poema;
     int cant_versos = 0;
+
     cout << endl;
     cant_versos = validar_entero(cant_versos, "Ingrese la cantidad de versos del poema: ", 1);
+
     poema = new Poema(titulo, duracion, anio, autor, cant_versos);
     cin.ignore();
 
@@ -201,8 +207,8 @@ void Funcionalidad::agregar_lectura() {
 
         cout << endl;
         anio = validar_entero(anio, "Ingrese el anio de publicacion: ", 0);
-        cin.ignore();
 
+        cin.ignore();
         char anonimo = ingresar_si_es_anonimo();
 
         if(toupper(anonimo) == 'N')
@@ -221,7 +227,9 @@ int Funcionalidad::ingresar_indice_lectura() {
 
     int indice = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
     while(!validar_opcion(indice, cantidad_lecturas)) {
+
         indice = validar_entero(indice, "Ingrese el indice de la lectura a eliminar: ", 1);
+
         if(!validar_opcion(indice, cantidad_lecturas))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
@@ -232,9 +240,10 @@ int Funcionalidad::ingresar_indice_lectura() {
 
 void Funcionalidad::quitar_lectura() {
 
-    lista_lecturas_ -> imprimir_lista2();
-
     if(!lista_lecturas_ -> vacia()) {
+
+        lista_lecturas_ -> imprimir_lista2();
+
         int indice = ingresar_indice_lectura();
         cout << "\nSe ha eliminado " << lista_lecturas_ -> consulta(indice - 1) -> obtener_titulo() << " correctamente." << endl;
         lista_lecturas_ -> baja(indice - 1);
@@ -247,7 +256,8 @@ void Funcionalidad::quitar_lectura() {
 
 void Funcionalidad::agregar_escritor() {
 
-    string nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento;
+    string nombre, apellido, nacionalidad;
+    int anio_nacimiento = 0, anio_fallecimiento = 0;
 
     cout << "Ingrese el nombre del escritor a agregar: ";
     getline(cin, nombre);
@@ -258,16 +268,17 @@ void Funcionalidad::agregar_escritor() {
     cout << "\nIngrese la nacionalidad del escritor a agregar: ";
     getline(cin, nacionalidad);
 
-    cout << "\nIngrese el anio de nacimiento del escritor a agregar (-1 en caso de desconocerlo): ";
-    getline(cin, anio_nacimiento);
+    cout << endl;
+    anio_nacimiento = validar_entero(anio_nacimiento, "Ingrese el anio de nacimiento del escritor a agregar (-1 en caso de desconocerlo): ", -1);
 
-    cout << "\nIngrese el anio de fallecimiento del escritor a agregar (-1 en caso de no poseerlo): ";
-    getline(cin, anio_fallecimiento);
+    cout << endl;
+    anio_fallecimiento = validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor a agregar (-1 en caso de no poseerlo): ", -1);
 
-    Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
+    Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
     lista_escritores_ -> alta(escritor, lista_escritores_ -> devolver_cantidad());
 
     cout << "\n\nSe agrego a " << nombre << " " << apellido << " a la lista correctamente.\n" << endl;
+    cin.ignore();
 }
 
 
@@ -275,7 +286,9 @@ int Funcionalidad::ingresar_indice_escritor() {
 
     int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
     while(!validar_opcion(indice, cantidad_escritores)) {
+
         indice = validar_entero(indice, "Ingrese el indice del escritor a asignarle el anio: ", 1);
+
         if(!validar_opcion(indice, cantidad_escritores))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
@@ -294,8 +307,10 @@ void Funcionalidad::asignar_fallecimiento_escritor() {
         int indice = ingresar_indice_escritor();
 
         if(lista_escritores_ -> consulta(indice - 1) -> validar_fallecimiento()) {
+
             cout << endl;
             anio_fallecimiento = validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", 0);
+
             lista_escritores_ -> consulta(indice-1) -> asignar_fallecimiento(anio_fallecimiento);
             cout << "\nSe ha asignado el anio de fallecimiento en " << anio_fallecimiento <<
             " para " << lista_escritores_ -> consulta(indice - 1) -> devolver_nombre_completo() << " correctamente." << endl;
@@ -343,8 +358,11 @@ unsigned int Funcionalidad::ingresar_anio_correcto(unsigned int anio_inferior) {
 
     unsigned int anio_superior = 0;
 
+    cout << endl;
     while(anio_superior <= anio_inferior) {
+
         anio_superior = validar_entero(anio_superior, "Ingrese el anio hasta donde desea mostrar las lecturas: ", 1);
+
         if(anio_superior <= anio_inferior)
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
@@ -355,11 +373,11 @@ unsigned int Funcionalidad::ingresar_anio_correcto(unsigned int anio_inferior) {
 
 void Funcionalidad::listar_periodo_lecturas() {
 
-    int contador = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
-
     if(!lista_lecturas_ -> vacia()) {
 
+        int contador = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
         unsigned int anio_inferior = 0;
+
         anio_inferior = validar_entero(anio_inferior, "Ingrese el anio desde donde desea mostrar las lecturas: ", 1);
 
         unsigned int anio_superior = ingresar_anio_correcto(anio_inferior);

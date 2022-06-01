@@ -19,7 +19,6 @@ private:
     Lista<Escritor *>* lista_escritores_;
     Lista<Lectura *>* lista_lecturas_;
     bool validar_opcion(int opcion, int opcion_max);
-    int validar_entero(int a_validar, string instruccion, int valor_minimo);
     char ingresar_tipo_lectura();
     char ingresar_si_es_anonimo();
     Escritor* no_es_autor_anonimo(int indice, int cantidad_escritores);
@@ -42,6 +41,10 @@ public:
     // PRE:
     // POST:
     static void limpiar_pantalla();
+
+    // PRE:
+    // POST:
+    static int validar_entero(int a_validar, string instruccion, int valor_minimo);
 
     // PRE:
     // POST:

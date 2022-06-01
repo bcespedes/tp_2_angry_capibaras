@@ -16,8 +16,7 @@ Menu::Menu() {
 
      while (!cerrar_menu) {
           mostrar_menu();
-          cout << ESCRIBA_OPCION;
-          cin >> opcion_elegida;
+          opcion_elegida = Funcionalidad::validar_entero(opcion_elegida, ESCRIBA_OPCION, OPCION_MINIMA);
           Funcionalidad::limpiar_pantalla();
           cerrar_menu = procesar_opcion(f);
      }
