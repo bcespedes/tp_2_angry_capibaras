@@ -88,6 +88,8 @@ Escritor* Funcionalidad::no_es_autor_anonimo(int indice, int cantidad_escritores
         indice = cantidad_escritores + 1;
         cout << "\nAhora prosiga creando su lectura." << endl;
     }
+    else
+        cin.ignore();
     autor = lista_escritores_ -> consulta(indice - 1);
 
     return autor;
@@ -141,8 +143,6 @@ Lectura* Funcionalidad::crear_novela(string titulo, int duracion, int anio, Escr
 
 Lectura* Funcionalidad::crear_cuento(string titulo, int duracion, int anio, Escritor* autor) {
 
-    if(autor != NULL)
-        cin.ignore();
     Lectura* cuento;
     cout << "\nIngrese el libro donde se publico el cuento: ";
     string libro_publicado;
