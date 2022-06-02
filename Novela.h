@@ -15,7 +15,7 @@ public:
 
     // PRE:
     // POST:
-    Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero);
+    Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero);
 
     // PRE:
     // POST:

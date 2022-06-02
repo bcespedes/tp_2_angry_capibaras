@@ -15,7 +15,7 @@ public:
 
     //PRE: Genero tiene que ser historica
     //POST: Crea un objeto historica
-    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero, char* tema);
+    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char* tema);
     
     //PRE: -
     //POST: Se devuelve el tema de la novela historica.
@@ -27,7 +27,7 @@ public:
 
     // PRE:
     // POST:
-    void insertar_lectura(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *>* lista_lectura, Escritor* autor, int referencia);
+    void insertar_lectura(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *>* lista_lectura, Escritor* escritor, int referencia);
 
     // PRE:
     // POST:

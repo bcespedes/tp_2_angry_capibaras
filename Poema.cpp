@@ -1,8 +1,8 @@
 # include "Poema.h"
 
 
-Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos) 
-    : Lectura(titulo, minutos, anio, autor) {
+Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, int versos) 
+    : Lectura(titulo, minutos, anio, escritor) {
 
         versos_ = versos;
 }
@@ -23,8 +23,8 @@ void Poema::mostrar_lectura() {
     cout << "Cant de versos: " << versos_ << endl;
     
     cout << "Autor: ";
-    if(autor_ != nullptr)
-        autor_ -> mostrar_escritor();
+    if(escritor_ != nullptr)
+        escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;
 }

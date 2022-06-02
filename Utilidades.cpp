@@ -29,8 +29,7 @@ int Utilidades::validar_entero(int a_validar, string instruccion, int valor_mini
     while(!cin.good() || a_validar < valor_minimo) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << ERROR_TIPO_DE_DATO;
-        cout << VOLVER_A_INTENTAR;
+        cout << ERROR_TIPO_DE_DATO + VOLVER_A_INTENTAR;
         cout << instruccion;
         cin >> a_validar;
     }

@@ -1,8 +1,8 @@
 # include "Cuento.h"
 
 
-Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, string libro) 
-    : Lectura(titulo, minutos, anio, autor) {
+Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, string libro) 
+    : Lectura(titulo, minutos, anio, escritor) {
 
         libro_ = libro;
 }
@@ -24,8 +24,8 @@ void Cuento::mostrar_lectura() {
     
     cout << "Autor: ";
 
-    if(autor_ != nullptr)
-        autor_ -> mostrar_escritor();
+    if(escritor_ != nullptr)
+        escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;
 }

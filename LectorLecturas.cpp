@@ -50,7 +50,6 @@ Lectura* LectorLecturas::crear_novela(string titulo, int duracion, int anio, Lis
     string genero;
     string referencia;
     getline(archivo_lecturas, genero);
-
     Lectura* novela;
 
     if(genero == "HISTORICA") {
@@ -87,6 +86,7 @@ Lectura* LectorLecturas::crear_poema(string titulo, int minutos, int anio,  List
     getline(archivo_lecturas, referencia);
     
     Lectura* poema = new Poema(titulo, minutos, anio, obtener_escritor(lista_escritores, obtener_referencia(referencia)), stoi(cant_versos));
+
     return poema;
 }
 

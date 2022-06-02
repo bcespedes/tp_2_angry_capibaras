@@ -50,9 +50,9 @@ Escritor* LectorEscritores::crear_escritor(ifstream &archivo_escritores) {
         falta_fallecimiento(anio_fallecimiento);
     validar_anios_fin_archivo(leido, anio_nacimiento, anio_fallecimiento);
 
-    Escritor* e = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
+    Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
 
-    return e;
+    return escritor;
 }
 
 
@@ -79,8 +79,8 @@ Lista<Escritor *>* LectorEscritores::procesar_escritores() {
         
         while(!archivo_escritores.eof()) {
 
-            Escritor* e = crear_escritor(archivo_escritores);
-            lista_escritores -> alta(e, indice);
+            Escritor* escritor = crear_escritor(archivo_escritores);
+            lista_escritores -> alta(escritor, indice);
             indice++;
 
         }

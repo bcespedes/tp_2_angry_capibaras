@@ -15,7 +15,7 @@ public:
 
     // PRE:
     // POST:
-    Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, string libro);
+    Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, string libro);
 
     // PRE:
     // POST:

@@ -15,7 +15,7 @@ public:
 
     // PRE:
     // POST:
-    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos);
+    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, int versos);
 
     // PRE:
     // POST:

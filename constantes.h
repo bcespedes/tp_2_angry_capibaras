@@ -69,8 +69,7 @@ const int OPCION_ALTERNATIVA = -1;
 
 const std::string LISTA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
 const std::string LISTA_LECTURAS_VACIA = "No hay lecturas cargadas. Puedes agregarlas manualmente.\n";
-const std::string ERROR_INGRESO = "\nHas ingresado algo erroneo.";
-const std::string ERROR_INGRESO_INCORRECTO = ERROR_INGRESO + VOLVER_A_INTENTAR;
+const std::string ERROR_INGRESO_INCORRECTO = "\nHas ingresado algo erroneo.";
 
 
 # endif

@@ -17,13 +17,13 @@ protected:
     string titulo_;
     unsigned int minutos_;
     unsigned int anio_;
-    Escritor* autor_;
+    Escritor* escritor_;
 
 public:
 
     // PRE:
     // POST:
-    Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor);   
+    Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor);   
 
     // PRE:
     // POST: 
