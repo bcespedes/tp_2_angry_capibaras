@@ -26,8 +26,8 @@ private:
     Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* autor);
     Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* autor);
     Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
-    int ingresar_indice_lectura();
-    int ingresar_indice_escritor();
+    int ingresar_indice_lectura(string instruccion);
+    int ingresar_indice_escritor(string instruccion);
     int ingresar_anio_correcto(int anio_inferior);
 
 public:

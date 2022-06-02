@@ -192,13 +192,13 @@ void ProcesadorDeOpciones::agregar_lectura() {
 }
 
 
-int ProcesadorDeOpciones::ingresar_indice_lectura() {
+int ProcesadorDeOpciones::ingresar_indice_lectura(string instruccion) {
 
     Utilidades validador;
     int indice = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
     while(!validador.validar_opcion(indice, cantidad_lecturas)) {
 
-        indice = validador.validar_entero(indice, "Ingrese el indice de la lectura a eliminar: ", OPCION_MINIMA);
+        indice = validador.validar_entero(indice, instruccion, OPCION_MINIMA);
 
         if(!validador.validar_opcion(indice, cantidad_lecturas))
             cout << ERROR_INGRESO_INCORRECTO;
@@ -214,7 +214,7 @@ void ProcesadorDeOpciones::quitar_lectura() {
 
         lista_lecturas_ -> imprimir_lista2();
 
-        int indice = ingresar_indice_lectura();
+        int indice = ingresar_indice_lectura("Ingrese el indice de la lectura a eliminar: ");
         cout << "\nSe ha eliminado " << lista_lecturas_ -> consulta(indice - 1) -> obtener_titulo() << " correctamente." << endl;
         lista_lecturas_ -> baja(indice - 1);
     }
@@ -251,13 +251,13 @@ void ProcesadorDeOpciones::agregar_escritor() {
 }
 
 
-int ProcesadorDeOpciones::ingresar_indice_escritor() {
+int ProcesadorDeOpciones::ingresar_indice_escritor(string instruccion) {
 
     Utilidades validador;
     int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
     while(!validador.validar_opcion(indice, cantidad_escritores)) {
 
-        indice = validador.validar_entero(indice, "Ingrese el indice del escritor a asignarle el anio: ", OPCION_MINIMA);
+        indice = validador.validar_entero(indice, instruccion, OPCION_MINIMA);
 
         if(!validador.validar_opcion(indice, cantidad_escritores))
             cout << ERROR_INGRESO_INCORRECTO;
@@ -275,7 +275,7 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
         lista_escritores_ -> imprimir_lista();
 
-        int indice = ingresar_indice_escritor();
+        int indice = ingresar_indice_escritor("Ingrese el indice del escritor a asignarle el anio: ");
 
         if(lista_escritores_ -> consulta(indice - 1) -> validar_fallecimiento()) {
 
@@ -380,7 +380,7 @@ void ProcesadorDeOpciones::listar_lecturas_de() {
 
         lista_escritores_ -> imprimir_lista();
 
-        int indice = ingresar_indice_escritor();
+        int indice = ingresar_indice_escritor("Ingrese el indice del escritor del cual desea conocer las obras: ");
         
         Escritor* escritor = lista_escritores_ -> consulta(indice - 1);
 
