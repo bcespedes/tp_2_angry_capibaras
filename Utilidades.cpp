@@ -1,5 +1,4 @@
 # include "Utilidades.h"
-# include <limits>
 
 
 Utilidades::Utilidades() {
@@ -19,7 +18,7 @@ void Utilidades::limpiar_pantalla() {
 
 bool Utilidades::validar_opcion(int opcion, int opcion_max) {
 
-    return (1 <= opcion && opcion <= opcion_max);
+    return (OPCION_MINIMA <= opcion && opcion <= opcion_max);
 }
 
 
@@ -30,7 +29,8 @@ int Utilidades::validar_entero(int a_validar, string instruccion, int valor_mini
     while(!cin.good() || a_validar < valor_minimo) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "\nNo has ingresado un valor esperado.\nIntentalo nuevamente. ";
+        cout << ERROR_TIPO_DE_DATO;
+        cout << VOLVER_A_INTENTAR;
         cout << instruccion;
         cin >> a_validar;
     }
@@ -41,6 +41,7 @@ int Utilidades::validar_entero(int a_validar, string instruccion, int valor_mini
 
 
 void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura) {
+
     int pos = 0;
     bool avanzar = true;
 
@@ -64,4 +65,26 @@ void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* l
     }
 
     lista_lectura -> alta(lectura, pos);
+}
+
+
+string Utilidades::obtener_nombre_genero(generos genero) {
+
+    string nombre_genero;
+    if(genero == DRAMA)
+        nombre_genero = "drama";
+    else if(genero == COMEDIA)
+        nombre_genero = "comedia";
+    else if(genero == FICCION)
+        nombre_genero = "ficcion";
+    else if(genero == SUSPENSO)
+        nombre_genero = "suspenso";
+    else if(genero == TERROR)
+        nombre_genero = "terror";
+    else if(genero == ROMANTICA)
+        nombre_genero = "romantica";
+    else if(genero == HISTORICA)
+        nombre_genero = "historica";
+
+    return nombre_genero;
 }

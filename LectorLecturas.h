@@ -36,11 +36,7 @@ public:
 
     // PRE:
     // POST:
-    static void insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura);
-
-    // PRE:
-    // POST:
-    static generos convertir_a_genero(string genero);
+    generos convertir_a_genero(string genero);
 
     // PRE:
     // POST:

@@ -1,13 +1,14 @@
 # ifndef FUNCIONALIDAD_H
 # define FUNCIONALIDAD_H
 
+
+# include "constantes.h"
 # include "Utilidades.h"
 # include "LectorLecturas.h"
 # include "Cola.h"
 # include "stdlib.h"
 # include "time.h"
 # include <string.h>
-# include <limits>
 
 
 class ProcesadorDeOpciones {
@@ -27,7 +28,7 @@ private:
     Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
     int ingresar_indice_lectura();
     int ingresar_indice_escritor();
-    unsigned int ingresar_anio_correcto(unsigned int anio_inferior);
+    int ingresar_anio_correcto(int anio_inferior);
 
 public:
 

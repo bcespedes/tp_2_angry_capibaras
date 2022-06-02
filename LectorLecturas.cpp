@@ -14,7 +14,7 @@ Escritor* LectorLecturas::obtener_escritor(Lista<Escritor *>* lista, int referen
 bool LectorLecturas::validar_archivo(ifstream &archivo_lecturas) {
     bool abierto = true;
     if(!archivo_lecturas.is_open()) {
-        cout << "No se pudo abrir el archivo lecturas, puede añadirlas manualmente!\n" << endl;
+        cout << "No se pudo abrir el archivo lecturas, puede agregarlas manualmente!\n" << endl;
         abierto = false;
     }
 
@@ -23,16 +23,17 @@ bool LectorLecturas::validar_archivo(ifstream &archivo_lecturas) {
 
 
 generos LectorLecturas::convertir_a_genero(string genero) {
-    generos gen;
-    
-    if(genero == "DRAMA") gen = DRAMA;
-    if(genero == "FICCION") gen = FICCION;
-    if(genero == "TERROR") gen = TERROR;
-    if(genero == "COMEDIA") gen = COMEDIA;
-    if(genero == "SUSPENSO") gen = SUSPENSO;
-    if(genero == "ROMANTICA") gen = ROMANTICA;
 
-    return gen;
+    generos genero_en_enum;
+    
+    if(genero == "DRAMA") genero_en_enum = DRAMA;
+    if(genero == "FICCION") genero_en_enum = FICCION;
+    if(genero == "TERROR") genero_en_enum = TERROR;
+    if(genero == "COMEDIA") genero_en_enum = COMEDIA;
+    if(genero == "SUSPENSO") genero_en_enum = SUSPENSO;
+    if(genero == "ROMANTICA") genero_en_enum = ROMANTICA;
+
+    return genero_en_enum;
 }
 
 

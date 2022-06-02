@@ -1,19 +1,8 @@
 # ifndef NOVELA_H
 # define NOVELA_H
 
-
+# include "constantes.h"
 # include "Lectura.h"
-
-
-enum generos {
-    DRAMA = 1,
-    COMEDIA,
-    FICCION,
-    SUSPENSO,
-    TERROR,
-    ROMANTICA,
-    HISTORICA
-};
 
 
 class Novela: public Lectura {

@@ -2,7 +2,9 @@
 # define UTILIDADES_H
 
 
+# include "constantes.h"
 # include "Lectura.h"
+# include <limits>
 
 
 class Utilidades {
@@ -26,8 +28,12 @@ public:
     int validar_entero(int a_validar, string instruccion, int valor_minimo);
 
     //PRE:
-    //POST
+    //POST:
     void insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura);
+
+    //PRE:
+    //POST:
+    string obtener_nombre_genero(generos genero);
 
 };
 
