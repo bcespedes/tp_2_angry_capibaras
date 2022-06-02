@@ -1,14 +1,14 @@
-#include "funcionalidad.h"
+# include "ProcesadorDeOpciones.h"
 
 
-Funcionalidad::Funcionalidad(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas) {
+ProcesadorDeOpciones::ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas) {
 
     lista_escritores_ = lista_escritores;
     lista_lecturas_ = lista_lecturas;
 }
 
 
-void Funcionalidad::limpiar_pantalla() {
+void ProcesadorDeOpciones::limpiar_pantalla() {
 
     #ifdef _WIN32
             system("cls");
@@ -18,13 +18,13 @@ void Funcionalidad::limpiar_pantalla() {
 }
 
 
-bool Funcionalidad::validar_opcion(int opcion, int opcion_max) {
+bool ProcesadorDeOpciones::validar_opcion(int opcion, int opcion_max) {
 
     return (1 <= opcion && opcion <= opcion_max);
 }
 
 
-int Funcionalidad::validar_entero(int a_validar, string instruccion, int valor_minimo) {
+int ProcesadorDeOpciones::validar_entero(int a_validar, string instruccion, int valor_minimo) {
 
     cout << instruccion;
     cin >> a_validar;
@@ -40,7 +40,7 @@ int Funcionalidad::validar_entero(int a_validar, string instruccion, int valor_m
 }
 
 
-char Funcionalidad::ingresar_tipo_lectura() {
+char ProcesadorDeOpciones::ingresar_tipo_lectura() {
 
     string tipo_lectura = "XX";
     cout << "Tipos de lectura disponibles:" << endl;
@@ -55,7 +55,7 @@ char Funcionalidad::ingresar_tipo_lectura() {
     return tipo_lectura[0];
 }
 
-char Funcionalidad::ingresar_si_es_anonimo() {
+char ProcesadorDeOpciones::ingresar_si_es_anonimo() {
 
     string anonimo = "XX";
     while((toupper(anonimo[0]) != 'S' && toupper(anonimo[0]) != 'N') || anonimo.length() > 1) {
@@ -69,7 +69,7 @@ char Funcionalidad::ingresar_si_es_anonimo() {
 }
 
 
-Escritor* Funcionalidad::no_es_autor_anonimo(int indice, int cantidad_escritores) {
+Escritor* ProcesadorDeOpciones::no_es_autor_anonimo(int indice, int cantidad_escritores) {
 
     Escritor* autor;
     cout << endl;
@@ -98,7 +98,7 @@ Escritor* Funcionalidad::no_es_autor_anonimo(int indice, int cantidad_escritores
 }
 
 
-int Funcionalidad::ingresar_genero() {
+int ProcesadorDeOpciones::ingresar_genero() {
 
     int genero = 0;
     cout << "Generos disponibles:" << endl;
@@ -115,7 +115,7 @@ int Funcionalidad::ingresar_genero() {
 }
 
 
-Lectura* Funcionalidad::crear_novela_historica(string titulo, int duracion, int anio, Escritor* autor) {
+Lectura* ProcesadorDeOpciones::crear_novela_historica(string titulo, int duracion, int anio, Escritor* autor) {
 
     Lectura* novela_historica;
     string tema;
@@ -129,7 +129,7 @@ Lectura* Funcionalidad::crear_novela_historica(string titulo, int duracion, int 
 }
 
 
-Lectura* Funcionalidad::crear_novela(string titulo, int duracion, int anio, Escritor* autor) {
+Lectura* ProcesadorDeOpciones::crear_novela(string titulo, int duracion, int anio, Escritor* autor) {
 
     Lectura* novela;
     cout << endl;
@@ -145,7 +145,7 @@ Lectura* Funcionalidad::crear_novela(string titulo, int duracion, int anio, Escr
 }
 
 
-Lectura* Funcionalidad::crear_cuento(string titulo, int duracion, int anio, Escritor* autor) {
+Lectura* ProcesadorDeOpciones::crear_cuento(string titulo, int duracion, int anio, Escritor* autor) {
 
     Lectura* cuento;
     cout << "\nIngrese el libro donde se publico el cuento: ";
@@ -157,7 +157,7 @@ Lectura* Funcionalidad::crear_cuento(string titulo, int duracion, int anio, Escr
 }
 
 
-Lectura* Funcionalidad::crear_poema(string titulo, int duracion, int anio, Escritor* autor) {
+Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio, Escritor* autor) {
     
     Lectura* poema;
     int cant_versos = 0;
@@ -172,7 +172,7 @@ Lectura* Funcionalidad::crear_poema(string titulo, int duracion, int anio, Escri
 }
 
 
-Lectura* Funcionalidad::crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor) {
+Lectura* ProcesadorDeOpciones::crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor) {
     
     Lectura* lectura;
 
@@ -188,7 +188,7 @@ Lectura* Funcionalidad::crear_lectura(char tipo_lectura, string titulo, int dura
 }
 
 
-void Funcionalidad::agregar_lectura() {
+void ProcesadorDeOpciones::agregar_lectura() {
 
     if(!lista_escritores_ -> vacia()) {
         string titulo; 
@@ -215,7 +215,7 @@ void Funcionalidad::agregar_lectura() {
             autor = no_es_autor_anonimo(indice, cantidad_escritores);
 
         lectura = crear_lectura(tipo_lectura, titulo, duracion, anio, autor);
-        Lector_lecturas::insertar_lectura_ordenada(lectura, lista_lecturas_);
+        LectorLecturas::insertar_lectura_ordenada(lectura, lista_lecturas_);
 
     }
     else
@@ -223,7 +223,7 @@ void Funcionalidad::agregar_lectura() {
 }
 
 
-int Funcionalidad::ingresar_indice_lectura() {
+int ProcesadorDeOpciones::ingresar_indice_lectura() {
 
     int indice = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
     while(!validar_opcion(indice, cantidad_lecturas)) {
@@ -238,7 +238,7 @@ int Funcionalidad::ingresar_indice_lectura() {
 }
 
 
-void Funcionalidad::quitar_lectura() {
+void ProcesadorDeOpciones::quitar_lectura() {
 
     if(!lista_lecturas_ -> vacia()) {
 
@@ -254,7 +254,7 @@ void Funcionalidad::quitar_lectura() {
 }
 
 
-void Funcionalidad::agregar_escritor() {
+void ProcesadorDeOpciones::agregar_escritor() {
 
     string nombre, apellido, nacionalidad;
     int anio_nacimiento = 0, anio_fallecimiento = 0;
@@ -282,7 +282,7 @@ void Funcionalidad::agregar_escritor() {
 }
 
 
-int Funcionalidad::ingresar_indice_escritor() {
+int ProcesadorDeOpciones::ingresar_indice_escritor() {
 
     int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
     while(!validar_opcion(indice, cantidad_escritores)) {
@@ -297,7 +297,7 @@ int Funcionalidad::ingresar_indice_escritor() {
 }
 
 
-void Funcionalidad::asignar_fallecimiento_escritor() {
+void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
     if(!lista_escritores_ -> vacia()) {
         int anio_fallecimiento = 0;
@@ -324,7 +324,7 @@ void Funcionalidad::asignar_fallecimiento_escritor() {
 }
 
 
-void Funcionalidad::listar_escritores() {
+void ProcesadorDeOpciones::listar_escritores() {
 
     if(!lista_escritores_ -> vacia())
         lista_escritores_ -> imprimir_lista();
@@ -333,7 +333,7 @@ void Funcionalidad::listar_escritores() {
 }
 
 
-void Funcionalidad::sortear_lectura() {
+void ProcesadorDeOpciones::sortear_lectura() {
 
     if(!lista_lecturas_ -> vacia()) {
         srand((unsigned int) time(NULL));
@@ -345,7 +345,7 @@ void Funcionalidad::sortear_lectura() {
 }
 
 
-void Funcionalidad::listar_lecturas() {
+void ProcesadorDeOpciones::listar_lecturas() {
 
     if(!lista_lecturas_ -> vacia())
         lista_lecturas_ -> imprimir_lista2();
@@ -354,7 +354,7 @@ void Funcionalidad::listar_lecturas() {
 }
 
 
-unsigned int Funcionalidad::ingresar_anio_correcto(unsigned int anio_inferior) {
+unsigned int ProcesadorDeOpciones::ingresar_anio_correcto(unsigned int anio_inferior) {
 
     unsigned int anio_superior = 0;
 
@@ -371,7 +371,7 @@ unsigned int Funcionalidad::ingresar_anio_correcto(unsigned int anio_inferior) {
 }
 
 
-void Funcionalidad::listar_periodo_lecturas() {
+void ProcesadorDeOpciones::listar_periodo_lecturas() {
 
     if(!lista_lecturas_ -> vacia()) {
 
@@ -400,7 +400,7 @@ void Funcionalidad::listar_periodo_lecturas() {
 }
 
 
-void Funcionalidad::listar_lecturas_de() {
+void ProcesadorDeOpciones::listar_lecturas_de() {
 
     if(!lista_escritores_ -> vacia()) {
 
@@ -432,7 +432,7 @@ void Funcionalidad::listar_lecturas_de() {
 }
 
 
-void Funcionalidad::listar_novelas_genero() {
+void ProcesadorDeOpciones::listar_novelas_genero() {
     if(!lista_lecturas_ -> vacia()) {
         unsigned int contador = 0;
         int cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
@@ -456,7 +456,7 @@ void Funcionalidad::listar_novelas_genero() {
 }
 
 
-Funcionalidad::~Funcionalidad() {
+ProcesadorDeOpciones::~ProcesadorDeOpciones() {
 
     delete lista_escritores_;
     delete lista_lecturas_;

@@ -1,5 +1,5 @@
-#include "lector.h"
-#include <string>
+# include "Lector.h"
+# include <string>
 
 
 Lector::Lector() {

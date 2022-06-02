@@ -1,10 +1,11 @@
-#ifndef LECTOR_LECTURAS_H
-#define LECTOR_LECTURAS_H
-
-#include "lector.h"
+# ifndef LECTOR_LECTURAS_H
+# define LECTOR_LECTURAS_H
 
 
-class Lector_lecturas : public Lector {
+# include "Lector.h"
+
+
+class LectorLecturas : public Lector {
 
 public:
 
@@ -51,4 +52,4 @@ public:
 };
 
 
-#endif
+# endif

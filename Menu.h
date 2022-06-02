@@ -1,12 +1,12 @@
-#ifndef MENU_H
-#define MENU_H
+# ifndef MENU_H
+# define MENU_H
 
 
-#include <string>
-#include "lector.h"
-#include "lector_escritores.h"
-#include "lector_lecturas.h"
-#include "funcionalidad.h"
+# include <string>
+# include "Lector.h"
+# include "LectorEscritores.h"
+# include "LectorLecturas.h"
+# include "ProcesadorDeOpciones.h"
 
 
 const int OPCION_MINIMA = 1;
@@ -58,12 +58,12 @@ public:
 private:
 
      void mostrar_menu(); //privada o publica ver
-     bool procesar_opcion(Funcionalidad* f);//privada o publica ver
-     Funcionalidad* cargar_archivos(Lector_lecturas l, Lector_escritores e);//privada o publica ver
-     Lista<Escritor *>* cargar_archivo_e(Lector_escritores e);
-     Lista<Lectura *>* cargar_archivo_l(Lector_lecturas l,Lista<Escritor *>*& lista_escritores);
+     bool procesar_opcion(ProcesadorDeOpciones* f);//privada o publica ver
+     ProcesadorDeOpciones* cargar_archivos(LectorLecturas l, LectorEscritores e);//privada o publica ver
+     Lista<Escritor *>* cargar_archivo_e(LectorEscritores e);
+     Lista<Lectura *>* cargar_archivo_l(LectorLecturas l,Lista<Escritor *>*& lista_escritores);
 
 };
 
 
-#endif
+# endif

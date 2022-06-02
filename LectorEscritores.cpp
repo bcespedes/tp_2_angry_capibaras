@@ -1,20 +1,20 @@
-#include "lector_escritores.h"
+# include "LectorEscritores.h"
 
 
-void Lector_escritores::faltan_anios(string &anio_nacimiento, string &anio_fallecimiento) {
+void LectorEscritores::faltan_anios(string &anio_nacimiento, string &anio_fallecimiento) {
 
     anio_nacimiento = "-1";
     anio_fallecimiento = "-1";
 }
 
 
-void Lector_escritores::falta_fallecimiento(string &anio_fallecimiento) {
+void LectorEscritores::falta_fallecimiento(string &anio_fallecimiento) {
 
     anio_fallecimiento = "-1";
 }
 
 
-void Lector_escritores::validar_anios_fin_archivo(int leido, string &anio_nacimiento, string &anio_fallecimiento) {
+void LectorEscritores::validar_anios_fin_archivo(int leido, string &anio_nacimiento, string &anio_fallecimiento) {
 
     if(leido == 5)
         anio_fallecimiento = "-1";
@@ -26,7 +26,7 @@ void Lector_escritores::validar_anios_fin_archivo(int leido, string &anio_nacimi
 }
 
 
-Escritor* Lector_escritores::crear_escritor(ifstream &archivo_escritores) {
+Escritor* LectorEscritores::crear_escritor(ifstream &archivo_escritores) {
 
     string nombre, apellido, nacionalidad, referencia, anio_nacimiento, anio_fallecimiento;
 
@@ -56,7 +56,7 @@ Escritor* Lector_escritores::crear_escritor(ifstream &archivo_escritores) {
 }
 
 
-bool Lector_escritores::validar_archivo(ifstream &archivo_escritores) {
+bool LectorEscritores::validar_archivo(ifstream &archivo_escritores) {
 
     bool abierto = true;
     if(!archivo_escritores.is_open()) {
@@ -68,7 +68,7 @@ bool Lector_escritores::validar_archivo(ifstream &archivo_escritores) {
 }
 
 
-Lista<Escritor *>* Lector_escritores::procesar_escritores() {
+Lista<Escritor *>* LectorEscritores::procesar_escritores() {
 
     ifstream archivo_escritores(ESCRITORES);
 

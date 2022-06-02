@@ -1,5 +1,5 @@
-#include "lector.h"
-#include "Menu.h"
+# include "Lector.h"
+# include "Menu.h"
 
 
 int main() {

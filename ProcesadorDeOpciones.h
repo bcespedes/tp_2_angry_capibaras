@@ -1,18 +1,19 @@
-#ifndef FUNCIONALIDAD_H
-#define FUNCIONALIDAD_H
-
-#include "lista.h"
-#include "escritor.h"
-#include "lectura.h"
-#include "cola.h"
-#include "lector_lecturas.h"
-#include "stdlib.h"
-#include "time.h"
-#include <string.h>
-#include <limits>
+# ifndef FUNCIONALIDAD_H
+# define FUNCIONALIDAD_H
 
 
-class Funcionalidad {
+# include "Lista.h"
+# include "Escritor.h"
+# include "Lectura.h"
+# include "Cola.h"
+# include "LectorLecturas.h"
+# include "stdlib.h"
+# include "time.h"
+# include <string.h>
+# include <limits>
+
+
+class ProcesadorDeOpciones {
 
 private:
 
@@ -36,7 +37,7 @@ public:
 
     // PRE:
     // POS:
-    Funcionalidad(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
+    ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
 
     // PRE:
     // POST:
@@ -92,9 +93,9 @@ public:
 
     // PRE:
     // POST:
-    ~Funcionalidad();
+    ~ProcesadorDeOpciones();
 
 };
 
 
-#endif
+# endif

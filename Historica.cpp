@@ -1,5 +1,5 @@
-#include "historica.h"
-#include <string.h>
+# include "Historica.h"
+# include <string.h>
 
 
 Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero, char *tema)

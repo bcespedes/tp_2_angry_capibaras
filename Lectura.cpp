@@ -1,4 +1,5 @@
-#include "lectura.h"
+# include "Lectura.h"
+
 
 Lectura::Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor) {
 
@@ -45,4 +46,3 @@ int Lectura::comparar(Lectura* a_comparar) {
 Lectura::~Lectura() {
 
 }
-

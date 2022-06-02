@@ -1,8 +1,8 @@
-#ifndef HISTORICA_H
-#define HISTORICA_H
+# ifndef HISTORICA_H
+# define HISTORICA_H
 
 
-#include "novela.h"
+# include "Novela.h"
 
 
 class Historica: public Novela {
@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif
+# endif

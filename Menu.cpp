@@ -1,5 +1,5 @@
-#include "Menu.h"
-#include <iostream>
+# include "Menu.h"
+# include <iostream>
 
 
 using namespace std;
@@ -7,17 +7,17 @@ using namespace std;
 
 Menu::Menu() {
 
-     Funcionalidad::limpiar_pantalla();
+     ProcesadorDeOpciones::limpiar_pantalla();
      mensaje_bienvenida();
      opcion_elegida = 0;
-     Lector_escritores e;
-     Lector_lecturas l;
-     Funcionalidad* f = cargar_archivos(l,e);
+     LectorEscritores e;
+     LectorLecturas l;
+     ProcesadorDeOpciones* f = cargar_archivos(l,e);
 
      while (!cerrar_menu) {
           mostrar_menu();
-          opcion_elegida = Funcionalidad::validar_entero(opcion_elegida, ESCRIBA_OPCION, OPCION_MINIMA);
-          Funcionalidad::limpiar_pantalla();
+          opcion_elegida = ProcesadorDeOpciones::validar_entero(opcion_elegida, ESCRIBA_OPCION, OPCION_MINIMA);
+          ProcesadorDeOpciones::limpiar_pantalla();
           cerrar_menu = procesar_opcion(f);
      }
 
@@ -25,11 +25,11 @@ Menu::Menu() {
 }
 
 
-Funcionalidad* Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e) {
+ProcesadorDeOpciones* Menu::cargar_archivos(LectorLecturas l, LectorEscritores e) {
 
      Lista<Escritor *>* lista_escritores = e.procesar_escritores();
      Lista<Lectura *>* lista_lecturas = l.procesar_lecturas(lista_escritores);
-     Funcionalidad* f = new Funcionalidad(lista_escritores, lista_lecturas);
+     ProcesadorDeOpciones* f = new ProcesadorDeOpciones(lista_escritores, lista_lecturas);
 
      return f;
 }
@@ -52,7 +52,7 @@ void Menu::mostrar_menu() {
 }
 
 
-bool Menu::procesar_opcion(Funcionalidad* f) {
+bool Menu::procesar_opcion(ProcesadorDeOpciones* f) {
 
      cin.ignore();
      switch (opcion_elegida) {
@@ -130,11 +130,10 @@ void Menu::tecla_continuar() {
      cout << "Presione Enter para continuar: ";
      getline(cin, entrada_usuario);
      cin.clear();
-     Funcionalidad::limpiar_pantalla();
+     ProcesadorDeOpciones::limpiar_pantalla();
 }
 
 
 Menu::~Menu() {
 
 }
-

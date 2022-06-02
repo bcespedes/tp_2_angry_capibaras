@@ -1,7 +1,8 @@
-#ifndef LISTA_H
-#define LISTA_H
+# ifndef LISTA_H
+# define LISTA_H
 
-#include "nodo.h"
+
+# include "Nodo.h"
 
 
 template <typename Tipo>
@@ -244,4 +245,4 @@ Lista<Tipo>::~Lista() {
 }
 
 
-#endif
+# endif

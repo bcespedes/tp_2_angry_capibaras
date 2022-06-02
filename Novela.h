@@ -1,7 +1,8 @@
-#ifndef NOVELA_H
-#define NOVELA_H
+# ifndef NOVELA_H
+# define NOVELA_H
 
-#include "lectura.h"
+
+# include "Lectura.h"
 
 
 enum generos {
@@ -46,4 +47,4 @@ public:
 };
 
 
-#endif
+# endif
