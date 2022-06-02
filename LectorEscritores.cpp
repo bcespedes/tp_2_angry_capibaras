@@ -3,25 +3,25 @@
 
 void LectorEscritores::faltan_anios(string &anio_nacimiento, string &anio_fallecimiento) {
 
-    anio_nacimiento = "-1";
-    anio_fallecimiento = "-1";
+    anio_nacimiento = ANIO_INEXISTENTE;
+    anio_fallecimiento = ANIO_INEXISTENTE;
 }
 
 
 void LectorEscritores::falta_fallecimiento(string &anio_fallecimiento) {
 
-    anio_fallecimiento = "-1";
+    anio_fallecimiento = ANIO_INEXISTENTE;
 }
 
 
 void LectorEscritores::validar_anios_fin_archivo(int leido, string &anio_nacimiento, string &anio_fallecimiento) {
 
-    if(leido == 5)
-        anio_fallecimiento = "-1";
+    if(leido == EOF_NACIMIENTO_FALTANTE) 
+        anio_fallecimiento = ANIO_INEXISTENTE;
 
-    else if(leido == 4) {
-        anio_nacimiento = "-1";
-        anio_fallecimiento = "-1";
+    else if(leido == EOF_AMBOS_ANIOS_FALTANTES) {
+        anio_nacimiento = ANIO_INEXISTENTE;
+        anio_fallecimiento = ANIO_INEXISTENTE;
     }
 }
 
@@ -60,7 +60,7 @@ bool LectorEscritores::validar_archivo(ifstream &archivo_escritores) {
 
     bool abierto = true;
     if(!archivo_escritores.is_open()) {
-        cout << "No se pudo abrir el archivo escritores, puede agregarlos manualmente!\n" << endl;
+        cout << ERROR_APERTURA_ESCRITORES << endl;
         abierto = false;
     }
 

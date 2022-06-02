@@ -24,7 +24,7 @@ void Cuento::mostrar_lectura() {
     
     cout << "Autor: ";
 
-    if(escritor_ != nullptr)
+    if(escritor_ != NULL)
         escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;

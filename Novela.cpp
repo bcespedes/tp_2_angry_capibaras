@@ -15,7 +15,7 @@ generos Novela::obtener_genero() {
 }
 
 
-string Novela::convertir_a_string_genero() {
+string Novela::convertir_genero_a_string() {
 
     string gen;
     
@@ -36,7 +36,7 @@ void Novela::mostrar_lectura() {
     cout << titulo_ << endl;
     cout << "Minutos estimados: " << minutos_ << endl;
     cout << "Publicacion: " << anio_ << endl;
-    cout << "Genero: " << convertir_a_string_genero() << endl;
+    cout << "Genero: " << convertir_genero_a_string() << endl;
 
     cout << "Autor: ";
     if(escritor_ != nullptr)

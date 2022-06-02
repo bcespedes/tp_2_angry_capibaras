@@ -13,24 +13,24 @@ protected:
 
 public:
 
-    // PRE:
-    // POST:
+    // PRE: Los datos son validos.
+    // POST: Crea una novela.
     Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero);
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Devuelve el genero de la novela.
     generos obtener_genero();
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Muestra por pantalla las caracteristicas de la novela.
     void mostrar_lectura();
 
-    // PRE:
-    // POST:
-    string convertir_a_string_genero();
+    // PRE: -
+    // POST: Devuelve un string con el genero de la novela.
+    string convertir_genero_a_string();
 
-    // PRE:
-    // POST:
+    // PRE: genero es un genero valido. (ver indices de genero en enum)
+    // POST: Devuelve true si genero es igual al genero de la novela, false en caso contrario.
     bool coinciden_generos(int genero);
 
 };

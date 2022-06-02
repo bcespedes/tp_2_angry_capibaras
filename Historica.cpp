@@ -6,8 +6,6 @@ Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Esc
  : Novela(titulo, minutos, anio, escritor, genero) {
 
     tema_ = tema;
-    /*new char[strlen(tema)];
-    strcpy(tema_, tema);*/
 }
 
 
@@ -38,7 +36,7 @@ bool Historica::coinciden_generos(int genero) {
 
     bool coinciden = false;
 
-    if(genero_ == genero)
+    if(HISTORICA == genero)
         coinciden = true;
 
     return coinciden;

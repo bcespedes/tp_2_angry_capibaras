@@ -16,28 +16,28 @@ private:
 
 public:
 
-    //PRE: -
-    //POST: Crea una cola vacia.
+    // PRE: -
+    // POST: Crea una cola vacia.
     Cola();
 
-    //PRE: -
-    //POST: devuelve true si la cola esta llena, false en caso contrario
+    // PRE: -
+    // POST: Devuelve true si la cola esta llena, false en caso contrario.
     bool vacia();
 
-    //PRE: La cola no esta llena - e es un dato valido
-    //POST: Agrega el dato e al final de la cola.
-    void alta(Tipo e);
+    // PRE: La cola no esta llena - elemento es un dato valido.
+    // POST: Agrega el dato e al final de la cola.
+    void alta(Tipo elemento);
 
-    //PRE: La cola no puede estar vacia.
-    //POST: Elimina el primer elemento de la cola.
+    // PRE: La cola no puede estar vacia.
+    // POST: Elimina el primer elemento de la cola.
     Tipo baja();
 
-    //PRE: La cola no puede estar vacia
-    //POST: Devuelve el primer elemento de la cola (sin modificarla).
+    // PRE: La cola no puede estar vacia.
+    // POST: Devuelve el primer elemento de la cola (sin modificarla).
     Tipo consulta();
 
-    //PRE: -
-    //POST: destruye la cola.
+    // PRE: -
+    // POST: Destruye la cola.
     ~Cola();
 
 };

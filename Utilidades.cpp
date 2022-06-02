@@ -22,7 +22,7 @@ bool Utilidades::validar_opcion(int opcion, int opcion_max) {
 }
 
 
-int Utilidades::validar_entero(int a_validar, string instruccion, int valor_minimo) {
+int Utilidades::validar_ingreso_entero(int a_validar, string instruccion, int valor_minimo) {
 
     cout << instruccion;
     cin >> a_validar;
