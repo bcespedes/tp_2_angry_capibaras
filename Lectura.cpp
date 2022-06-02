@@ -1,12 +1,12 @@
 # include "Lectura.h"
 
 
-Lectura::Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor) {
+Lectura::Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor) {
 
     titulo_ = titulo;
     minutos_ = minutos;
     anio_ = anio;
-    autor_ = autor;
+    escritor_ = escritor;
 };
 
 string Lectura::obtener_titulo() {
@@ -26,7 +26,7 @@ unsigned int Lectura::obtener_anio() {
 
 Escritor* Lectura::obtener_escritor() {
 
-    return autor_;
+    return escritor_;
 }
 
 int Lectura::comparar(Lectura* a_comparar) {
@@ -34,10 +34,10 @@ int Lectura::comparar(Lectura* a_comparar) {
     int devolver;
 
     if(anio_ < a_comparar -> obtener_anio())
-        devolver = -1;
+        devolver = ES_MENOR;
     else if(anio_ > a_comparar -> obtener_anio())
-        devolver = 1;
-    else devolver = 0;
+        devolver = ES_MAYOR;
+    else devolver = ES_IGUAL;
 
 
     return devolver;

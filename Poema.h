@@ -13,20 +13,20 @@ private:
 
 public:
 
-    // PRE:
-    // POST:
-    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos);
+    // PRE: Los datos son validos.
+    // POST: Crea un poema.
+    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, int versos);
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Devuelve la cantidad de versos del poema. 
     int obtener_versos();
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Muestra por pantalla las caracteristicas del poema.
     void mostrar_lectura();
 
-    // PRE:
-    // POST:
+    // PRE: - 
+    // POST: Devuelve false, pues un Poema no tiene genero.
     bool coinciden_generos(int genero);
     
 };

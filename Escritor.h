@@ -3,6 +3,7 @@
 
 
 # include <iostream>
+# include "constantes.h"
 
 
 using namespace std;
@@ -18,34 +19,36 @@ private:
     int anio_nacimiento_;
     int anio_fallecimiento_;
 
+
+
 public:
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Crea un escritor vacio.
     Escritor();
 
-    // PRE:
-    // POST:
+    // PRE: Los datos son validos.
+    // POST: Crea un escritor.
     Escritor(string nombre, string apellido, string nacionalidad, int anio_nacimiento, int anio_fallecimiento);
 
-    // PRE:
-    // POST:
-    string devolver_nombre_completo();
+    // PRE: - 
+    // POST: Devuelve el nombre y apellido del escritor.
+    string obtener_nombre_completo();
 
-    // PRE:
-    // POST:
-    string devolver_nacionalidad();
+    // PRE: -
+    // POST: Devuelve la nacionalidad del autor.
+    string obtener_nacionalidad();
 
-    // PRE:
-    // POST:
-    bool validar_fallecimiento();
+    // PRE: -
+    // POST: Devuelve true si el fallecimiento es desconocido, false en caso contrario.
+    bool verificar_fallecimiento();
 
-    // PRE:
-    // POST:
+    // PRE: Anio es mayor a 0.
+    // POST: Se le asigna el anio al escritor.
     void asignar_fallecimiento(int anio);
 
     // PRE:
-    // POST:
+    // POST: Muestra por pantalla las caracteristicas del escritor.
     void mostrar_escritor();
 
 };

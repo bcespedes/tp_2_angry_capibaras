@@ -8,25 +8,21 @@
 # include "Historica.h"
 # include "Poema.h"
 # include "Cuento.h"
-
-
-const string ESCRITORES = "escritores.txt";
-const string LECTURAS = "lecturas.txt";
+# include "constantes.h"
 
 
 class Lector {
     
 protected:
 
+    // METODOS
     int obtener_referencia(string referencia);
+    virtual bool validar_archivo(ifstream &archivo) = 0;
 
 public:
 
     Lector();
-    /*Lista<Lectura *> *procesar_lecturas();
-    Lista<Escritor *> *procesar_escritores();*/
-    //virtual void procesar_archivos() = 0;
-    virtual bool validar_archivo(ifstream &archivo) = 0;
+    
 
 };
 

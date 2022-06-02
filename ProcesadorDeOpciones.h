@@ -15,45 +15,48 @@ class ProcesadorDeOpciones {
 
 private:
 
-    Lista<Escritor *>* lista_escritores_;
-    Lista<Lectura *>* lista_lecturas_;
+    // ATRIBUTOS
+    Lista <Escritor*>* lista_escritores_;
+    Lista <Lectura*>* lista_lecturas_;
+
+    // METODOS
     char ingresar_tipo_lectura();
     char ingresar_si_es_anonimo();
-    Escritor* no_es_autor_anonimo(int indice, int cantidad_escritores);
     int ingresar_genero();
-    Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* autor);
-    Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* autor);
-    Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* autor);
-    Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* autor);
-    Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
-    int ingresar_indice_lectura();
-    int ingresar_indice_escritor();
+    Escritor* no_es_escritor_anonimo(int indice, int cantidad_escritores);
+    Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor);
+    Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* escritor);
+    Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* escritor);
+    Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* escritor);
+    Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* escritor);
+    int ingresar_indice_lista(string instruccion, int cantidad_datos);
     int ingresar_anio_correcto(int anio_inferior);
+    Escritor* ingresar_escritor();
 
 public:
 
-    // PRE:
-    // POS:
+    // PRE: -
+    // POST: Crea un procesador de opciones. 
     ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: Agrega una lectura a la lista.
     void agregar_lectura();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: Quita una lectura de la lista.
     void quitar_lectura();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_escritores esta creada.
+    // POST: Agrega un escritor a la lista.
     void agregar_escritor();
 
-    // PRE:
-    // POST:
+    // PRE: La lista escritores no esta vacia.
+    // POST: Si el escritor no tiene un fallecimiento asignado, se le pide un anio al usuario y se actualiza.
     void asignar_fallecimiento_escritor();
 
-    // PRE:
-    // POST:
+    // PRE: La lista escritores no esta vacia.
+    // POST: Muestra por pantalla todos los escritores. 
     void listar_escritores();
 
     // PRE:
@@ -79,6 +82,10 @@ public:
     // PRE:
     // POST:
     void crear_cola_ordenada();
+
+    // PRE:
+    // POST:
+    void cocinar_pastel_de_papa();
 
     // PRE:
     // POST:

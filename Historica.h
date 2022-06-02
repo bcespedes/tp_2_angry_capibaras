@@ -13,28 +13,24 @@ private:
 
 public:
 
-    //PRE: Genero tiene que ser historica
-    //POST: Crea un objeto historica
-    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero, char* tema);
+    // PRE: Genero tiene que ser historica.
+    // POST: Crea un objeto historica.
+    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char* tema);
     
-    //PRE: -
-    //POST: Se devuelve el tema de la novela historica.
+    // PRE: -
+    // POST: Se devuelve el tema de la novela historica.
     char* obtener_tema();
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Muestra por pantalla las caracteristicas de la novela historica.
     void mostrar_lectura();
 
-    // PRE:
-    // POST:
-    void insertar_lectura(string titulo, int minutos, int anio, generos genero, string tema, Lista<Lectura *>* lista_lectura, Escritor* autor, int referencia);
-
-    // PRE:
-    // POST:
+    // PRE: Genero es un genero valido.
+    // POST: Devuelve true si genero es HISTORICA, false de caso contrario.
     bool coinciden_generos(int genero);
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Destruye la novela historica.
     ~Historica();
 
 };

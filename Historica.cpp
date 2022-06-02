@@ -2,12 +2,10 @@
 # include <string.h>
 
 
-Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero, char *tema)
- : Novela(titulo, minutos, anio, autor, genero) {
+Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char *tema)
+ : Novela(titulo, minutos, anio, escritor, genero) {
 
     tema_ = tema;
-    /*new char[strlen(tema)];
-    strcpy(tema_, tema);*/
 }
 
 
@@ -27,8 +25,8 @@ void Historica::mostrar_lectura() {
     cout << "Tema historico: " << tema_ << endl;
 
     cout << "Autor: ";
-    if(autor_ != nullptr)
-        autor_ -> mostrar_escritor();
+    if(escritor_ != nullptr)
+        escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;
 }
@@ -38,7 +36,7 @@ bool Historica::coinciden_generos(int genero) {
 
     bool coinciden = false;
 
-    if(genero_ == genero)
+    if(HISTORICA == genero)
         coinciden = true;
 
     return coinciden;

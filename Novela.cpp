@@ -2,8 +2,8 @@
 # include "Historica.h"
 
 
-Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero)
- : Lectura(titulo, minutos, anio, autor) {
+Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero)
+ : Lectura(titulo, minutos, anio, escritor) {
 
     genero_ = genero;
 }
@@ -15,7 +15,7 @@ generos Novela::obtener_genero() {
 }
 
 
-string Novela::convertir_a_string_genero() {
+string Novela::convertir_genero_a_string() {
 
     string gen;
     
@@ -36,11 +36,11 @@ void Novela::mostrar_lectura() {
     cout << titulo_ << endl;
     cout << "Minutos estimados: " << minutos_ << endl;
     cout << "Publicacion: " << anio_ << endl;
-    cout << "Genero: " << convertir_a_string_genero() << endl;
+    cout << "Genero: " << convertir_genero_a_string() << endl;
 
     cout << "Autor: ";
-    if(autor_ != nullptr)
-        autor_ -> mostrar_escritor();
+    if(escritor_ != nullptr)
+        escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;
 }

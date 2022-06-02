@@ -17,24 +17,24 @@ private:
 
 public:
 
-    //PRE: d es un dato valido
-    //POST: Construye un nodo con d como dato y siguiente apuntado a null
+    // PRE: d es un dato valido.
+    // POST: Construye un nodo con d como dato y siguiente apuntado a null.
     Nodo(Tipo d);
 
-    //PRE: n es un nodo valido
-    //POST: siguiente apunta a n
-    void cambiar_siguiente(Nodo* n);
+    // PRE: Nodo es un nodo valido.
+    // POST: Siguiente apunta a n.
+    void cambiar_siguiente(Nodo* nodo);
 
-    //PRE: -
-    //POST: devuelve el dato
+    // PRE: -
+    // POST: Devuelve el dato.
     Tipo obtener_dato();
 
-    //PRE: -
-    //POST: devuelve el nodo siguiente, si no lo hubiera devuelve null
+    // PRE: -
+    // POST: Devuelve el nodo siguiente, si no lo hubiera devuelve null.
     Nodo* obtener_siguiente();
 
     // PRE:
-    // POST:
+    // POST: Se llama al destructor del dato y luego se destruye el nodo.
     ~Nodo();
 
 };

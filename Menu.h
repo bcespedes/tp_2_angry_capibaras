@@ -8,16 +8,21 @@
 # include "LectorLecturas.h"
 # include "ProcesadorDeOpciones.h"
 
-
 class Menu {
 
 private:
 
+     // ATRIBUTOS
      int opcion_elegida;
      bool cerrar_menu = false;
+
+     // METODOS
      void mensaje_bienvenida();
      void mensaje_despedida();
      void tecla_continuar();
+     void mostrar_menu(); 
+     bool procesar_opcion(ProcesadorDeOpciones* procesador_opciones);
+     ProcesadorDeOpciones* cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas);
 
 public:
 
@@ -28,12 +33,6 @@ public:
      // PRE:
      // POST:
      ~Menu();
-
-private:
-
-     void mostrar_menu(); //privada o publica ver
-     bool procesar_opcion(ProcesadorDeOpciones* procesador_opciones);//privada o publica ver
-     ProcesadorDeOpciones* cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas);//privada o publica ver
 
 };
 

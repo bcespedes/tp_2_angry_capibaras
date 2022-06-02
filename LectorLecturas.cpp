@@ -4,7 +4,7 @@
 
 Escritor* LectorLecturas::obtener_escritor(Lista<Escritor *>* lista, int referencia) {
 
-    if(referencia == -1)
+    if(referencia == ANONIMO)
         return NULL;
 
     return lista -> consulta(referencia - 1);
@@ -14,7 +14,7 @@ Escritor* LectorLecturas::obtener_escritor(Lista<Escritor *>* lista, int referen
 bool LectorLecturas::validar_archivo(ifstream &archivo_lecturas) {
     bool abierto = true;
     if(!archivo_lecturas.is_open()) {
-        cout << "No se pudo abrir el archivo lecturas, puede agregarlas manualmente!\n" << endl;
+        cout << ERROR_APERTURA_LECTURAS << endl;
         abierto = false;
     }
 
@@ -45,12 +45,12 @@ Lectura* LectorLecturas::crear_historica(string titulo, int minutos, int anio, s
     return historica;
 }
 
+
 Lectura* LectorLecturas::crear_novela(string titulo, int duracion, int anio, Lista<Escritor *>* lista_escritores, ifstream &archivo_lecturas) {
 
     string genero;
     string referencia;
     getline(archivo_lecturas, genero);
-
     Lectura* novela;
 
     if(genero == "HISTORICA") {
@@ -67,6 +67,7 @@ Lectura* LectorLecturas::crear_novela(string titulo, int duracion, int anio, Lis
     return novela;
 }
 
+
 Lectura* LectorLecturas::crear_cuento(string titulo, int minutos, int anio, Lista<Escritor *>* lista_escritores, ifstream &archivo_lecturas) {
 
     string libro_publicado, referencia;
@@ -79,6 +80,7 @@ Lectura* LectorLecturas::crear_cuento(string titulo, int minutos, int anio, List
     return cuento;
 }
 
+
 Lectura* LectorLecturas::crear_poema(string titulo, int minutos, int anio,  Lista<Escritor *>* lista_escritores, ifstream &archivo_lecturas) {
     
     string cant_versos, referencia;
@@ -87,12 +89,15 @@ Lectura* LectorLecturas::crear_poema(string titulo, int minutos, int anio,  List
     getline(archivo_lecturas, referencia);
     
     Lectura* poema = new Poema(titulo, minutos, anio, obtener_escritor(lista_escritores, obtener_referencia(referencia)), stoi(cant_versos));
+
     return poema;
 }
 
+
 Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Lista<Escritor *>* lista_escritores) {
 
-    string tipo_lectura, titulo, duracion, anio, referencia, genero, tema_historico, cant_versos, libro_publicado;
+    char tipo_lectura;
+    string titulo, duracion, anio, referencia, genero, tema_historico, cant_versos, libro_publicado;
     archivo_lecturas >> tipo_lectura;
     archivo_lecturas.ignore();
     getline(archivo_lecturas, titulo);
@@ -101,10 +106,10 @@ Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Lista<Escrito
 
     Lectura* lectura;
 
-    if(tipo_lectura == "N")
+    if(tipo_lectura == NOVELA)
         lectura = crear_novela(titulo, stoi(duracion), stoi(anio), lista_escritores, archivo_lecturas);
 
-    else if (tipo_lectura == "C")
+    else if (tipo_lectura == CUENTO)
         lectura = crear_cuento(titulo, stoi(duracion), stoi(anio), lista_escritores, archivo_lecturas);
         
     else

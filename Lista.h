@@ -17,56 +17,53 @@ private:
 
 public:
 
-    //PRE: -
-    //POST: Crea una lista vacia
+    // PRE: -
+    // POST: Crea una lista vacia.
     Lista();
 
-    //PRE: -
-    //POST: Mueve el actual al inicio de la lista
+    // PRE: -
+    // POST: Mueve el actual al inicio de la lista.
     void inicializar();
 
     // PRE:
     // POST:
     void desinicializar();
 
-    //PRE:
-    //POST: Devuelve true si hay un nodo siguiente, false si se esta en el final
+    // PRE:
+    // POST: Devuelve true si hay un nodo siguiente, false si se esta en el final.
     bool hay_siguiente();
 
-    //PRE:
-    //POST: Devuelve el dato de actual y mueve el actual+ hacia la siguiente posicion.
+    // PRE:
+    // POST: Devuelve el dato de actual y mueve el actual hacia la siguiente posicion.
     Tipo siguiente();
 
-    //PRE: -
-    //POST: Devuelve true si esta vacia, false en caso contrario.
+    // PRE: -
+    // POST: Devuelve true si esta vacia, false en caso contrario.
     bool vacia();
 
-    //PRE: e es un dato valido. 0 <= Pos <= obtener.cantidad()+1
-    //POST: Agrega el elem en la posicion pos. (empieza en 0)
+    // PRE: e es un dato valido. 0 <= Pos <= obtener.cantidad() + 1
+    // POST: Agrega el elem en la posicion pos. (empieza en 0)
     void alta(Tipo e, int pos); 
     
-    //PRE: 0 <= Pos <= obtener.cantidad()
-    //POST: Da de baja al elemento en pos
+    // PRE: 0 <= Pos <= obtener.cantidad().
+    // POST: Da de baja al elemento en pos.
     void baja(int pos);
 
-    //PRE: 0 <= Pos <= obtener.cantidad()
-    //POST: Devuelve el elemento en pos
+    // PRE: 0 <= Pos <= obtener.cantidad().
+    // POST: Devuelve el elemento en pos.
     Tipo consulta(int pos);
 
+    // PRE: La lista es de punteros a escritores.
+    // POST: Imprime los elementos de la lista.
+    void imprimir_lista_escritores();
 
-    // PRE:
-    // POST:
-    void imprimir_lista();
+    // PRE: La lista es de punteros a lecturas.
+    // POST: Imprime los elementos de la lista. 
+    void imprimir_lista_lecturas();
 
-
-    // PRE:
-    // POST:
-    void imprimir_lista2();
-
-
-    // PRE:
-    // POST:
-    int devolver_cantidad();
+    // PRE: -
+    // POST: Devuelve el tamaño de la lista.
+    int obtener_cantidad();
 
     //PRE: -
     //POST: Destruye la lista.
@@ -133,7 +130,7 @@ bool Lista<Tipo>::vacia() {
 
 template <typename Tipo>
 
-int Lista<Tipo>::devolver_cantidad() {
+int Lista<Tipo>::obtener_cantidad() {
 
     return cantidad;
 }
@@ -202,20 +199,19 @@ void Lista<Tipo>::baja(int pos) {
     }
     cantidad--;
 
-    //delete borrar -> obtener_dato();
-    delete borrar; //:)
+    delete borrar; 
 }
 
 
 template <typename Tipo>
 
-void Lista<Tipo>::imprimir_lista() {
+void Lista<Tipo>::imprimir_lista_escritores() {
 
     int indice = 1;
     inicializar();
     while(actual != NULL) {
         cout << "["<< indice <<"] - ";
-        actual -> obtener_dato() -> mostrar_escritor(); //cambiar la lista tiene templates
+        actual -> obtener_dato() -> mostrar_escritor();
         actual = actual -> obtener_siguiente();
         indice++;
     }
@@ -224,7 +220,7 @@ void Lista<Tipo>::imprimir_lista() {
 
 template <typename Tipo>
 
-void Lista<Tipo>::imprimir_lista2() {
+void Lista<Tipo>::imprimir_lista_lecturas() {
 
     int indice = 1;
     inicializar();
