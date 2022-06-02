@@ -8,38 +8,6 @@ ProcesadorDeOpciones::ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, 
 }
 
 
-void ProcesadorDeOpciones::limpiar_pantalla() {
-
-    #ifdef _WIN32
-            system("cls");
-    #else
-            system ("clear");
-    #endif
-}
-
-
-bool ProcesadorDeOpciones::validar_opcion(int opcion, int opcion_max) {
-
-    return (1 <= opcion && opcion <= opcion_max);
-}
-
-
-int ProcesadorDeOpciones::validar_entero(int a_validar, string instruccion, int valor_minimo) {
-
-    cout << instruccion;
-    cin >> a_validar;
-    while(!cin.good() || a_validar < valor_minimo) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "\nNo has ingresado un valor esperado.\nIntentalo nuevamente. ";
-        cout << instruccion;
-        cin >> a_validar;
-    }
-
-    return a_validar;
-}
-
-
 char ProcesadorDeOpciones::ingresar_tipo_lectura() {
 
     string tipo_lectura = "XX";
@@ -54,6 +22,7 @@ char ProcesadorDeOpciones::ingresar_tipo_lectura() {
     
     return tipo_lectura[0];
 }
+
 
 char ProcesadorDeOpciones::ingresar_si_es_anonimo() {
 
@@ -71,27 +40,26 @@ char ProcesadorDeOpciones::ingresar_si_es_anonimo() {
 
 Escritor* ProcesadorDeOpciones::no_es_autor_anonimo(int indice, int cantidad_escritores) {
 
+    Utilidades validador;
     Escritor* autor;
     cout << endl;
     lista_escritores_ -> imprimir_lista();
-    while (!validar_opcion(indice, cantidad_escritores) && indice != -1) {
+    while (!validador.validar_opcion(indice, cantidad_escritores) && indice != -1) {
 
-        indice = validar_entero(indice, "Ingrese el indice del escritor de la lectura correspondiente."
+        indice = validador.validar_entero(indice, "Ingrese el indice del escritor de la lectura correspondiente."
         " Si su escritor no aparece en la lista ingrese -1: ", -1);
 
-        if(!validar_opcion(indice, cantidad_escritores) && indice != -1)
+        if(!validador.validar_opcion(indice, cantidad_escritores) && indice != -1)
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
 
     if(indice == -1) {
         cout << "\nProceda a agregar un nuevo escritor:\n" << endl;
-        cin.ignore();
         agregar_escritor();
         indice = cantidad_escritores + 1;
         cout << "\nAhora prosiga creando su lectura." << endl;
     }
-    else
-        cin.ignore();
+
     autor = lista_escritores_ -> consulta(indice - 1);
 
     return autor;
@@ -100,14 +68,15 @@ Escritor* ProcesadorDeOpciones::no_es_autor_anonimo(int indice, int cantidad_esc
 
 int ProcesadorDeOpciones::ingresar_genero() {
 
+    Utilidades validador;
     int genero = 0;
     cout << "Generos disponibles:" << endl;
     cout << "\n[1] - Drama\n\n[2] - Comedia\n\n[3] - Ficcion\n\n[4] - Suspenso\n\n[5] - Terror\n\n[6] - Romantica \n\n[7] - Historica" << endl << endl;
-    while(!validar_opcion(genero, 7)) {
+    while(!validador.validar_opcion(genero, 7)) {
 
-        genero = validar_entero(genero, "Ingrese el indice correspondiente al genero de la novela: ", 1);
+        genero = validador.validar_entero(genero, "Ingrese el indice correspondiente al genero de la novela: ", 1);
 
-        if(!validar_opcion(genero, 7))
+        if(!validador.validar_opcion(genero, 7))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
 
@@ -135,7 +104,6 @@ Lectura* ProcesadorDeOpciones::crear_novela(string titulo, int duracion, int ani
     cout << endl;
     int genero = ingresar_genero();
 
-    cin.ignore();
     if(genero == 7)
         novela = crear_novela_historica(titulo, duracion, anio, autor);
     else
@@ -158,15 +126,15 @@ Lectura* ProcesadorDeOpciones::crear_cuento(string titulo, int duracion, int ani
 
 
 Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio, Escritor* autor) {
-    
+
+    Utilidades validador;
     Lectura* poema;
     int cant_versos = 0;
 
     cout << endl;
-    cant_versos = validar_entero(cant_versos, "Ingrese la cantidad de versos del poema: ", 1);
+    cant_versos = validador.validar_entero(cant_versos, "Ingrese la cantidad de versos del poema: ", 1);
 
     poema = new Poema(titulo, duracion, anio, autor, cant_versos);
-    cin.ignore();
 
     return poema;
 }
@@ -191,7 +159,8 @@ Lectura* ProcesadorDeOpciones::crear_lectura(char tipo_lectura, string titulo, i
 void ProcesadorDeOpciones::agregar_lectura() {
 
     if(!lista_escritores_ -> vacia()) {
-        string titulo; 
+        Utilidades validador, insertador;
+        string titulo;
         unsigned int duracion = 0, anio = 0;
         int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
         Escritor* autor = NULL;
@@ -203,19 +172,18 @@ void ProcesadorDeOpciones::agregar_lectura() {
         getline(cin, titulo);
 
         cout << endl;
-        duracion = validar_entero(duracion, "Ingrese la duracion en minutos de su lectura: ", 1);
+        duracion = validador.validar_entero(duracion, "Ingrese la duracion en minutos de su lectura: ", 1);
 
         cout << endl;
-        anio = validar_entero(anio, "Ingrese el anio de publicacion: ", 0);
+        anio = validador.validar_entero(anio, "Ingrese el anio de publicacion: ", 0);
 
-        cin.ignore();
         char anonimo = ingresar_si_es_anonimo();
 
         if(toupper(anonimo) == 'N')
             autor = no_es_autor_anonimo(indice, cantidad_escritores);
 
         lectura = crear_lectura(tipo_lectura, titulo, duracion, anio, autor);
-        LectorLecturas::insertar_lectura_ordenada(lectura, lista_lecturas_);
+        insertador.insertar_lectura_ordenada(lectura, lista_lecturas_);
 
     }
     else
@@ -225,12 +193,13 @@ void ProcesadorDeOpciones::agregar_lectura() {
 
 int ProcesadorDeOpciones::ingresar_indice_lectura() {
 
+    Utilidades validador;
     int indice = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
-    while(!validar_opcion(indice, cantidad_lecturas)) {
+    while(!validador.validar_opcion(indice, cantidad_lecturas)) {
 
-        indice = validar_entero(indice, "Ingrese el indice de la lectura a eliminar: ", 1);
+        indice = validador.validar_entero(indice, "Ingrese el indice de la lectura a eliminar: ", 1);
 
-        if(!validar_opcion(indice, cantidad_lecturas))
+        if(!validador.validar_opcion(indice, cantidad_lecturas))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
 
@@ -247,7 +216,6 @@ void ProcesadorDeOpciones::quitar_lectura() {
         int indice = ingresar_indice_lectura();
         cout << "\nSe ha eliminado " << lista_lecturas_ -> consulta(indice - 1) -> obtener_titulo() << " correctamente." << endl;
         lista_lecturas_ -> baja(indice - 1);
-        cin.ignore();
     }
     else
         cout << "La lista esta vacia!" << endl;
@@ -256,6 +224,7 @@ void ProcesadorDeOpciones::quitar_lectura() {
 
 void ProcesadorDeOpciones::agregar_escritor() {
 
+    Utilidades validador;
     string nombre, apellido, nacionalidad;
     int anio_nacimiento = 0, anio_fallecimiento = 0;
 
@@ -269,27 +238,27 @@ void ProcesadorDeOpciones::agregar_escritor() {
     getline(cin, nacionalidad);
 
     cout << endl;
-    anio_nacimiento = validar_entero(anio_nacimiento, "Ingrese el anio de nacimiento del escritor a agregar (-1 en caso de desconocerlo): ", -1);
+    anio_nacimiento = validador.validar_entero(anio_nacimiento, "Ingrese el anio de nacimiento del escritor a agregar (-1 en caso de desconocerlo): ", -1);
 
     cout << endl;
-    anio_fallecimiento = validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor a agregar (-1 en caso de no poseerlo): ", -1);
+    anio_fallecimiento = validador.validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor a agregar (-1 en caso de no poseerlo): ", -1);
 
     Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
     lista_escritores_ -> alta(escritor, lista_escritores_ -> devolver_cantidad());
 
     cout << "\n\nSe agrego a " << nombre << " " << apellido << " a la lista correctamente.\n" << endl;
-    cin.ignore();
 }
 
 
 int ProcesadorDeOpciones::ingresar_indice_escritor() {
 
+    Utilidades validador;
     int indice = 0, cantidad_escritores = lista_escritores_ -> devolver_cantidad();
-    while(!validar_opcion(indice, cantidad_escritores)) {
+    while(!validador.validar_opcion(indice, cantidad_escritores)) {
 
-        indice = validar_entero(indice, "Ingrese el indice del escritor a asignarle el anio: ", 1);
+        indice = validador.validar_entero(indice, "Ingrese el indice del escritor a asignarle el anio: ", 1);
 
-        if(!validar_opcion(indice, cantidad_escritores))
+        if(!validador.validar_opcion(indice, cantidad_escritores))
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
     }
 
@@ -300,6 +269,7 @@ int ProcesadorDeOpciones::ingresar_indice_escritor() {
 void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
     if(!lista_escritores_ -> vacia()) {
+        Utilidades validador;
         int anio_fallecimiento = 0;
 
         lista_escritores_ -> imprimir_lista();
@@ -309,7 +279,7 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
         if(lista_escritores_ -> consulta(indice - 1) -> validar_fallecimiento()) {
 
             cout << endl;
-            anio_fallecimiento = validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", 0);
+            anio_fallecimiento = validador.validar_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", 0);
 
             lista_escritores_ -> consulta(indice-1) -> asignar_fallecimiento(anio_fallecimiento);
             cout << "\nSe ha asignado el anio de fallecimiento en " << anio_fallecimiento <<
@@ -317,7 +287,6 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
         }
         else
             cout << "\nEste escritor ya tiene anio de fallecimiento asignado" << endl;
-        cin.ignore();
     }
     else
         cout << "La lista esta vacia!" << endl;
@@ -356,12 +325,13 @@ void ProcesadorDeOpciones::listar_lecturas() {
 
 unsigned int ProcesadorDeOpciones::ingresar_anio_correcto(unsigned int anio_inferior) {
 
+    Utilidades validador;
     unsigned int anio_superior = 0;
 
     cout << endl;
     while(anio_superior <= anio_inferior) {
 
-        anio_superior = validar_entero(anio_superior, "Ingrese el anio hasta donde desea mostrar las lecturas: ", 1);
+        anio_superior = validador.validar_entero(anio_superior, "Ingrese el anio hasta donde desea mostrar las lecturas: ", 1);
 
         if(anio_superior <= anio_inferior)
             cout << "\nHas ingresado algo erroneo.\nIntentalo nuevamente. ";
@@ -375,10 +345,11 @@ void ProcesadorDeOpciones::listar_periodo_lecturas() {
 
     if(!lista_lecturas_ -> vacia()) {
 
+        Utilidades validador;
         int contador = 0, cantidad_lecturas = lista_lecturas_ -> devolver_cantidad();
         unsigned int anio_inferior = 0;
 
-        anio_inferior = validar_entero(anio_inferior, "Ingrese el anio desde donde desea mostrar las lecturas: ", 1);
+        anio_inferior = validador.validar_entero(anio_inferior, "Ingrese el anio desde donde desea mostrar las lecturas: ", 1);
 
         unsigned int anio_superior = ingresar_anio_correcto(anio_inferior);
 
@@ -393,7 +364,6 @@ void ProcesadorDeOpciones::listar_periodo_lecturas() {
 
         if(contador == 0)
             cout << "\nNo se han encontrado lecturas en ese periodo de tiempo." << endl;
-        cin.ignore();
     }
     else
         cout << "La lista esta vacia!" << endl;
@@ -425,7 +395,6 @@ void ProcesadorDeOpciones::listar_lecturas_de() {
 
         if(contador == 0)
             cout << "\nEste escritor no tiene cargada ninguna lectura." << endl;
-        cin.ignore();
     }
     else
         cout << "La lista esta vacia!" << endl;
@@ -449,7 +418,6 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
 
         if(contador == 0)
             cout << "No se han encontrado novelas de ese genero." << endl;
-        cin.ignore();
     }
     else
         cout << "La lista esta vacia!" << endl;

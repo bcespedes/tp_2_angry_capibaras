@@ -7,7 +7,8 @@ using namespace std;
 
 Menu::Menu() {
 
-     ProcesadorDeOpciones::limpiar_pantalla();
+     Utilidades limpiador, validador;
+     limpiador.limpiar_pantalla();
      mensaje_bienvenida();
      opcion_elegida = 0;
      LectorEscritores e;
@@ -16,8 +17,8 @@ Menu::Menu() {
 
      while (!cerrar_menu) {
           mostrar_menu();
-          opcion_elegida = ProcesadorDeOpciones::validar_entero(opcion_elegida, ESCRIBA_OPCION, OPCION_MINIMA);
-          ProcesadorDeOpciones::limpiar_pantalla();
+          opcion_elegida = validador.validar_entero(opcion_elegida, ESCRIBA_OPCION, OPCION_MINIMA);
+          limpiador.limpiar_pantalla();
           cerrar_menu = procesar_opcion(f);
      }
 
@@ -54,7 +55,6 @@ void Menu::mostrar_menu() {
 
 bool Menu::procesar_opcion(ProcesadorDeOpciones* f) {
 
-     cin.ignore();
      switch (opcion_elegida) {
           case AGREGAR_LECTURA: 
                f -> agregar_lectura();
@@ -125,12 +125,13 @@ void Menu::mensaje_bienvenida() {
 
 void Menu::tecla_continuar() {
 
+     Utilidades limpiador;
      string entrada_usuario = "a";
      cout << endl;
      cout << "Presione Enter para continuar: ";
      getline(cin, entrada_usuario);
      cin.clear();
-     ProcesadorDeOpciones::limpiar_pantalla();
+     limpiador.limpiar_pantalla();
 }
 
 

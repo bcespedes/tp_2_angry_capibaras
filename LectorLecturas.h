@@ -3,6 +3,7 @@
 
 
 # include "Lector.h"
+# include "Utilidades.h"
 
 
 class LectorLecturas : public Lector {

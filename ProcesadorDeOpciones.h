@@ -1,12 +1,9 @@
 # ifndef FUNCIONALIDAD_H
 # define FUNCIONALIDAD_H
 
-
-# include "Lista.h"
-# include "Escritor.h"
-# include "Lectura.h"
-# include "Cola.h"
+# include "Utilidades.h"
 # include "LectorLecturas.h"
+# include "Cola.h"
 # include "stdlib.h"
 # include "time.h"
 # include <string.h>
@@ -19,7 +16,6 @@ private:
 
     Lista<Escritor *>* lista_escritores_;
     Lista<Lectura *>* lista_lecturas_;
-    bool validar_opcion(int opcion, int opcion_max);
     char ingresar_tipo_lectura();
     char ingresar_si_es_anonimo();
     Escritor* no_es_autor_anonimo(int indice, int cantidad_escritores);
@@ -38,14 +34,6 @@ public:
     // PRE:
     // POS:
     ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
-
-    // PRE:
-    // POST:
-    static void limpiar_pantalla();
-
-    // PRE:
-    // POST:
-    static int validar_entero(int a_validar, string instruccion, int valor_minimo);
 
     // PRE:
     // POST:

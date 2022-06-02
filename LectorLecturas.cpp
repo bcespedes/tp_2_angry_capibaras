@@ -10,6 +10,7 @@ Escritor* LectorLecturas::obtener_escritor(Lista<Escritor *>* lista, int referen
     return lista -> consulta(referencia - 1);
 }
 
+
 bool LectorLecturas::validar_archivo(ifstream &archivo_lecturas) {
     bool abierto = true;
     if(!archivo_lecturas.is_open()) {
@@ -19,6 +20,7 @@ bool LectorLecturas::validar_archivo(ifstream &archivo_lecturas) {
 
     return abierto;
 }
+
 
 generos LectorLecturas::convertir_a_genero(string genero) {
     generos gen;
@@ -33,31 +35,6 @@ generos LectorLecturas::convertir_a_genero(string genero) {
     return gen;
 }
 
-void LectorLecturas::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura) {
-    int pos = 0;
-    bool avanzar = true;
-
-    lista_lectura -> inicializar();
-    if(!lista_lectura -> vacia()) {
-    
-        while(avanzar) {
-            if(lectura -> comparar(lista_lectura -> consulta(pos)) == -1) {
-                avanzar = false;
-                pos--;
-            }
-            if(!lista_lectura -> hay_siguiente()) {
-                pos++;
-                avanzar = false;
-            }
-            else {
-                pos++;
-                lista_lectura -> siguiente();
-            }
-        }
-    }
-
-    lista_lectura -> alta(lectura, pos);
-}
 
 Lectura* LectorLecturas::crear_historica(string titulo, int minutos, int anio, string tema,  Escritor* escritor) {
 
@@ -138,9 +115,10 @@ Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Lista<Escrito
 }
 
 Lista<Lectura *>* LectorLecturas::procesar_lecturas(Lista<Escritor *>* lista_escritores) {
+
+    Utilidades insertador;
     ifstream archivo_lecturas(LECTURAS);
     Lista<Lectura *>* lista_lecturas = new Lista<Lectura *>();
-
 
     if(validar_archivo(archivo_lecturas)) {
 
@@ -148,7 +126,7 @@ Lista<Lectura *>* LectorLecturas::procesar_lecturas(Lista<Escritor *>* lista_esc
         while(!archivo_lecturas.eof()) {
 
             lectura = crear_lectura(archivo_lecturas, lista_escritores);
-            insertar_lectura_ordenada(lectura, lista_lecturas);
+            insertador.insertar_lectura_ordenada(lectura, lista_lecturas);
         }
     }
 
