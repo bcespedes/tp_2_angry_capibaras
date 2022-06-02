@@ -2,9 +2,9 @@
 #define LECTURA_H
 
 
-#include <iostream>
-#include "escritor.h"
-#include "lista.h"
+# include <iostream>
+# include "Escritor.h"
+# include "Lista.h"
 
 
 using namespace std;
@@ -52,4 +52,4 @@ public:
 };
 
 
-#endif
+# endif

@@ -1,10 +1,12 @@
-#ifndef LECTOR_LECTURAS_H
-#define LECTOR_LECTURAS_H
-
-#include "lector.h"
+# ifndef LECTOR_LECTURAS_H
+# define LECTOR_LECTURAS_H
 
 
-class Lector_lecturas : public Lector {
+# include "Lector.h"
+# include "Utilidades.h"
+
+
+class LectorLecturas : public Lector {
 
 public:
 
@@ -34,11 +36,7 @@ public:
 
     // PRE:
     // POST:
-    static void insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura);
-
-    // PRE:
-    // POST:
-    static generos convertir_a_genero(string genero);
+    generos convertir_a_genero(string genero);
 
     // PRE:
     // POST:
@@ -51,4 +49,4 @@ public:
 };
 
 
-#endif
+# endif

@@ -1,18 +1,8 @@
-#ifndef NOVELA_H
-#define NOVELA_H
+# ifndef NOVELA_H
+# define NOVELA_H
 
-#include "lectura.h"
-
-
-enum generos {
-    DRAMA = 1,
-    COMEDIA,
-    FICCION,
-    SUSPENSO,
-    TERROR,
-    ROMANTICA,
-    HISTORICA
-};
+# include "constantes.h"
+# include "Lectura.h"
 
 
 class Novela: public Lectura {
@@ -46,4 +36,4 @@ public:
 };
 
 
-#endif
+# endif

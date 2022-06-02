@@ -1,5 +1,5 @@
-#include "Menu.h"
-#include <iostream>
+# include "Menu.h"
+# include <iostream>
 
 
 using namespace std;
@@ -7,32 +7,32 @@ using namespace std;
 
 Menu::Menu() {
 
-     Funcionalidad::limpiar_pantalla();
+     Utilidades limpiador, validador;
+     limpiador.limpiar_pantalla();
      mensaje_bienvenida();
      opcion_elegida = 0;
-     Lector_escritores e;
-     Lector_lecturas l;
-     Funcionalidad* f = cargar_archivos(l,e);
+     LectorEscritores lector_escritores;
+     LectorLecturas lector_lecturas;
+     ProcesadorDeOpciones* procesador_opciones = cargar_archivos(lector_escritores, lector_lecturas);
 
      while (!cerrar_menu) {
           mostrar_menu();
-          cout << ESCRIBA_OPCION;
-          cin >> opcion_elegida;
-          Funcionalidad::limpiar_pantalla();
-          cerrar_menu = procesar_opcion(f);
+          opcion_elegida = validador.validar_entero(opcion_elegida, ESCRIBA_OPCION_MENU, OPCION_MINIMA);
+          limpiador.limpiar_pantalla();
+          cerrar_menu = procesar_opcion(procesador_opciones);
      }
 
-     delete f;
+     delete procesador_opciones;
 }
 
 
-Funcionalidad* Menu::cargar_archivos(Lector_lecturas l, Lector_escritores e) {
+ProcesadorDeOpciones* Menu::cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas) {
 
-     Lista<Escritor *>* lista_escritores = e.procesar_escritores();
-     Lista<Lectura *>* lista_lecturas = l.procesar_lecturas(lista_escritores);
-     Funcionalidad* f = new Funcionalidad(lista_escritores, lista_lecturas);
+     Lista<Escritor *>* lista_escritores = lector_escritores.procesar_escritores();
+     Lista<Lectura *>* lista_lecturas = lector_lecturas.procesar_lecturas(lista_escritores);
+     ProcesadorDeOpciones* procesador_opciones = new ProcesadorDeOpciones(lista_escritores, lista_lecturas);
 
-     return f;
+     return procesador_opciones;
 }
 
 
@@ -53,49 +53,39 @@ void Menu::mostrar_menu() {
 }
 
 
-bool Menu::procesar_opcion(Funcionalidad* f) {
+bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
 
-     cin.ignore();
+     Utilidades validador;
      switch (opcion_elegida) {
           case AGREGAR_LECTURA: 
-               f -> agregar_lectura();
-               tecla_continuar();
+               procesador_opciones -> agregar_lectura();
                break;
           case QUITAR_LECTURA:
-               f -> quitar_lectura();
-               tecla_continuar();
+               procesador_opciones -> quitar_lectura();
                break;
           case AGREGAR_ESCRITOR:
-               f -> agregar_escritor();
-               tecla_continuar();
+               procesador_opciones -> agregar_escritor();
                break;
           case CAMBIAR_FALLECIMIENTO:
-               f -> asignar_fallecimiento_escritor();
-               tecla_continuar();
+               procesador_opciones -> asignar_fallecimiento_escritor();
                break;
           case LISTAR_ESCRITORES:
-               f -> listar_escritores();
-               tecla_continuar();
+               procesador_opciones -> listar_escritores();
                break;
           case SORTEAR_LECTURA:
-               f -> sortear_lectura();
-               tecla_continuar();
+               procesador_opciones -> sortear_lectura();
                break;
           case LISTAR_LECTURAS:
-               f -> listar_lecturas();
-               tecla_continuar();
+               procesador_opciones -> listar_lecturas();
                break;
           case LISTAR_LECTURAS_POR_PERIODOS:
-               f -> listar_periodo_lecturas();
-               tecla_continuar();
+               procesador_opciones -> listar_periodo_lecturas();
                break;
           case LISTAR_LECTURA_POR_ESCRITOR:
-               f -> listar_lecturas_de();
-               tecla_continuar();
+               procesador_opciones -> listar_lecturas_de();
                break;
           case LISTAR_NOVELAS_POR_GENERO:
-               f -> listar_novelas_genero();
-               tecla_continuar();
+               procesador_opciones -> listar_novelas_genero();
                break;
           case ARMAR_COLA:
                //armar cola
@@ -104,38 +94,41 @@ bool Menu::procesar_opcion(Funcionalidad* f) {
                cerrar_menu = true;
                break;
           default:
-               cout << OPCION_INVALIDA << endl;
-               cout << endl;     
+               cout << OPCION_INVALIDA_MENU << endl;
+               cout << endl; 
      }         
+
+     if(opcion_elegida != SALIR && validador.validar_opcion(opcion_elegida, OPCION_MAXIMA_MENU - 1))
+          tecla_continuar();
+     else if(opcion_elegida == SALIR)
+          mensaje_despedida();
 
      return cerrar_menu;
 }
 
 
-bool Menu::es_opcion_valida() {
+void Menu::mensaje_bienvenida() {
 
-     return (opcion_elegida >= OPCION_MINIMA && opcion_elegida <= OPCION_MAXIMA);
+     cout << MENSAJE_BIENVENIDA_MENU << endl;
 }
 
 
-void Menu::mensaje_bienvenida() {
+void Menu::mensaje_despedida() {
 
-     cout << MENSAJE_BIENVENIDA << endl;
+     cout << MENSAJE_DESPEDIDA_MENU << endl;
 }
 
 
 void Menu::tecla_continuar() {
 
-     string entrada_usuario = "a";
+     Utilidades limpiador;
      cout << endl;
      cout << "Presione Enter para continuar: ";
-     getline(cin, entrada_usuario);
-     cin.clear();
-     Funcionalidad::limpiar_pantalla();
+     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+     limpiador.limpiar_pantalla();
 }
 
 
 Menu::~Menu() {
 
 }
-

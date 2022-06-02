@@ -1,13 +1,13 @@
-#ifndef LECTOR_H
-#define LECTOR_H
+# ifndef LECTOR_H
+# define LECTOR_H
 
 
-#include <fstream>
-#include "escritor.h"
-#include "lista.h"
-#include "historica.h"
-#include "poema.h"
-#include "cuento.h"
+# include <fstream>
+# include "Escritor.h"
+# include "Lista.h"
+# include "Historica.h"
+# include "Poema.h"
+# include "Cuento.h"
 
 
 const string ESCRITORES = "escritores.txt";
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif
+# endif

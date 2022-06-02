@@ -1,8 +1,8 @@
-#ifndef CUENTO_H
-#define CUENTO_H
+# ifndef CUENTO_H
+# define CUENTO_H
 
 
-#include "lectura.h"
+# include "Lectura.h"
 
 
 class Cuento: public Lectura {
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif
+# endif

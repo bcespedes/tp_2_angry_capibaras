@@ -1,5 +1,5 @@
-#include "novela.h"
-#include "historica.h"
+# include "Novela.h"
+# include "Historica.h"
 
 
 Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, generos genero)

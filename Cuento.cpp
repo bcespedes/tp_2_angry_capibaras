@@ -1,4 +1,4 @@
-#include "cuento.h"
+# include "Cuento.h"
 
 
 Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, string libro) 

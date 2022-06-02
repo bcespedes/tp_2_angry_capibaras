@@ -1,25 +1,22 @@
-#ifndef FUNCIONALIDAD_H
-#define FUNCIONALIDAD_H
-
-#include "lista.h"
-#include "escritor.h"
-#include "lectura.h"
-#include "cola.h"
-#include "lector_lecturas.h"
-#include "stdlib.h"
-#include "time.h"
-#include <string.h>
-#include <limits>
+# ifndef FUNCIONALIDAD_H
+# define FUNCIONALIDAD_H
 
 
-class Funcionalidad {
+# include "constantes.h"
+# include "Utilidades.h"
+# include "LectorLecturas.h"
+# include "Cola.h"
+# include "stdlib.h"
+# include "time.h"
+# include <string.h>
+
+
+class ProcesadorDeOpciones {
 
 private:
 
     Lista<Escritor *>* lista_escritores_;
     Lista<Lectura *>* lista_lecturas_;
-    bool validar_opcion(int opcion, int opcion_max);
-    int validar_entero(int a_validar, string instruccion, int valor_minimo);
     char ingresar_tipo_lectura();
     char ingresar_si_es_anonimo();
     Escritor* no_es_autor_anonimo(int indice, int cantidad_escritores);
@@ -31,17 +28,13 @@ private:
     Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* autor);
     int ingresar_indice_lectura();
     int ingresar_indice_escritor();
-    unsigned int ingresar_anio_correcto(unsigned int anio_inferior);
+    int ingresar_anio_correcto(int anio_inferior);
 
 public:
 
     // PRE:
     // POS:
-    Funcionalidad(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
-
-    // PRE:
-    // POST:
-    static void limpiar_pantalla();
+    ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
 
     // PRE:
     // POST:
@@ -89,9 +82,9 @@ public:
 
     // PRE:
     // POST:
-    ~Funcionalidad();
+    ~ProcesadorDeOpciones();
 
 };
 
 
-#endif
+# endif

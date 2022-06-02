@@ -1,9 +1,9 @@
-#ifndef NODO_H
-#define NODO_H
+# ifndef NODO_H
+# define NODO_H
 
 
-#include <iostream>
-#include "escritor.h"
+# include <iostream>
+# include "Escritor.h"
 
 
 template <typename Tipo>
@@ -81,4 +81,4 @@ Nodo<Tipo>::~Nodo() {
 }
 
 
-#endif
+# endif

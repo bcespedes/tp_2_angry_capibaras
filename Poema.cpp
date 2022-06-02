@@ -1,4 +1,4 @@
-#include "poema.h"
+# include "Poema.h"
 
 
 Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* autor, int versos) 

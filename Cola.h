@@ -1,8 +1,8 @@
-#ifndef COLA_H
-#define COLA_H
+# ifndef COLA_H
+# define COLA_H
 
 
-#include "nodo.h"
+# include "Nodo.h"
 
 
 template <typename Tipo>
@@ -110,4 +110,4 @@ Cola<Tipo>::~Cola() {
 }
 
 
-#endif
+# endif

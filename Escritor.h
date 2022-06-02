@@ -1,8 +1,8 @@
-#ifndef ESCRITOR_H
-#define ESCRITOR_H
+# ifndef ESCRITOR_H
+# define ESCRITOR_H
 
 
-#include <iostream>
+# include <iostream>
 
 
 using namespace std;
@@ -51,4 +51,4 @@ public:
 };
 
 
-#endif
+# endif

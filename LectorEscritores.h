@@ -1,11 +1,11 @@
-#ifndef LECTOR_ESCRITORES_H
-#define LECTOR_ESCRITORES_H
+# ifndef LECTOR_ESCRITORES_H
+# define LECTOR_ESCRITORES_H
 
 
-#include "lector.h"
+# include "Lector.h"
 
 
-class Lector_escritores : public Lector {
+class LectorEscritores : public Lector {
 
 public:
     
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif
+# endif
