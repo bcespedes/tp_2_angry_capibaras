@@ -87,15 +87,3 @@ string Utilidades::obtener_nombre_genero(generos genero) {
 
     return nombre_genero;
 }
-
-
-bool Utilidades::esta_elemento_en_vector(int* vector, int cantidad_elementos, int elemento) {
-
-    bool esta_elemento = false;
-    for(int i = 0; i < cantidad_elementos; i++) {
-        if(vector[i] == elemento)
-            esta_elemento = true;
-    }
-
-    return esta_elemento;
-}

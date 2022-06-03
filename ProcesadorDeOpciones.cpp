@@ -51,7 +51,7 @@ char ProcesadorDeOpciones::ingresar_si_es_anonimo() {
 
 Escritor* ProcesadorDeOpciones::no_es_escritor_anonimo(int indice, int cantidad_escritores) {
 
-    Utilidades validador;
+    Utilidades validador, limpiador;
     Escritor* escritor;
     cout << endl;
 
@@ -68,6 +68,7 @@ Escritor* ProcesadorDeOpciones::no_es_escritor_anonimo(int indice, int cantidad_
     }
 
     if(indice == OPCION_ALTERNATIVA) {
+        limpiador.limpiar_pantalla();
         cout << "\nProceda a agregar un nuevo escritor:\n" << endl;
         agregar_escritor();
         indice = cantidad_escritores + 1;
@@ -307,6 +308,7 @@ void ProcesadorDeOpciones::sortear_lectura() {
         srand((unsigned int) time(NULL));
         int sorteo = rand() % (lista_lecturas_ -> obtener_cantidad() + 0);
         cout << "Se leera la lectura numero: " << sorteo + 1 << " - " << lista_lecturas_ -> consulta(sorteo) -> obtener_titulo() << endl;
+        lista_lecturas_->consulta(sorteo)->leido(true);
     }
     else
         cout << LISTA_LECTURAS_VACIA;
@@ -437,9 +439,10 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
 }
 
 
-int ProcesadorDeOpciones::obtener_indice_maximos_minutos(int cantidad_elementos, Lectura* lectura) {
-
+int ProcesadorDeOpciones::obtener_indice_mayor_duracion() {
+    int cantidad_elementos = lista_lecturas_->obtener_cantidad();
     int indice_maximos_minutos = 0;
+    Lectura *lectura = lista_lecturas_->consulta(0);
     for(int i = 0; i < cantidad_elementos; i++) {
         if((lectura -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == -1)) {
             indice_maximos_minutos = i;
@@ -450,29 +453,11 @@ int ProcesadorDeOpciones::obtener_indice_maximos_minutos(int cantidad_elementos,
     return indice_maximos_minutos;
 }
 
+bool ProcesadorDeOpciones::seguir_leyendo() {
 
-int ProcesadorDeOpciones::obtener_indices_en_orden(int cantidad_elementos, Lectura* lectura, int* vector_indices) {
-
-    Utilidades buscador;
-    int indice = 0;
-    for(int i = 0; i < cantidad_elementos; i++) {
-        if(lectura -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == 1
-        && !buscador.esta_elemento_en_vector(vector_indices, cantidad_elementos - 1, i)
-        && !lista_lecturas_ -> consulta(i) -> obtener_leido()) {
-            indice = i;
-            lectura = lista_lecturas_ -> consulta(indice);
-        }
-    }
-
-    return indice;
-}
-
-
-char ProcesadorDeOpciones::ingresar_si_quiere_seguir_leyendo() {
-
+    bool leer = false;
     string seguir_leyendo_ingresado = "XX";
     char seguir_leyendo = 'X';
-    cout << endl;
 
     while((seguir_leyendo != 'S' && seguir_leyendo != 'N') || seguir_leyendo_ingresado.length() > 1) {
     
@@ -485,74 +470,86 @@ char ProcesadorDeOpciones::ingresar_si_quiere_seguir_leyendo() {
             cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
 
         else if(seguir_leyendo == 'S') {
+            leer = true;
             limpiador.limpiar_pantalla();
-            cout << "Has leido esa lectura!\n" << endl;
         }
-        else
-            cout << "Has dejado de leer por ahora" << endl;
+
     }
 
-    return seguir_leyendo;
+    return leer;
+}
+
+int ProcesadorDeOpciones::cantidad_lecturas_sin_leer(){
+
+    int no_leidos = 0;
+    for(int i = 0; i < lista_lecturas_->obtener_cantidad(); i++){
+        if(!lista_lecturas_->consulta(i)->fue_leido())
+            no_leidos++;
+    }
+    return no_leidos;
 }
 
 
-void ProcesadorDeOpciones::crear_cola_ordenada() {
+void ProcesadorDeOpciones::insertar_en_cola_ordenada(Cola<Lectura *>* cola, unsigned int menor_duracion){
 
-    Cola<Lectura *>* cola_lecturas = new Cola<Lectura *>();
+    if(cola->obtener_cantidad() == cantidad_lecturas_sin_leer())
+        return;
 
-    Lectura* lectura = lista_lecturas_ -> consulta(0);
+    Lectura *lectura_menor_duracion = lista_lecturas_->consulta(obtener_indice_mayor_duracion());
+    int cantidad_elementos = lista_lecturas_->obtener_cantidad();
 
-    int cantidad_recorridos = -1, indice = 0, indice_maximos_minutos = 0, cantidad_elementos = lista_lecturas_ -> obtener_cantidad();
+    for(int i = 0; i < cantidad_elementos; i++) {
 
-    char seguir_leyendo = 'X';
-
-    // Se crea un vector estatico, a priori se sabe la cantidad de elementos, no tiene sentido hacerlo dinamico.
-
-    // Se rellena el vector con -1 por si acaso, ya que al estar relleno de numeros basura se nos puede generar un numero que justo coincida con un indice en la lista.
-    int cantidad_elementos_cola = 0;
-
-    for(int i = 0; i < lista_lecturas_ -> obtener_cantidad(); i++) {
-        if(lista_lecturas_ -> consulta(i) -> obtener_leido() == false)
-            cantidad_elementos_cola++;
-    }
-
-
-    int vector_indices[cantidad_elementos_cola - 1];
-
-    std::fill_n(vector_indices, cantidad_elementos_cola - 1, -1);
-
-    cout << cantidad_elementos_cola << "<- cantidad cola" << endl;
-
-    indice_maximos_minutos = obtener_indice_maximos_minutos(cantidad_elementos, lectura);
-    // Se busca el elemento que tiene el mayor tiempo de lectura.
-
-    while(cola_lecturas -> obtener_cantidad() < cantidad_elementos_cola - 1) {
-        indice = obtener_indices_en_orden(cantidad_elementos, lectura, vector_indices);
-        cantidad_recorridos++;
-        vector_indices[cantidad_recorridos] = indice;
-        cola_lecturas -> alta(lista_lecturas_ -> consulta(indice));
-        lectura = lista_lecturas_ -> consulta(indice_maximos_minutos);
-    }
-    // Se colocan todos los elementos en orden en la cola desde el primero hasta el ultimo - 1.
-    bool leido = true;
-
-    if(lista_lecturas_ -> consulta(indice_maximos_minutos) -> obtener_leido() == false)
-        cola_lecturas -> alta(lista_lecturas_ -> consulta(indice_maximos_minutos));
-
-    if(!cola_lecturas ->vacia()) {
-        while(seguir_leyendo != 'N' && !cola_lecturas -> vacia()){
-            cola_lecturas -> consulta() -> mostrar_lectura();
-            seguir_leyendo = ingresar_si_quiere_seguir_leyendo();
-            if(seguir_leyendo == 'S') {
-                cola_lecturas -> consulta() -> asignar_leido(leido);
-                cola_lecturas -> baja();
-            }
+        if((lectura_menor_duracion -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == 1)
+            && lista_lecturas_->consulta(i)->obtener_minutos() > menor_duracion
+            && !lista_lecturas_->consulta(i)->fue_leido()) {
+            
+            lectura_menor_duracion = lista_lecturas_ -> consulta(i);
         }
     }
-    else
-        cout << "LA COLA ESTA VACIA!!!";
-    // Solo para mostrar que la cola se creo en orden.
 
+    cola->alta(lectura_menor_duracion);
+    menor_duracion = lectura_menor_duracion->obtener_minutos();
+    insertar_en_cola_ordenada(cola, menor_duracion);
+
+}
+
+void ProcesadorDeOpciones::reiniciar_lecturas(){
+    for(int i = 0; i < lista_lecturas_->obtener_cantidad(); i++){
+        lista_lecturas_->consulta(i)->leido(false);
+    }
+    cout << "Se ha reiniciado la cola, ya puedes volver a armarla y leer de la misma!" << endl;
+}
+
+void ProcesadorDeOpciones::crear_cola_ordenada(){
+    Cola<Lectura *>* cola_lecturas = new Cola<Lectura *>();
+    
+    insertar_en_cola_ordenada(cola_lecturas, 0);
+    Utilidades limpiador;
+    bool leer = true;
+    Lectura *lectura_leida;
+
+    while(!cola_lecturas->vacia() && leer){
+        cout << "Cantidad de lecturas: " << cola_lecturas->obtener_cantidad() << endl << endl;
+        cola_lecturas->consulta()->mostrar_lectura();
+        if(!seguir_leyendo()){
+            leer = false;
+            limpiador.limpiar_pantalla();
+            cout << "Has dejado de leer." << endl;
+        }
+        else{
+            lectura_leida = cola_lecturas->baja();
+            lectura_leida->leido(true);
+            cout << "\nHas leido "<<lectura_leida->obtener_titulo() << "! En un lapso de: " 
+            << lectura_leida->obtener_minutos() << " minutos\n" << endl;
+        }
+    }
+    if(cola_lecturas->vacia()){
+        cout << "Ya has leido todas las lecturas de la cola :(" << endl;
+        cout << "Para seguir leyendo, puedes ingresar mas lecturas o reiniciar la cola de lecturas." << endl;
+    }
+
+    delete cola_lecturas;
 }
 
 
@@ -560,16 +557,16 @@ void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
     #ifdef _WIN32
         srand((unsigned int) time(NULL));
         if ((rand() % 2) + 1 ==  2)
-            system("start https://ibb.co/w68fpdp");
+            system("start https://drive.google.com/file/d/16aB2L2z-jo0O5vIcl8S3cao04Ud5Tdba/view");
         else 
-            system("start https://ibb.co/ZmVg5gD");
+            system("start https://drive.google.com/file/d/1YzOFCVS56FlnMrrh09RDS3z-jXlnJHw3/view");
 
      #else
         srand((unsigned int) time(NULL));
         if ((rand() % 2) + 1 ==  2)
-            system("xdg-open https://ibb.co/w68fpdp");
+            system("xdg-open https://drive.google.com/file/d/16aB2L2z-jo0O5vIcl8S3cao04Ud5Tdba/view");
         else 
-            system("xdg-open https://ibb.co/ZmVg5gD");
+            system("xdg-open https://drive.google.com/file/d/1YzOFCVS56FlnMrrh09RDS3z-jXlnJHw3/view");
      #endif
      cout << "Has descubierto un secreto" << endl;
 }

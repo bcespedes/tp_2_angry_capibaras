@@ -39,7 +39,7 @@ void Novela::mostrar_lectura() {
     cout << "Genero: " << convertir_genero_a_string() << endl;
 
     cout << "Autor: ";
-    if(escritor_ != nullptr)
+    if(escritor_ != NULL)
         escritor_ -> mostrar_escritor();
     else
         cout << "ANONIMO" << endl << endl;

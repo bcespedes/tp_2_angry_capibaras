@@ -31,14 +31,13 @@ Escritor* Lectura::obtener_escritor() {
 }
 
 
-bool Lectura::obtener_leido() {
+bool Lectura::fue_leido() {
 
     return leido_;
 }
 
 
-void Lectura::asignar_leido(bool leido) {
-
+void Lectura::leido(bool leido) {
     leido_ = leido;
 }
 
