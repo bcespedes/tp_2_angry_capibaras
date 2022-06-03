@@ -48,7 +48,7 @@ void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* l
     if(!lista_lectura -> vacia()) {
     
         while(avanzar) {
-            if(lectura -> comparar(lista_lectura -> consulta(pos)) == -1) {
+            if(lectura -> comparar_por_anio(lista_lectura -> consulta(pos)) == -1) {
                 avanzar = false;
                 pos--;
             }

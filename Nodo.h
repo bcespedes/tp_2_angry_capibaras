@@ -45,7 +45,7 @@ template <typename Tipo>
 Nodo<Tipo>::Nodo(Tipo d) {
 
     dato = d;
-    siguiente = nullptr;
+    siguiente = NULL;
 }
 
 

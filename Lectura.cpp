@@ -29,7 +29,7 @@ Escritor* Lectura::obtener_escritor() {
     return escritor_;
 }
 
-int Lectura::comparar(Lectura* a_comparar) {
+int Lectura::comparar_por_anio(Lectura* a_comparar) {
 
     int devolver;
 
@@ -42,6 +42,22 @@ int Lectura::comparar(Lectura* a_comparar) {
 
     return devolver;
 }
+
+int Lectura::comparar_por_duracion(Lectura* a_comparar){
+
+    int devolver;
+
+    if(minutos_ < a_comparar -> obtener_minutos())
+        devolver = ES_MENOR;
+    else if(minutos_ > a_comparar -> obtener_minutos())
+        devolver = ES_MAYOR;
+    else devolver = ES_IGUAL;
+
+
+    return devolver;
+
+}
+
 
 Lectura::~Lectura() {
 

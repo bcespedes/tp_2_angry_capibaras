@@ -435,6 +435,121 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
         cout << LISTA_LECTURAS_VACIA;
 }
 
+/*bool ProcesadorDeOpciones::esta_en_vector(int *vector_posiciones, int pos, int cantidad){
+    //cout << "cantidad: " << cantidad << endl;
+    bool esta = false;
+
+    for(int i = 0; i < cantidad; i++){
+        if(vector_posiciones[i] == pos){
+            esta = true;
+        }
+    }
+    return esta;
+}
+
+void ProcesadorDeOpciones::insertar_lectura_a_cola_(Cola<Lectura *>* cola, int *vector_posiciones, int cantidad){
+
+    if(cola->obtener_tamanio() == lista_lecturas_->obtener_cantidad())
+        return;
+
+
+    Lectura *menor_duracion = lista_lecturas_->consulta(6);
+
+    int iterador = 0;
+    int comparacion = 0;
+    int pos;
+
+    bool esta = false;
+
+    while(iterador < lista_lecturas_->obtener_cantidad()){
+
+
+        comparacion = menor_duracion->comparar_por_duracion(lista_lecturas_->consulta(iterador));
+
+        esta = esta_en_vector(vector_posiciones, iterador, cantidad);
+        if(comparacion == 1 && esta == false){
+            menor_duracion = lista_lecturas_->consulta(iterador);
+            pos = iterador;
+        }
+
+        iterador++;
+    }
+
+
+
+    cola->alta(menor_duracion);
+    menor_duracion->mostrar_lectura();
+    vector_posiciones[cola->obtener_tamanio() - 1] = pos;
+    cantidad++;
+    insertar_lectura_a_cola_(cola, vector_posiciones, cantidad);
+
+}
+
+
+
+void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *> *cola){
+
+
+
+    Lectura *menor_duracion = lista_lecturas_->consulta(0);
+
+    int iterador = 1;
+    int pos = 0;
+    int comparacion = 0;
+
+
+    int *posiciones_guardadas = new int [lista_lecturas_->obtener_cantidad()];
+    int cantidad_vector = 0;
+
+    while(iterador < lista_lecturas_->obtener_cantidad()){
+
+        comparacion = menor_duracion->comparar_por_duracion(lista_lecturas_->consulta(iterador));
+
+        if(comparacion == 1)
+            menor_duracion = lista_lecturas_->consulta(iterador);
+            pos = iterador;
+        iterador++;
+    }
+
+
+    cola->alta(menor_duracion);
+    menor_duracion->mostrar_lectura();
+    posiciones_guardadas[0] = pos;
+    cantidad_vector++;
+    insertar_lectura_a_cola_(cola, posiciones_guardadas, cantidad_vector);
+    
+}
+
+void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *>* cola){
+    Lectura **lecturas_en_orden = new Lectura *[lista_lecturas_->obtener_cantidad()];
+
+    lecturas_en_orden[0] = lista_lecturas_->consulta(0);
+
+    int iterador = 1;
+
+    Lectura *aux = NULL;
+    Lectura *aux2 = NULL;
+
+    while(iterador < lista_lecturas_->obtener_cantidad()){
+        if(lecturas_en_orden[iterador-1]->comparar_por_duracion(lista_lecturas_->consulta(iterador)) == 1){
+            aux = lecturas_en_orden[iterador];
+            lecturas_en_orden[iterador] = lista_lecturas_->consulta(iterador);
+            
+
+        }
+    }
+
+}
+
+
+void ProcesadorDeOpciones::crear_cola_ordenada(){
+    Cola<Lectura *> *cola = new Cola<Lectura *>();
+
+    insertar_lecturas_a_cola(cola);
+    file(!cola->vacia()){
+        cola->baja()->mostrar_lectura();
+    }
+}*/
 
 void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
     #ifdef _WIN32
@@ -451,7 +566,7 @@ void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
         else 
             system("xdg-open https://ibb.co/ZmVg5gD");
      #endif
-     cout << "Has decubierto un secreto" << endl;
+     cout << "Has descubierto un secreto" << endl;
 }
 
 

@@ -27,11 +27,11 @@ private:
 public:
 
      // PRE:
-     // POST:
+     // POST: Construye un menu y mantiene abierta la interfaz hasta que el usuario salga del programa.
      Menu();
 
      // PRE:
-     // POST:
+     // POST: Destruye el menu
      ~Menu();
 
 };
