@@ -27,10 +27,10 @@ A través de nuestros conocimientos en programación orientada a objetos y con u
 - Salir del menú.
 
 #### Manual de usuario:
-El programa cuenta con un menu con el que el usuario podra interactuar con las diversas opciones ya mencionadas. El programa puede contar o no con los archivos `escritores.txt` y `lecturas.txt`, en caso de no encontrarse, se le informara al usuario y se podran agregar manualmente  nuevas lecturas o escritores desde las opciones correspondientes. Las instrucciones que se dan en cada instancia estan validadas lo maximo posible para evitar que el programa colapse. Ademas cuenta con algun Easter Egg que sera descubierto a medida que se explore el codigo.
+Diseñado tanto para windows como para linux, el programa cuenta con un menu con el que el usuario podra interactuar con las diversas opciones ya mencionadas. El programa puede contar o no con los archivos `escritores.txt` y `lecturas.txt`, en caso de no encontrarse, se le informara al usuario y se podran agregar manualmente  nuevas lecturas o escritores desde las opciones correspondientes. Las instrucciones que se dan en cada instancia estan validadas lo maximo posible para evitar que el programa colapse. Ademas cuenta con algun Easter Egg que sera descubierto a medida que se explore el codigo.
 
 ```
-El programa debe compilar por terminal con el comando: g++ *.cpp -Wall -Werror -Wconversion y esta diseñado para funcionar tanto en Windows como en Linux.
+El programa debe compilar por terminal con el comando: g++ *.cpp -Wall -Werror -Wconversion 
 ```
 
 #### División de tareas en el trabajo:
