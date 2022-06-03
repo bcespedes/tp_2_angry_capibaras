@@ -28,8 +28,8 @@ Menu::Menu() {
 
 ProcesadorDeOpciones* Menu::cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas) {
 
-     Lista<Escritor *>* lista_escritores = lector_escritores.procesar_escritores();
-     Lista<Lectura *>* lista_lecturas = lector_lecturas.procesar_lecturas(lista_escritores);
+     Lista<Escritor*>* lista_escritores = lector_escritores.procesar_escritores();
+     Lista<Lectura*>* lista_lecturas = lector_lecturas.procesar_lecturas(lista_escritores);
      ProcesadorDeOpciones* procesador_opciones = new ProcesadorDeOpciones(lista_escritores, lista_lecturas);
 
      return procesador_opciones;
@@ -88,7 +88,7 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                procesador_opciones -> listar_novelas_genero();
                break;
           case ARMAR_COLA:
-               procesador_opciones->crear_cola_ordenada();
+               //procesador_opciones->crear_cola_ordenada();
                break;
           case SALIR:
                cerrar_menu = true;

@@ -30,7 +30,7 @@ public:
 
     // PRE: las lecturas deben ser validas y debe existir su lista
     // POST: inserta las lecturas ordenadas por anio a la lista
-    void insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura);
+    void insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura*>* lista_lectura);
 
     // PRE:
     // POST: le asigna a cada indice del enumerado de generos, su cadena correspondiente

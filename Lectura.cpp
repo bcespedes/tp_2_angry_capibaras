@@ -1,12 +1,13 @@
 # include "Lectura.h"
 
 
-Lectura::Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor) {
+Lectura::Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido) {
 
     titulo_ = titulo;
     minutos_ = minutos;
     anio_ = anio;
     escritor_ = escritor;
+    leido_ = leido;
 };
 
 string Lectura::obtener_titulo() {
@@ -28,6 +29,19 @@ Escritor* Lectura::obtener_escritor() {
 
     return escritor_;
 }
+
+
+bool Lectura::obtener_leido() {
+
+    return leido_;
+}
+
+
+void Lectura::asignar_leido(bool leido) {
+
+    leido_ = leido;
+}
+
 
 int Lectura::comparar_por_anio(Lectura* a_comparar) {
 

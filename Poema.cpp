@@ -1,8 +1,8 @@
 # include "Poema.h"
 
 
-Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, int versos) 
-    : Lectura(titulo, minutos, anio, escritor) {
+Poema::Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, int versos) 
+    : Lectura(titulo, minutos, anio, escritor, leido) {
 
         versos_ = versos;
 }

@@ -15,7 +15,7 @@ public:
 
     // PRE: Los datos son validos.
     // POST: Se crea un Cuento.
-    Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, string libro);
+    Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, string libro);
 
     // PRE: -
     // POST: Devuelve el libro donde esta publicado el cuento.

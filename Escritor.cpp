@@ -29,7 +29,7 @@ bool Escritor::verificar_fallecimiento() {
 
 void Escritor::asignar_fallecimiento(int anio) {
 
-        anio_fallecimiento_ = anio;
+    anio_fallecimiento_ = anio;
 }
 
 void Escritor::mostrar_escritor() {
