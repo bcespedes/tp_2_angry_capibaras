@@ -11,18 +11,23 @@ Menu::Menu() {
      limpiador.limpiar_pantalla();
      mensaje_bienvenida();
      opcion_elegida = 0;
+     cerrar_menu = false;
      LectorEscritores lector_escritores;
      LectorLecturas lector_lecturas;
      ProcesadorDeOpciones* procesador_opciones = cargar_archivos(lector_escritores, lector_lecturas);
 
+     mantener_abierto_menu(validador, limpiador, procesador_opciones);
+
+     delete procesador_opciones;
+}
+
+void Menu::mantener_abierto_menu(Utilidades validador, Utilidades limpiador, ProcesadorDeOpciones *procesador_opciones){
      while (!cerrar_menu) {
           mostrar_menu();
           opcion_elegida = validador.validar_ingreso_entero(opcion_elegida, ESCRIBA_OPCION_MENU, OPCION_MINIMA);
           limpiador.limpiar_pantalla();
           cerrar_menu = procesar_opcion(procesador_opciones);
      }
-
-     delete procesador_opciones;
 }
 
 
@@ -50,6 +55,7 @@ void Menu::mostrar_menu() {
      cout << OPCION_10 << endl;
      cout << OPCION_11 << endl;
      cout << OPCION_12 << endl;
+     cout << OPCION_13 << endl;
 }
 
 
@@ -89,6 +95,9 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                break;
           case ARMAR_COLA:
                procesador_opciones -> crear_cola_ordenada();
+               break;
+          case REINICIAR_COLA:
+               procesador_opciones->reiniciar_lecturas();
                break;
           case SALIR:
                cerrar_menu = true;

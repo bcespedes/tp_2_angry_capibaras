@@ -37,6 +37,8 @@ public:
     // POST: Devuelve el primer elemento de la cola (sin modificarla).
     Tipo consulta();
 
+    // PRE: -
+    // POST: Devuelve la cantidad de elementos de la cola.
     int obtener_cantidad();
 
     // PRE: -
@@ -105,7 +107,8 @@ Tipo Cola<Tipo>::baja() {
     if(!primero)
         ultimo = NULL;
 
-    borrar = NULL;
+    borrar->asignar_dato(NULL);
+    delete borrar;
     cantidad--;
  
     return dato;

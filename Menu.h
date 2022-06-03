@@ -14,23 +14,24 @@ private:
 
      // ATRIBUTOS
      int opcion_elegida;
-     bool cerrar_menu = false;
+     bool cerrar_menu;
 
      // METODOS
      void mensaje_bienvenida();
      void mensaje_despedida();
      void tecla_continuar();
      void mostrar_menu(); 
+     void mantener_abierto_menu(Utilidades validador, Utilidades limpiador, ProcesadorDeOpciones *procesador_opciones);
      bool procesar_opcion(ProcesadorDeOpciones* procesador_opciones);
      ProcesadorDeOpciones* cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas);
 
 public:
 
-     // PRE:
-     // POST: Construye un menu y mantiene abierta la interfaz hasta que el usuario salga del programa.
+     // PRE: -
+     // POST: Construye y pone en funcionamiento el menu.
      Menu();
 
-     // PRE:
+     // PRE: -
      // POST: Destruye el menu
      ~Menu();
 

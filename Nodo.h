@@ -33,7 +33,9 @@ public:
     // POST: Devuelve el nodo siguiente, si no lo hubiera devuelve null.
     Nodo* obtener_siguiente();
 
-    // PRE:
+    void asignar_dato(Tipo d);
+
+    // PRE: -
     // POST: Se llama al destructor del dato y luego se destruye el nodo.
     ~Nodo();
 
@@ -64,6 +66,10 @@ Tipo Nodo<Tipo>::obtener_dato() {
     return dato;
 }
 
+template <typename Tipo>
+void Nodo<Tipo>::asignar_dato(Tipo d){
+    dato = d;
+}
 
 template <typename Tipo>
 

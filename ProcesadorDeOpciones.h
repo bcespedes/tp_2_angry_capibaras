@@ -32,10 +32,10 @@ private:
     int ingresar_indice_lista(string instruccion, int cantidad_datos);
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
-    int obtener_indice_maximos_minutos(int cantidad_elementos, Lectura* lectura);
-    int obtener_indices_en_orden(int cantidad_elementos, Lectura* lectura, int* vector_indices);
-    char ingresar_si_quiere_seguir_leyendo();
-
+    int obtener_indice_mayor_duracion();
+    void insertar_en_cola_ordenada(Cola<Lectura *>* cola, unsigned int menor_duracion);
+    bool seguir_leyendo();
+    int cantidad_lecturas_sin_leer();
 
 
 
@@ -66,7 +66,7 @@ public:
     void listar_escritores();
 
     // PRE:La lista_lectura esta creada.
-    // POST: muestra una lectura aleatoria 
+    // POST: muestra una lectura aleatoria y se marca como leida si no lo estaba. 
     void sortear_lectura();
 
     // PRE: La lista_lectura esta creada.
@@ -85,17 +85,22 @@ public:
     // POST: imprime las novelas del genero determinado por el usuario.
     void listar_novelas_genero();
 
-    // PRE:
-    // POST:
+    // PRE: -
+    // POST: Crea una cola ordenada por duracion en base a las lecturas no leidas.
     void crear_cola_ordenada();
 
-    // PRE:
+    // PRE: -
+    // POST: Reinicia todas las lecturas en no leidas, para volver a leerlas en la cola.
+    void reiniciar_lecturas();
+
+
+    // PRE: -
     // POST: 50% de posibilidades de cocinar un delicioso pastel de papa.
-    //       50% de posibilidades de que ocurra la desgracia, fatalidad einfortunio de no tener los suficientes ingredientes.
+    //       50% de posibilidades de que ocurra la desgracia, fatalidad e infortunio de no tener los suficientes ingredientes.
     void cocinar_pastel_de_papa();
 
     // PRE:
-    // POST: destruye el procesador de opciones, eliminando las listas y liberando su memoria. 
+    // POST: Destruye el procesador de opciones, eliminando las listas y liberando su memoria. 
     ~ProcesadorDeOpciones();
 
 };

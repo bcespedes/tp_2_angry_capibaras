@@ -47,7 +47,7 @@ public:
     // POST: Se le asigna el anio al escritor.
     void asignar_fallecimiento(int anio);
 
-    // PRE:
+    // PRE: -
     // POST: Muestra por pantalla las caracteristicas del escritor.
     void mostrar_escritor();
 
