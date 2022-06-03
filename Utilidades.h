@@ -36,6 +36,10 @@ public:
     // POST: le asigna a cada indice del enumerado de generos, su cadena correspondiente
     string obtener_nombre_genero(generos genero);
 
+    // PRE: Recibe un vector de enteros, su cantidad de elementos y un elemento entero validos.
+    // POST: Devuelve verdadero si el elemento se encuentra contenido en el vector.
+    bool esta_elemento_en_vector(int* vector, int cantidad_elementos, int elemento);
+
 };
 
 
