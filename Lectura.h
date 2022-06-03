@@ -20,12 +20,13 @@ protected:
     unsigned int minutos_;
     unsigned int anio_;
     Escritor* escritor_;
+    bool leido_;
 
 public:
 
     // PRE: Los datos son validos.
     // POST: Crea una lectura. 
-    Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor);   
+    Lectura(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido);   
 
     // PRE: -
     // POST: Devuelve el titulo de la lectura.
@@ -42,6 +43,14 @@ public:
     // PRE: -
     // POST: Devuelve el autor de la lectura.
     Escritor* obtener_escritor();
+
+    // PRE: -
+    // POST: Devuelve true si la lectura fue leida.
+    bool obtener_leido();
+
+    // PRE: Recibe un booleano (true / false).
+    // POST: Le asigna a la lectura correspondiente si fue leida o no.
+    void asignar_leido(bool leido);
 
     // PRE: Recibe una lectura valida.
     // POST: Devuelve -1 si el año de la lectura que llama es menor al año de la que se pasa por parametro.

@@ -15,7 +15,7 @@ public:
 
     // PRE: Los datos son validos.
     // POST: Crea una novela.
-    Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero);
+    Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, generos genero);
 
     // PRE: -
     // POST: Devuelve el genero de la novela.

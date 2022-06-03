@@ -2,8 +2,8 @@
 # include "Historica.h"
 
 
-Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero)
- : Lectura(titulo, minutos, anio, escritor) {
+Novela::Novela(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, generos genero)
+ : Lectura(titulo, minutos, anio, escritor, leido) {
 
     genero_ = genero;
 }

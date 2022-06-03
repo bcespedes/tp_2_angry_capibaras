@@ -15,7 +15,7 @@ public:
 
     // PRE: Genero tiene que ser historica. El tema debe ser una cadena dinamica.
     // POST: Crea un objeto historica.
-    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char* tema);
+    Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, generos genero, char* tema);
     
     // PRE: -
     // POST: Se devuelve el tema de la novela historica.

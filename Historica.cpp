@@ -2,8 +2,8 @@
 # include <string.h>
 
 
-Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char *tema)
- : Novela(titulo, minutos, anio, escritor, genero) {
+Historica::Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, generos genero, char* tema)
+ : Novela(titulo, minutos, anio, escritor, leido, genero) {
 
     tema_ = tema;
 }

@@ -1,8 +1,8 @@
 # include "Cuento.h"
 
 
-Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, string libro) 
-    : Lectura(titulo, minutos, anio, escritor) {
+Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, string libro) 
+    : Lectura(titulo, minutos, anio, escritor, leido) {
 
         libro_ = libro;
 }

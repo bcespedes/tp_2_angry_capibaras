@@ -68,11 +68,11 @@ bool LectorEscritores::validar_archivo(ifstream &archivo_escritores) {
 }
 
 
-Lista<Escritor *>* LectorEscritores::procesar_escritores() {
+Lista<Escritor*>* LectorEscritores::procesar_escritores() {
 
     ifstream archivo_escritores(ESCRITORES);
 
-    Lista<Escritor*>* lista_escritores = new Lista<Escritor *>();
+    Lista<Escritor*>* lista_escritores = new Lista<Escritor*>();
     if(validar_archivo(archivo_escritores)) { 
 
         int indice = 0;

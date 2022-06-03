@@ -16,25 +16,25 @@ class ProcesadorDeOpciones {
 private:
 
     // ATRIBUTOS
-    Lista <Escritor*>* lista_escritores_;
-    Lista <Lectura*>* lista_lecturas_;
+    Lista<Escritor*>* lista_escritores_;
+    Lista<Lectura*>* lista_lecturas_;
 
     // METODOS
     char ingresar_tipo_lectura();
     char ingresar_si_es_anonimo();
     int ingresar_genero();
     Escritor* no_es_escritor_anonimo(int indice, int cantidad_escritores);
-    Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor);
-    Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* escritor);
-    Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* escritor);
-    Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* escritor);
+    Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
+    Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
+    Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
+    Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
     Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* escritor);
     int ingresar_indice_lista(string instruccion, int cantidad_datos);
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
-    void insertar_lecturas_a_cola(Cola<Lectura *> *cola);
-    void insertar_lectura_a_cola_(Cola<Lectura *>* cola, int *vector_posiciones, int cantidad);
-    bool esta_en_vector(int *vector_posiciones, int pos, int cantidad);
+    void insertar_lecturas_a_cola(Cola<Lectura*>* cola);
+    void insertar_lectura_a_cola_(Cola<Lectura*>* cola, int* vector_posiciones, int cantidad);
+    bool esta_en_vector(int* vector_posiciones, int pos, int cantidad);
 
 
 
@@ -43,7 +43,7 @@ public:
 
     // PRE: -
     // POST: Crea un procesador de opciones. 
-    ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas);
+    ProcesadorDeOpciones(Lista<Escritor*>* lista_escritores, Lista<Lectura*>* lista_lecturas);
 
     // PRE: La lista_lectura esta creada.
     // POST: Agrega una lectura a la lista.

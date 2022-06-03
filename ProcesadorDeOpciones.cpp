@@ -1,7 +1,7 @@
 # include "ProcesadorDeOpciones.h"
 
 
-ProcesadorDeOpciones::ProcesadorDeOpciones(Lista<Escritor *>* lista_escritores, Lista<Lectura *>* lista_lecturas) {
+ProcesadorDeOpciones::ProcesadorDeOpciones(Lista<Escritor*>* lista_escritores, Lista<Lectura*>* lista_lecturas) {
 
     lista_escritores_ = lista_escritores;
     lista_lecturas_ = lista_lecturas;
@@ -98,7 +98,7 @@ int ProcesadorDeOpciones::ingresar_genero() {
 }
 
 
-Lectura* ProcesadorDeOpciones::crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor) {
+Lectura* ProcesadorDeOpciones::crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor, bool leido) {
 
     Lectura* novela_historica;
     string tema;
@@ -106,40 +106,40 @@ Lectura* ProcesadorDeOpciones::crear_novela_historica(string titulo, int duracio
     getline(cin, tema);
     char* tema_historico = new char[tema.length() + 1];
     strcpy(tema_historico, tema.c_str());
-    novela_historica = new Historica(titulo, duracion, anio, escritor, HISTORICA, tema_historico);
+    novela_historica = new Historica(titulo, duracion, anio, escritor, leido, HISTORICA, tema_historico);
 
     return novela_historica;
 }
 
 
-Lectura* ProcesadorDeOpciones::crear_novela(string titulo, int duracion, int anio, Escritor* escritor) {
+Lectura* ProcesadorDeOpciones::crear_novela(string titulo, int duracion, int anio, Escritor* escritor, bool leido) {
 
     Lectura* novela;
     cout << endl;
     int genero = ingresar_genero();
 
     if(genero == 7)
-        novela = crear_novela_historica(titulo, duracion, anio, escritor);
+        novela = crear_novela_historica(titulo, duracion, anio, escritor, leido);
     else
-        novela = new Novela(titulo, duracion, anio, escritor, (generos) genero);
+        novela = new Novela(titulo, duracion, anio, escritor, leido, (generos) genero);
 
     return novela;
 }
 
 
-Lectura* ProcesadorDeOpciones::crear_cuento(string titulo, int duracion, int anio, Escritor* escritor) {
+Lectura* ProcesadorDeOpciones::crear_cuento(string titulo, int duracion, int anio, Escritor* escritor, bool leido) {
 
     Lectura* cuento;
     cout << "\nIngrese el libro donde se publico el cuento: ";
     string libro_publicado;
     getline(cin, libro_publicado);
-    cuento = new Cuento(titulo, duracion, anio, escritor, libro_publicado);
+    cuento = new Cuento(titulo, duracion, anio, escritor, leido, libro_publicado);
 
     return cuento;
 }
 
 
-Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio, Escritor* escritor) {
+Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio, Escritor* escritor, bool leido) {
 
     Utilidades validador;
     Lectura* poema;
@@ -148,7 +148,7 @@ Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio
     cout << endl;
     cant_versos = validador.validar_ingreso_entero(cant_versos, "Ingrese la cantidad de versos del poema: ", OPCION_MINIMA);
 
-    poema = new Poema(titulo, duracion, anio, escritor, cant_versos);
+    poema = new Poema(titulo, duracion, anio, escritor, leido, cant_versos);
 
     return poema;
 }
@@ -157,13 +157,14 @@ Lectura* ProcesadorDeOpciones::crear_poema(string titulo, int duracion, int anio
 Lectura* ProcesadorDeOpciones::crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* escritor) {
     
     Lectura* lectura;
+    bool leido = false;
 
     if(toupper(tipo_lectura) == NOVELA)
-        lectura = crear_novela(titulo, duracion, anio, escritor);
+        lectura = crear_novela(titulo, duracion, anio, escritor, leido);
     else if(toupper(tipo_lectura) == CUENTO)
-        lectura = crear_cuento(titulo, duracion, anio, escritor);
+        lectura = crear_cuento(titulo, duracion, anio, escritor, leido);
     else
-        lectura = crear_poema(titulo, duracion, anio, escritor);
+        lectura = crear_poema(titulo, duracion, anio, escritor, leido);
     cout << "\n\nSe agrego la lectura " << titulo << " a la lista correctamente.\n" << endl;
 
     return lectura;
@@ -435,7 +436,8 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
         cout << LISTA_LECTURAS_VACIA;
 }
 
-/*bool ProcesadorDeOpciones::esta_en_vector(int *vector_posiciones, int pos, int cantidad){
+
+/*bool ProcesadorDeOpciones::esta_en_vector(int* vector_posiciones, int pos, int cantidad){
     //cout << "cantidad: " << cantidad << endl;
     bool esta = false;
 
@@ -447,13 +449,13 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
     return esta;
 }
 
-void ProcesadorDeOpciones::insertar_lectura_a_cola_(Cola<Lectura *>* cola, int *vector_posiciones, int cantidad){
+void ProcesadorDeOpciones::insertar_lectura_a_cola_(Cola<Lectura*>* cola, int* vector_posiciones, int cantidad){
 
     if(cola->obtener_tamanio() == lista_lecturas_->obtener_cantidad())
         return;
 
 
-    Lectura *menor_duracion = lista_lecturas_->consulta(6);
+    Lectura* menor_duracion = lista_lecturas_->consulta(6);
 
     int iterador = 0;
     int comparacion = 0;
@@ -486,19 +488,18 @@ void ProcesadorDeOpciones::insertar_lectura_a_cola_(Cola<Lectura *>* cola, int *
 }
 
 
-
-void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *> *cola){
-
+void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura*>* cola){
 
 
-    Lectura *menor_duracion = lista_lecturas_->consulta(0);
+
+    Lectura* menor_duracion = lista_lecturas_->consulta(0);
 
     int iterador = 1;
     int pos = 0;
     int comparacion = 0;
 
 
-    int *posiciones_guardadas = new int [lista_lecturas_->obtener_cantidad()];
+    int* posiciones_guardadas = new int [lista_lecturas_->obtener_cantidad()];
     int cantidad_vector = 0;
 
     while(iterador < lista_lecturas_->obtener_cantidad()){
@@ -520,15 +521,16 @@ void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *> *cola){
     
 }
 
-void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *>* cola){
-    Lectura **lecturas_en_orden = new Lectura *[lista_lecturas_->obtener_cantidad()];
+
+void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura*>* cola){
+    Lectura** lecturas_en_orden = new Lectura* [lista_lecturas_->obtener_cantidad()];
 
     lecturas_en_orden[0] = lista_lecturas_->consulta(0);
 
     int iterador = 1;
 
-    Lectura *aux = NULL;
-    Lectura *aux2 = NULL;
+    Lectura* aux = NULL;
+    Lectura* aux2 = NULL;
 
     while(iterador < lista_lecturas_->obtener_cantidad()){
         if(lecturas_en_orden[iterador-1]->comparar_por_duracion(lista_lecturas_->consulta(iterador)) == 1){
@@ -543,13 +545,14 @@ void ProcesadorDeOpciones::insertar_lecturas_a_cola(Cola<Lectura *>* cola){
 
 
 void ProcesadorDeOpciones::crear_cola_ordenada(){
-    Cola<Lectura *> *cola = new Cola<Lectura *>();
+    Cola<Lectura*>* cola = new Cola<Lectura*>();
 
     insertar_lecturas_a_cola(cola);
     file(!cola->vacia()){
         cola->baja()->mostrar_lectura();
     }
 }*/
+
 
 void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
     #ifdef _WIN32

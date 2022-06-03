@@ -15,7 +15,7 @@ public:
 
     // PRE: Los datos son validos.
     // POST: Crea un poema.
-    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, int versos);
+    Poema(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, bool leido, int versos);
 
     // PRE: -
     // POST: Devuelve la cantidad de versos del poema. 

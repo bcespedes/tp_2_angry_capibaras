@@ -39,7 +39,7 @@ int Utilidades::validar_ingreso_entero(int a_validar, string instruccion, int va
 }
 
 
-void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura *>* lista_lectura) {
+void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura*>* lista_lectura) {
 
     int pos = 0;
     bool avanzar = true;
