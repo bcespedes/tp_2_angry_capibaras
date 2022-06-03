@@ -88,7 +88,7 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                procesador_opciones -> listar_novelas_genero();
                break;
           case ARMAR_COLA:
-               //armar cola
+               procesador_opciones->crear_cola_ordenada();
                break;
           case SALIR:
                cerrar_menu = true;

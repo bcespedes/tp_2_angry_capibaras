@@ -44,10 +44,16 @@ public:
     Escritor* obtener_escritor();
 
     // PRE: Recibe una lectura valida.
-    // POST: Devuelve -1 si la lectura que llama es menor a la que se pasa por parametro.
-    //       Devuelve 1 si la que llama es mayor a la que se pasa por parametro.
+    // POST: Devuelve -1 si el año de la lectura que llama es menor al año de la que se pasa por parametro.
+    //       Devuelve 1 si el año de la que llama es mayor al año de la que se pasa por parametro.
     //       Devuelve 0 si son iguales.
-    int comparar(Lectura* a_comparar);
+    int comparar_por_anio(Lectura* a_comparar);
+
+    //PRE: Recibe una lectura valida.
+    // POST: Devuelve -1 si la duracion de la lectura que llama es menor a la duracion de la que se pasa por parametro.
+    //       Devuelve 1 si la duracion de la que llama es mayor a la duracion de la que se pasa por parametro.
+    //       Devuelve 0 si son iguales.
+    int comparar_por_duracion(Lectura* a_comparar);
 
     // PRE: -
     // POST: Muestra por pantalla la lectura.

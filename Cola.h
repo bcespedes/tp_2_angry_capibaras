@@ -11,6 +11,7 @@ class Cola {
 
 private:
 
+    int tamanio;
     Nodo<Tipo>* primero;
     Nodo<Tipo>* ultimo;
 
@@ -21,10 +22,10 @@ public:
     Cola();
 
     // PRE: -
-    // POST: Devuelve true si la cola esta llena, false en caso contrario.
+    // POST: Devuelve true si la cola esta vacia, false en caso contrario.
     bool vacia();
 
-    // PRE: La cola no esta llena - elemento es un dato valido.
+    // PRE: elemento es un dato valido.
     // POST: Agrega el dato e al final de la cola.
     void alta(Tipo elemento);
 
@@ -36,6 +37,8 @@ public:
     // POST: Devuelve el primer elemento de la cola (sin modificarla).
     Tipo consulta();
 
+    int obtener_tamanio();
+
     // PRE: -
     // POST: Destruye la cola.
     ~Cola();
@@ -46,8 +49,14 @@ template <typename Tipo>
 
 Cola<Tipo>::Cola() {
 
-    primero = nullptr;
-    ultimo = nullptr;
+    tamanio = 0;
+    primero = NULL;
+    ultimo = NULL;
+}
+
+template <typename Tipo>
+int Cola<Tipo>::obtener_tamanio(){
+    return tamanio;
 }
 
 
@@ -55,7 +64,7 @@ template <typename Tipo>
 
 bool Cola<Tipo>::vacia() {
 
-    return ultimo == nullptr;
+    return ultimo == NULL;
 }
 
 
@@ -79,6 +88,7 @@ void Cola<Tipo>::alta(Tipo d) {
         primero = nuevo;
     
     ultimo = nuevo;
+    tamanio++;
 }
 
 
@@ -93,9 +103,10 @@ Tipo Cola<Tipo>::baja() {
     primero = primero -> obtener_siguiente();
 
     if(!primero)
-        ultimo = nullptr;
+        ultimo = NULL;
 
     borrar = NULL;
+    tamanio--;
  
     return dato;
 }

@@ -13,7 +13,7 @@ private:
 
 public:
 
-    // PRE: Genero tiene que ser historica.
+    // PRE: Genero tiene que ser historica. El tema debe ser una cadena dinamica.
     // POST: Crea un objeto historica.
     Historica(string titulo, unsigned int minutos, unsigned int anio, Escritor* escritor, generos genero, char* tema);
     

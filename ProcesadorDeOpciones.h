@@ -32,6 +32,12 @@ private:
     int ingresar_indice_lista(string instruccion, int cantidad_datos);
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
+    void insertar_lecturas_a_cola(Cola<Lectura *> *cola);
+    void insertar_lectura_a_cola_(Cola<Lectura *>* cola, int *vector_posiciones, int cantidad);
+    bool esta_en_vector(int *vector_posiciones, int pos, int cantidad);
+
+
+
 
 public:
 
@@ -51,32 +57,32 @@ public:
     // POST: Agrega un escritor a la lista.
     void agregar_escritor();
 
-    // PRE: La lista escritores no esta vacia.
+    // PRE: La lista_escritores esta creada.
     // POST: Si el escritor no tiene un fallecimiento asignado, se le pide un anio al usuario y se actualiza.
     void asignar_fallecimiento_escritor();
 
-    // PRE: La lista escritores no esta vacia.
-    // POST: Muestra por pantalla todos los escritores. 
+    // PRE: La lista_escritores esta creada.
+    // POST: Muestra por pantalla todos los escritores. En caso de no haber, se le informa al usuario
     void listar_escritores();
 
-    // PRE:
-    // POST:
+    // PRE:La lista_lectura esta creada.
+    // POST: muestra una lectura aleatoria 
     void sortear_lectura();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: muestra por pantalla todas las lecturas. En caso de no haber se le informa al usuario
     void listar_lecturas();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: imprime las lecturas entre periodos de tiempo ingresados por el usuario
     void listar_periodo_lecturas();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: imprime las lecturas del autor determinado por el usuario
     void listar_lecturas_de();
 
-    // PRE:
-    // POST:
+    // PRE: La lista_lectura esta creada.
+    // POST: imprime las novelas del genero determinado por el usuario.
     void listar_novelas_genero();
 
     // PRE:
@@ -84,11 +90,12 @@ public:
     void crear_cola_ordenada();
 
     // PRE:
-    // POST:
+    // POST: 50% de posibilidades de cocinar un delicioso pastel de papa.
+    //       50% de posibilidades de que ocurra la desgracia, fatalidad einfortunio de no tener los suficientes ingredientes.
     void cocinar_pastel_de_papa();
 
     // PRE:
-    // POST:
+    // POST: destruye el procesador de opciones, eliminando las listas y liberando su memoria. 
     ~ProcesadorDeOpciones();
 
 };
