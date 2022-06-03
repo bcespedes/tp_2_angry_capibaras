@@ -456,7 +456,9 @@ int ProcesadorDeOpciones::obtener_indices_en_orden(int cantidad_elementos, Lectu
     Utilidades buscador;
     int indice = 0;
     for(int i = 0; i < cantidad_elementos; i++) {
-        if(lectura -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == 1 && !buscador.esta_elemento_en_vector(vector_indices, cantidad_elementos - 1, i) && !lista_lecturas_ -> consulta(i) -> obtener_leido()) {
+        if(lectura -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == 1
+        && !buscador.esta_elemento_en_vector(vector_indices, cantidad_elementos - 1, i)
+        && !lista_lecturas_ -> consulta(i) -> obtener_leido()) {
             indice = i;
             lectura = lista_lecturas_ -> consulta(indice);
         }
@@ -502,12 +504,9 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
 
     int cantidad_recorridos = -1, indice = 0, indice_maximos_minutos = 0, cantidad_elementos = lista_lecturas_ -> obtener_cantidad();
 
-    int vector_indices[cantidad_elementos - 1];
-
     char seguir_leyendo = 'X';
 
     // Se crea un vector estatico, a priori se sabe la cantidad de elementos, no tiene sentido hacerlo dinamico.
-    std::fill_n(vector_indices, cantidad_elementos - 1, -1);
 
     // Se rellena el vector con -1 por si acaso, ya que al estar relleno de numeros basura se nos puede generar un numero que justo coincida con un indice en la lista.
     int cantidad_elementos_cola = 0;
@@ -517,12 +516,17 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
             cantidad_elementos_cola++;
     }
 
+
+    int vector_indices[cantidad_elementos_cola - 1];
+
+    std::fill_n(vector_indices, cantidad_elementos_cola - 1, -1);
+
     cout << cantidad_elementos_cola << "<- cantidad cola" << endl;
 
     indice_maximos_minutos = obtener_indice_maximos_minutos(cantidad_elementos, lectura);
     // Se busca el elemento que tiene el mayor tiempo de lectura.
 
-    while(cola_lecturas -> obtener_cantidad() < cantidad_elementos_cola) {
+    while(cola_lecturas -> obtener_cantidad() < cantidad_elementos_cola - 1) {
         indice = obtener_indices_en_orden(cantidad_elementos, lectura, vector_indices);
         cantidad_recorridos++;
         vector_indices[cantidad_recorridos] = indice;
@@ -541,8 +545,6 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
             seguir_leyendo = ingresar_si_quiere_seguir_leyendo();
             if(seguir_leyendo == 'S') {
                 cola_lecturas -> consulta() -> asignar_leido(leido);
-                cola_lecturas -> consulta() -> mostrar_lectura();
-                cout << cola_lecturas -> consulta() -> obtener_leido() << endl;
                 cola_lecturas -> baja();
             }
         }
