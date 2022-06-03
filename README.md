@@ -29,6 +29,8 @@ A través de nuestros conocimientos en programación orientada a objetos y con u
 #### Manual de usuario:
 El programa cuenta con un menu con el que el usuario podra interactuar con las diversas opciones ya mencionadas. El programa puede contar o no con los archivos `escritores.txt` y `lecturas.txt`, en caso de no encontrarse, se le informara al usuario y se podran agregar manualmente  nuevas lecturas o escritores desde las opciones correspondientes. Las instrucciones que se dan en cada instancia estan validadas lo maximo posible para evitar que el programa colapse. Ademas cuenta con algun Easter Egg que sera descubierto a medida que se explore el codigo.
 
+El programa debe compilar con el comando g++ *.cpp -Wall -Werror -Wconversion y esta diseñado para funcionar tanto en Windows como en Linux.
+
 
 #### División de tareas en el trabajo:
 Establecimos un grupo de trabajo consolidado, por lo que no hubo una division de tareas muy marcada. A traves de reuniones planteamos las diferentes problematicas y las resolvimos juntos. En algunos momentos, para agilizar y aprovechar tiempos, utilizamos la extension del Vscode "Live Share" con lo que podiamos acceder todos al mismo codigo en tiempo real e ir modificandolo. Esta tematica se aprovecho mucho conjunto a la modalidad pair programming. Sobre el final hubo mas independencia y trabajo individual, con tareas puntuales, puliendo y optimizando el codigo con la finalidad de entregar un producto lo mas completo posible.
