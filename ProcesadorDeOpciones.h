@@ -32,9 +32,9 @@ private:
     int ingresar_indice_lista(string instruccion, int cantidad_datos);
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
-    void insertar_lecturas_a_cola(Cola<Lectura*>* cola);
-    void insertar_lectura_a_cola_(Cola<Lectura*>* cola, int* vector_posiciones, int cantidad);
-    bool esta_en_vector(int* vector_posiciones, int pos, int cantidad);
+    int obtener_indice_maximos_minutos(int cantidad_elementos, Lectura* lectura);
+    int obtener_indices_en_orden(int cantidad_elementos, Lectura* lectura, int* vector_indices);
+    char ingresar_si_quiere_seguir_leyendo();
 
 
 

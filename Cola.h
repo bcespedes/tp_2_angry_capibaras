@@ -11,7 +11,7 @@ class Cola {
 
 private:
 
-    int tamanio;
+    int cantidad;
     Nodo<Tipo>* primero;
     Nodo<Tipo>* ultimo;
 
@@ -37,7 +37,7 @@ public:
     // POST: Devuelve el primer elemento de la cola (sin modificarla).
     Tipo consulta();
 
-    int obtener_tamanio();
+    int obtener_cantidad();
 
     // PRE: -
     // POST: Destruye la cola.
@@ -49,14 +49,14 @@ template <typename Tipo>
 
 Cola<Tipo>::Cola() {
 
-    tamanio = 0;
+    cantidad = 0;
     primero = NULL;
     ultimo = NULL;
 }
 
 template <typename Tipo>
-int Cola<Tipo>::obtener_tamanio(){
-    return tamanio;
+int Cola<Tipo>::obtener_cantidad(){
+    return cantidad;
 }
 
 
@@ -88,7 +88,7 @@ void Cola<Tipo>::alta(Tipo d) {
         primero = nuevo;
     
     ultimo = nuevo;
-    tamanio++;
+    cantidad++;
 }
 
 
@@ -106,7 +106,7 @@ Tipo Cola<Tipo>::baja() {
         ultimo = NULL;
 
     borrar = NULL;
-    tamanio--;
+    cantidad--;
  
     return dato;
 }
