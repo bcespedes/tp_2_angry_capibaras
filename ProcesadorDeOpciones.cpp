@@ -35,13 +35,13 @@ char ProcesadorDeOpciones::ingresar_si_o_no(string instruccion) {
     char caracter = 'X';
     cout << endl;
 
-    while((caracter != 'S' && caracter != 'N') || cadena_ingresada.length() > 1) {
+    while((caracter != SI && caracter != NO) || cadena_ingresada.length() > 1) {
     
-        cout << instruccion + "(S / N): ";
+        cout << instruccion + SI_O_NO;
         getline(cin, cadena_ingresada);
         caracter = (char) toupper(cadena_ingresada[0]);
     
-        if((caracter != 'S' && caracter != 'N') || cadena_ingresada.length() > 1)
+        if((caracter != SI && caracter != NO) || cadena_ingresada.length() > 1)
             cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
     }
 
@@ -194,7 +194,7 @@ void ProcesadorDeOpciones::agregar_lectura() {
     anio = validador.validar_ingreso_entero(anio, "Ingrese el anio de publicacion: ", OPCION_MINIMA);
 
     if(!lista_escritores_ -> vacia())
-        anonimo = ingresar_si_o_no("Su escritor es anonimo? ");
+        anonimo = ingresar_si_o_no("Su escritor es anonimo?");
     else
         cout << "\nNo hay escritores cargados, por lo tanto su lectura se creara con escritor anonimo." << endl;
 
@@ -499,8 +499,8 @@ void ProcesadorDeOpciones::ingresar_reinicio_de_cola() {
     char reiniciar_cola = 'X';
     cout << "Ya has leido todas las lecturas de la cola :(" << endl <<
     "Para seguir leyendo, puedes ingresar mas lecturas o reiniciar la cola de lecturas." << endl;
-    reiniciar_cola = ingresar_si_o_no("Desea reiniciar la cola? ");
-    if(reiniciar_cola == 'S')
+    reiniciar_cola = ingresar_si_o_no("Desea reiniciar la cola?");
+    if(reiniciar_cola == SI)
         reiniciar_cola_lecturas();
     else
         cout << "\nDe acuerdo, puedes volver a esta opcion cuando desees para reiniciar la cola de lecturas.\n";
@@ -525,12 +525,12 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
         Utilidades limpiador;
         char seguir_leyendo = 'X';
 
-        while(!cola_lecturas -> vacia() && seguir_leyendo != 'N') {
+        while(!cola_lecturas -> vacia() && seguir_leyendo != NO) {
 
             cout << "Cantidad de lecturas sin leer: " << cola_lecturas -> obtener_cantidad() << endl << endl;
             cola_lecturas -> consulta() -> mostrar_lectura();
-            seguir_leyendo = ingresar_si_o_no("Quiere leer esta lectura? ");
-            if(seguir_leyendo == 'S') {
+            seguir_leyendo = ingresar_si_o_no("Quiere leer esta lectura?");
+            if(seguir_leyendo == SI) {
                 Lectura* lectura_leida = cola_lecturas -> baja();
                 lectura_leida -> leido(true);
                 limpiador.limpiar_pantalla();

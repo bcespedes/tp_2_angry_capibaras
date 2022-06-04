@@ -70,6 +70,10 @@ const int OPCION_ALTERNATIVA = -1;
 const std::string LISTA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
 const std::string LISTA_LECTURAS_VACIA = "No hay lecturas cargadas. Puedes agregarlas manualmente.\n";
 const std::string ERROR_INGRESO_INCORRECTO = "\nHas ingresado algo erroneo.";
+const std::string SI_O_NO = " (S / N): ";
+
+const char SI = 'S';
+const char NO = 'N';
 
 // CONSTANTES DE LAS CLASES DE LECTURA DE ARCHIVOS
 const int EOF_NACIMIENTO_FALTANTE = 5;
@@ -79,11 +83,12 @@ const int ANONIMO = -1;
 const std::string ANIO_INEXISTENTE = "-1";
 const std::string ERROR_APERTURA_ESCRITORES = "No se pudo abrir el archivo de escritores, puede agregarlos manualmente!\n";
 const std::string ERROR_APERTURA_LECTURAS = "No se pudo abrir el archivo lecturas, puede agregarlas manualmente!\n";
+const std::string ESCRITORES = "escritores.txt";
+const std::string LECTURAS = "lecturas.txt";
+
 const char NOVELA = 'N';
 const char CUENTO = 'C';
 const char POEMA = 'P';
-const std::string ESCRITORES = "escritores.txt";
-const std::string LECTURAS = "lecturas.txt";
 
 // CONSTANTES DE LA CLASE LECTURA
 const int ES_MAYOR = 1;
