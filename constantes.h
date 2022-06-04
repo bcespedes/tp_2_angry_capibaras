@@ -24,7 +24,7 @@ enum generos {
 
 
 // CONSTANTES DEL MENU PRINCIPAL.
-const int OPCION_MAXIMA_MENU = 14;
+const int OPCION_MAXIMA_MENU = 13;
 
 const std::string OPCION_1 = "1. Agregar una nueva lectura a la lista";
 const std::string OPCION_2 = "2. Quitar una lectura de la lista";
@@ -37,8 +37,7 @@ const std::string OPCION_8 = "8. Listar las lecturas entre determinados anios";
 const std::string OPCION_9 = "9. Listar las lecturas de un determinado escritor";
 const std::string OPCION_10 = "10. Listar las novelas de determinado genero";
 const std::string OPCION_11 = "11. Armar una cola ordenada por tiempo de lectura";
-const std::string OPCION_12 = "12. Reiniciar la cola de lecturas";
-const std::string OPCION_13 = "13. Salir\n";
+const std::string OPCION_12 = "12. Salir\n";
 
 const std::string OPCION_INVALIDA_MENU = "Por favor seleccione una opcion valida" ;
 const std::string ESCRIBA_OPCION_MENU = "Escriba una opcion: ";
@@ -58,7 +57,6 @@ enum cant_opciones_menu {
      LISTAR_LECTURA_POR_ESCRITOR,
      LISTAR_NOVELAS_POR_GENERO,
      ARMAR_COLA,
-     REINICIAR_COLA,
      SALIR,
      COCINAR_PASTEL_DE_PAPA
 };
@@ -72,6 +70,10 @@ const int OPCION_ALTERNATIVA = -1;
 const std::string LISTA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
 const std::string LISTA_LECTURAS_VACIA = "No hay lecturas cargadas. Puedes agregarlas manualmente.\n";
 const std::string ERROR_INGRESO_INCORRECTO = "\nHas ingresado algo erroneo.";
+const std::string SI_O_NO = " (S / N): ";
+
+const char SI = 'S';
+const char NO = 'N';
 
 // CONSTANTES DE LAS CLASES DE LECTURA DE ARCHIVOS
 const int EOF_NACIMIENTO_FALTANTE = 5;
@@ -81,11 +83,12 @@ const int ANONIMO = -1;
 const std::string ANIO_INEXISTENTE = "-1";
 const std::string ERROR_APERTURA_ESCRITORES = "No se pudo abrir el archivo de escritores, puede agregarlos manualmente!\n";
 const std::string ERROR_APERTURA_LECTURAS = "No se pudo abrir el archivo lecturas, puede agregarlas manualmente!\n";
+const std::string ESCRITORES = "escritores.txt";
+const std::string LECTURAS = "lecturas.txt";
+
 const char NOVELA = 'N';
 const char CUENTO = 'C';
 const char POEMA = 'P';
-const std::string ESCRITORES = "escritores.txt";
-const std::string LECTURAS = "lecturas.txt";
 
 // CONSTANTES DE LA CLASE LECTURA
 const int ES_MAYOR = 1;

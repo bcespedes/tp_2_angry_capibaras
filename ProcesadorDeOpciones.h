@@ -21,7 +21,7 @@ private:
 
     // METODOS
     char ingresar_tipo_lectura();
-    char ingresar_si_es_anonimo();
+    char ingresar_si_o_no(string instruccion);
     int ingresar_genero();
     Escritor* no_es_escritor_anonimo(int indice, int cantidad_escritores);
     Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
@@ -33,11 +33,11 @@ private:
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
     int obtener_indice_mayor_duracion();
-    void insertar_en_cola_ordenada(Cola<Lectura *>* cola, unsigned int menor_duracion);
+    void insertar_en_cola_ordenada(Cola<Lectura*>* cola_lecturas, unsigned int menor_duracion);
     bool seguir_leyendo();
-    int cantidad_lecturas_sin_leer();
-
-
+    int obtener_cantidad_lecturas_sin_leer();
+    void ingresar_reinicio_de_cola();
+    void reiniciar_cola_lecturas();
 
 public:
 
@@ -88,11 +88,6 @@ public:
     // PRE: -
     // POST: Crea una cola ordenada por duracion en base a las lecturas no leidas.
     void crear_cola_ordenada();
-
-    // PRE: -
-    // POST: Reinicia todas las lecturas en no leidas, para volver a leerlas en la cola.
-    void reiniciar_lecturas();
-
 
     // PRE: -
     // POST: 50% de posibilidades de cocinar un delicioso pastel de papa.
