@@ -55,7 +55,6 @@ void Menu::mostrar_menu() {
      cout << OPCION_10 << endl;
      cout << OPCION_11 << endl;
      cout << OPCION_12 << endl;
-     cout << OPCION_13 << endl;
 }
 
 
@@ -95,9 +94,6 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                break;
           case ARMAR_COLA:
                procesador_opciones -> crear_cola_ordenada();
-               break;
-          case REINICIAR_COLA:
-               procesador_opciones->reiniciar_lecturas();
                break;
           case SALIR:
                cerrar_menu = true;

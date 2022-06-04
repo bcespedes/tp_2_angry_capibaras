@@ -29,23 +29,23 @@ char ProcesadorDeOpciones::ingresar_tipo_lectura() {
 }
 
 
-char ProcesadorDeOpciones::ingresar_si_es_anonimo() {
+char ProcesadorDeOpciones::ingresar_si_o_no(string instruccion) {
 
-    string anonimo_ingresado = "XX";
-    char anonimo = 'X';
+    string cadena_ingresada = "XX";
+    char caracter = 'X';
     cout << endl;
 
-    while((anonimo != 'S' && anonimo != 'N') || anonimo_ingresado.length() > 1) {
+    while((caracter != 'S' && caracter != 'N') || cadena_ingresada.length() > 1) {
     
-        cout << "Su escritor es anonimo? (S / N): ";
-        getline(cin, anonimo_ingresado);
-        anonimo = (char) toupper(anonimo_ingresado[0]);
+        cout << instruccion + "(S / N): ";
+        getline(cin, cadena_ingresada);
+        caracter = (char) toupper(cadena_ingresada[0]);
     
-        if((anonimo != 'S' && anonimo != 'N') || anonimo_ingresado.length() > 1)
+        if((caracter != 'S' && caracter != 'N') || cadena_ingresada.length() > 1)
             cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
     }
 
-    return anonimo;
+    return caracter;
 }
 
 
@@ -194,7 +194,7 @@ void ProcesadorDeOpciones::agregar_lectura() {
     anio = validador.validar_ingreso_entero(anio, "Ingrese el anio de publicacion: ", OPCION_MINIMA);
 
     if(!lista_escritores_ -> vacia())
-        anonimo = ingresar_si_es_anonimo();
+        anonimo = ingresar_si_o_no("Su escritor es anonimo? ");
     else
         cout << "\nNo hay escritores cargados, por lo tanto su lectura se creara con escritor anonimo." << endl;
 
@@ -440,9 +440,11 @@ void ProcesadorDeOpciones::listar_novelas_genero() {
 
 
 int ProcesadorDeOpciones::obtener_indice_mayor_duracion() {
+
     int cantidad_elementos = lista_lecturas_->obtener_cantidad();
     int indice_maximos_minutos = 0;
-    Lectura *lectura = lista_lecturas_->consulta(0);
+    Lectura* lectura = lista_lecturas_ -> consulta(0);
+
     for(int i = 0; i < cantidad_elementos; i++) {
         if((lectura -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == -1)) {
             indice_maximos_minutos = i;
@@ -453,107 +455,103 @@ int ProcesadorDeOpciones::obtener_indice_mayor_duracion() {
     return indice_maximos_minutos;
 }
 
-bool ProcesadorDeOpciones::seguir_leyendo() {
 
-    bool leer = false;
-    string seguir_leyendo_ingresado = "XX";
-    char seguir_leyendo = 'X';
-
-    while((seguir_leyendo != 'S' && seguir_leyendo != 'N') || seguir_leyendo_ingresado.length() > 1) {
-    
-        Utilidades limpiador;
-        cout << "Quiere leer esta lectura? (S / N): ";
-        getline(cin, seguir_leyendo_ingresado);
-        seguir_leyendo = (char) toupper(seguir_leyendo_ingresado[0]);
-    
-        if((seguir_leyendo != 'S' && seguir_leyendo != 'N') || seguir_leyendo_ingresado.length() > 1)
-            cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
-
-        else if(seguir_leyendo == 'S') {
-            leer = true;
-            limpiador.limpiar_pantalla();
-        }
-
-    }
-
-    return leer;
-}
-
-int ProcesadorDeOpciones::cantidad_lecturas_sin_leer(){
+int ProcesadorDeOpciones::obtener_cantidad_lecturas_sin_leer() {
 
     int no_leidos = 0;
+
     for(int i = 0; i < lista_lecturas_->obtener_cantidad(); i++){
         if(!lista_lecturas_->consulta(i)->fue_leido())
             no_leidos++;
     }
+
     return no_leidos;
 }
 
 
-void ProcesadorDeOpciones::insertar_en_cola_ordenada(Cola<Lectura *>* cola, unsigned int menor_duracion){
+void ProcesadorDeOpciones::insertar_en_cola_ordenada(Cola<Lectura*>* cola_lecturas, unsigned int menor_duracion) {
 
-    if(cola->obtener_cantidad() == cantidad_lecturas_sin_leer())
+    if(cola_lecturas -> obtener_cantidad() == obtener_cantidad_lecturas_sin_leer())
         return;
 
-    Lectura *lectura_menor_duracion = lista_lecturas_->consulta(obtener_indice_mayor_duracion());
-    int cantidad_elementos = lista_lecturas_->obtener_cantidad();
+    Lectura* lectura_menor_duracion = lista_lecturas_ -> consulta(obtener_indice_mayor_duracion());
+    int cantidad_elementos = lista_lecturas_ -> obtener_cantidad();
 
     for(int i = 0; i < cantidad_elementos; i++) {
 
         if((lectura_menor_duracion -> comparar_por_duracion(lista_lecturas_ -> consulta(i)) == 1)
-            && lista_lecturas_->consulta(i)->obtener_minutos() > menor_duracion
-            && !lista_lecturas_->consulta(i)->fue_leido()) {
+            && lista_lecturas_ -> consulta(i)->obtener_minutos() > menor_duracion
+            && !lista_lecturas_ -> consulta(i)->fue_leido()) {
             
             lectura_menor_duracion = lista_lecturas_ -> consulta(i);
         }
     }
 
-    cola->alta(lectura_menor_duracion);
-    menor_duracion = lectura_menor_duracion->obtener_minutos();
-    insertar_en_cola_ordenada(cola, menor_duracion);
+    cola_lecturas -> alta(lectura_menor_duracion);
+    menor_duracion = lectura_menor_duracion -> obtener_minutos();
+    insertar_en_cola_ordenada(cola_lecturas, menor_duracion);
 
 }
 
-void ProcesadorDeOpciones::reiniciar_lecturas(){
-    for(int i = 0; i < lista_lecturas_->obtener_cantidad(); i++){
-        lista_lecturas_->consulta(i)->leido(false);
-    }
-    cout << "Se ha reiniciado la cola, ya puedes volver a armarla y leer de la misma!" << endl;
+
+void ProcesadorDeOpciones::ingresar_reinicio_de_cola() {
+
+    char reiniciar_cola = 'X';
+    cout << "Ya has leido todas las lecturas de la cola :(" << endl <<
+    "Para seguir leyendo, puedes ingresar mas lecturas o reiniciar la cola de lecturas." << endl;
+    reiniciar_cola = ingresar_si_o_no("Desea reiniciar la cola? ");
+    if(reiniciar_cola == 'S')
+        reiniciar_cola_lecturas();
+    else
+        cout << "\nDe acuerdo, puedes volver a esta opcion cuando desees para reiniciar la cola de lecturas.\n";
 }
 
-void ProcesadorDeOpciones::crear_cola_ordenada(){
-    Cola<Lectura *>* cola_lecturas = new Cola<Lectura *>();
-    
-    insertar_en_cola_ordenada(cola_lecturas, 0);
-    Utilidades limpiador;
-    bool leer = true;
-    Lectura *lectura_leida;
 
-    while(!cola_lecturas->vacia() && leer){
-        cout << "Cantidad de lecturas: " << cola_lecturas->obtener_cantidad() << endl << endl;
-        cola_lecturas->consulta()->mostrar_lectura();
-        if(!seguir_leyendo()){
-            leer = false;
-            limpiador.limpiar_pantalla();
-            cout << "Has dejado de leer." << endl;
-        }
-        else{
-            lectura_leida = cola_lecturas->baja();
-            lectura_leida->leido(true);
-            cout << "\nHas leido "<<lectura_leida->obtener_titulo() << "! En un lapso de: " 
-            << lectura_leida->obtener_minutos() << " minutos\n" << endl;
-        }
-    }
-    if(cola_lecturas->vacia()){
-        cout << "Ya has leido todas las lecturas de la cola :(" << endl;
-        cout << "Para seguir leyendo, puedes ingresar mas lecturas o reiniciar la cola de lecturas." << endl;
-    }
+void ProcesadorDeOpciones::reiniciar_cola_lecturas() {
 
-    delete cola_lecturas;
+    for(int i = 0; i < lista_lecturas_ -> obtener_cantidad(); i++){
+        lista_lecturas_ -> consulta(i) -> leido(false);
+    }
+    cout << "\nSe ha reiniciado la cola, ya puedes volver a armarla y leer de la misma!" << endl;
+}
+
+
+void ProcesadorDeOpciones::crear_cola_ordenada() {
+
+    if(!lista_lecturas_ -> vacia()) {
+
+        Cola<Lectura*>* cola_lecturas = new Cola<Lectura*>();
+        insertar_en_cola_ordenada(cola_lecturas, 0);
+        Utilidades limpiador;
+        char seguir_leyendo = 'X';
+
+        while(!cola_lecturas -> vacia() && seguir_leyendo != 'N') {
+
+            cout << "Cantidad de lecturas sin leer: " << cola_lecturas -> obtener_cantidad() << endl << endl;
+            cola_lecturas -> consulta() -> mostrar_lectura();
+            seguir_leyendo = ingresar_si_o_no("Quiere leer esta lectura? ");
+            if(seguir_leyendo == 'S') {
+                Lectura* lectura_leida = cola_lecturas -> baja();
+                lectura_leida -> leido(true);
+                limpiador.limpiar_pantalla();
+                cout << "Has leido " << lectura_leida -> obtener_titulo() << "! En un lapso de: " 
+                << lectura_leida -> obtener_minutos() << " minutos.\n" << endl;
+            }
+            else
+                cout << "\nHas dejado de leer." << endl;
+        }
+        if(cola_lecturas -> vacia())
+            ingresar_reinicio_de_cola();
+
+        delete cola_lecturas;
+    }
+    else
+        cout << LISTA_LECTURAS_VACIA;
 }
 
 
 void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
+
     #ifdef _WIN32
         srand((unsigned int) time(NULL));
         if ((rand() % 2) + 1 ==  2)
@@ -568,7 +566,8 @@ void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
         else 
             system("xdg-open https://drive.google.com/file/d/1YzOFCVS56FlnMrrh09RDS3z-jXlnJHw3/view");
      #endif
-     cout << "Has descubierto un secreto" << endl;
+
+     cout << "---> ---> ---> Has descubierto un secreto <--- <--- <---" << endl;
 }
 
 
